@@ -1,0 +1,46 @@
+﻿@model IEnumerable<FitnessApp.Models.Exercise>
+
+@{
+    ViewData["Title"] = "Ćwiczenia";
+}
+
+<h1>Lista ćwiczeń</h1>
+
+<p>
+    <a asp-controller="Exercises" asp-action="Create" class="btn btn-primary">
+        Dodaj nowe ćwiczenie
+    </a>
+</p>
+
+@if (!Model.Any())
+{
+    <div class="alert alert-info">
+        Brak ćwiczeń w bazie danych.
+    </div>
+}
+else
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Nazwa</th>
+                <th>Partia mięśniowa</th>
+                <th>Poziom trudności</th>
+                <th>Opis</th>
+                <th>Data dodania</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var exercise in Model)
+            {
+                <tr>
+                    <td>@exercise.Name</td>
+                    <td>@exercise.MuscleGroup</td>
+                    <td>@exercise.DifficultyLevel</td>
+                    <td>@exercise.Description</td>
+                    <td>@exercise.CreatedAt.ToString("dd.MM.yyyy HH:mm")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

@@ -1,0 +1,44 @@
+﻿@model FitnessApp.Models.Exercise
+
+@{
+    ViewData["Title"] = "Dodaj ćwiczenie";
+}
+
+<h1>Dodaj ćwiczenie</h1>
+
+<form asp-controller="Exercises" asp-action="Create" method="post">
+    @Html.AntiForgeryToken()
+
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <div class="mb-3">
+        <label asp-for="Name" class="form-label"></label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="MuscleGroup" class="form-label"></label>
+        <input asp-for="MuscleGroup" class="form-control" />
+        <span asp-validation-for="MuscleGroup" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Description" class="form-label"></label>
+        <textarea asp-for="Description" class="form-control" rows="4"></textarea>
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="DifficultyLevel" class="form-label"></label>
+        <input asp-for="DifficultyLevel" class="form-control" type="number" min="1" max="5" />
+        <span asp-validation-for="DifficultyLevel" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-success">Zapisz ćwiczenie</button>
+    <a asp-controller="Exercises" asp-action="Index" class="btn btn-secondary">Wróć</a>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
