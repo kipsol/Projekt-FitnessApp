@@ -1,0 +1,43 @@
+@page
+@model FitnessApp.Pages.MealPages.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Meal</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Meal.Name)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Meal.Name)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Meal.Calories)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Meal.Calories)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Meal.Description)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Meal.Description)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Meal.DietId)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Meal.DietId)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.Meal.Id">Edit</a> |
+    <a asp-page="./Index">Back to List</a>
+</div>

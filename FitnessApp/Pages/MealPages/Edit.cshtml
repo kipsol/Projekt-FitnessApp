@@ -1,0 +1,51 @@
+@page
+@model FitnessApp.Pages.MealPages.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Meal</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Meal.Id" />
+            <div class="form-group">
+                <span class="text-danger">*</span>
+                <label asp-for="Meal.Name" class="control-label"></label>
+                <input asp-for="Meal.Name" class="form-control" aria-required="true"/>
+                <span asp-validation-for="Meal.Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Meal.Calories" class="control-label"></label>
+                <input asp-for="Meal.Calories" class="form-control" />
+                <span asp-validation-for="Meal.Calories" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Meal.Description" class="control-label"></label>
+                <input asp-for="Meal.Description" class="form-control" />
+                <span asp-validation-for="Meal.Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Meal.DietId" class="control-label"></label>
+                <input asp-for="Meal.DietId" class="form-control" />
+                <span asp-validation-for="Meal.DietId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

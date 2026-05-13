@@ -1,0 +1,14 @@
+
+bin/
+obj/
+
+.vs/
+*.user
+*.userosscache
+*.sln.docstates
+
+.dockerignore
+
+publish/
+
+*.log
