@@ -1,0 +1,24 @@
+@page
+@model WebApplication1.Pages.MuscleGroups.CreateModel
+@{
+    ViewData["Title"] = "Dodaj partie miesniowa";
+}
+
+<div class="form-shell">
+    <a class="back-link" asp-page="/Index">Powrot</a>
+    <h1>Dodaj partie miesniowa</h1>
+
+    <form method="post" class="entity-form">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        <label asp-for="Partia.Nazwa"></label>
+        <input asp-for="Partia.Nazwa" class="form-control" />
+        <span asp-validation-for="Partia.Nazwa" class="text-danger"></span>
+
+        <button type="submit" class="btn btn-primary">Zapisz partie</button>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -1,0 +1,39 @@
+@page
+@model WebApplication1.Pages.GymMachines.CreateModel
+@{
+    ViewData["Title"] = "Dodaj maszyne";
+}
+
+<div class="form-shell">
+    <a class="back-link" asp-page="/Index">Powrot</a>
+    <h1>Dodaj maszyne</h1>
+
+    <form method="post" class="entity-form">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        <label asp-for="Maszyna.Nazwa"></label>
+        <input asp-for="Maszyna.Nazwa" class="form-control" />
+        <span asp-validation-for="Maszyna.Nazwa" class="text-danger"></span>
+
+        <label asp-for="Maszyna.Status"></label>
+        <select asp-for="Maszyna.Status" class="form-select">
+            <option value="">Wybierz status</option>
+            <option>Dostepna</option>
+            <option>W naprawie</option>
+            <option>Niedostepna</option>
+        </select>
+        <span asp-validation-for="Maszyna.Status" class="text-danger"></span>
+
+        <label asp-for="Maszyna.SekcjaId"></label>
+        <select asp-for="Maszyna.SekcjaId" asp-items="Model.Sekcje" class="form-select">
+            <option value="">Wybierz sekcje</option>
+        </select>
+        <span asp-validation-for="Maszyna.SekcjaId" class="text-danger"></span>
+
+        <button type="submit" class="btn btn-primary">Zapisz maszyne</button>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

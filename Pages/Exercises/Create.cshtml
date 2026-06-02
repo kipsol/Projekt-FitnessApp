@@ -1,0 +1,51 @@
+@page
+@model WebApplication1.Pages.Exercises.CreateModel
+@{
+    ViewData["Title"] = "Dodaj cwiczenie";
+}
+
+<div class="form-shell">
+    <a class="back-link" asp-page="/Index">Powrot</a>
+    <h1>Dodaj cwiczenie</h1>
+
+    <form method="post" class="entity-form">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        <label asp-for="Cwiczenie.Nazwa"></label>
+        <input asp-for="Cwiczenie.Nazwa" class="form-control" />
+        <span asp-validation-for="Cwiczenie.Nazwa" class="text-danger"></span>
+
+        <label asp-for="Cwiczenie.PartiaMiesniowaId"></label>
+        <select asp-for="Cwiczenie.PartiaMiesniowaId" asp-items="Model.PartieMiesniowe" class="form-select">
+            <option value="">Wybierz partie miesniowa</option>
+        </select>
+        <span asp-validation-for="Cwiczenie.PartiaMiesniowaId" class="text-danger"></span>
+
+        <label asp-for="Cwiczenie.MaszynaId"></label>
+        <select asp-for="Cwiczenie.MaszynaId" asp-items="Model.Maszyny" class="form-select">
+            <option value="">Bez maszyny</option>
+        </select>
+
+        <label asp-for="Cwiczenie.LiczbaSerii"></label>
+        <input asp-for="Cwiczenie.LiczbaSerii" class="form-control" type="number" min="1" />
+        <span asp-validation-for="Cwiczenie.LiczbaSerii" class="text-danger"></span>
+
+        <label asp-for="Cwiczenie.LiczbaPowtorzen"></label>
+        <input asp-for="Cwiczenie.LiczbaPowtorzen" class="form-control" placeholder="10-12" />
+        <span asp-validation-for="Cwiczenie.LiczbaPowtorzen" class="text-danger"></span>
+
+        <label asp-for="Cwiczenie.PrzerwaSekundy"></label>
+        <input asp-for="Cwiczenie.PrzerwaSekundy" class="form-control" type="number" min="0" />
+        <span asp-validation-for="Cwiczenie.PrzerwaSekundy" class="text-danger"></span>
+
+        <label asp-for="Cwiczenie.OpisWykonania"></label>
+        <textarea asp-for="Cwiczenie.OpisWykonania" class="form-control" rows="5"></textarea>
+        <span asp-validation-for="Cwiczenie.OpisWykonania" class="text-danger"></span>
+
+        <button type="submit" class="btn btn-primary">Zapisz cwiczenie</button>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

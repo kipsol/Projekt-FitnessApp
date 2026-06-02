@@ -1,0 +1,95 @@
+@page
+@model WebApplication1.Pages.OutdoorGymModel
+@{
+    ViewData["Title"] = "Trening w plenerze";
+    var badgeClass = Model.Recommendation?.Decision switch
+    {
+        "tak" => "text-bg-success",
+        "ostroznie" => "text-bg-warning",
+        "nie" => "text-bg-danger",
+        _ => "text-bg-secondary"
+    };
+}
+
+<div class="d-flex flex-wrap align-items-center justify-content-between gap-3 mb-4">
+    <div>
+        <h1 class="h2 mb-1">Czy mozna cwiczyc na dworze?</h1>
+        <p class="text-muted mb-0">Sprawdz aktualna pogode i decyzje dla silowni plenerowej.</p>
+    </div>
+</div>
+
+<form method="get" class="row gy-3 gx-3 align-items-end mb-4" id="weatherForm">
+    <div class="col-sm-8 col-lg-5">
+        <label asp-for="City" class="form-label">Miasto</label>
+        <input asp-for="City" class="form-control" placeholder="np. Warszawa" autocomplete="address-level2" />
+    </div>
+
+    <div class="col-sm-4 col-lg-3 d-flex gap-2">
+        <button type="submit" class="btn btn-primary">Sprawdz</button>
+    </div>
+</form>
+
+@if (!string.IsNullOrWhiteSpace(Model.ErrorMessage))
+{
+    <div class="alert alert-danger" role="alert">@Model.ErrorMessage</div>
+}
+
+@if (Model.Recommendation is not null)
+{
+    <section class="border rounded p-4 mb-4">
+        <div class="d-flex flex-wrap align-items-start justify-content-between gap-3 mb-3">
+            <div>
+                <h2 class="h4 mb-2">@Model.Recommendation.Message</h2>
+                <span class="badge @badgeClass text-uppercase">@Model.Recommendation.Decision</span>
+            </div>
+            <div class="text-muted small">
+                @if (Model.Location is not null)
+                {
+                    <span>@Model.Location.Name@if (!string.IsNullOrWhiteSpace(Model.Location.Admin1)) { <text>, @Model.Location.Admin1</text> }@if (!string.IsNullOrWhiteSpace(Model.Location.Country)) { <text>, @Model.Location.Country</text> }</span>
+                    <br />
+                }
+                Dane: @Model.Recommendation.Weather.Time
+            </div>
+        </div>
+
+        <ul class="mb-4">
+            @foreach (var reason in Model.Recommendation.Reasons)
+            {
+                <li>@reason</li>
+            }
+        </ul>
+
+        <div class="row g-3">
+            <div class="col-sm-6 col-lg-3">
+                <div class="border rounded p-3 h-100">
+                    <div class="text-muted small">Temperatura</div>
+                    <div class="fs-4">@Model.Recommendation.Weather.TemperatureC.ToString("0.#") &deg;C</div>
+                    <div class="small">Odczuwalna: @Model.Recommendation.Weather.ApparentTemperatureC.ToString("0.#") &deg;C</div>
+                </div>
+            </div>
+
+            <div class="col-sm-6 col-lg-3">
+                <div class="border rounded p-3 h-100">
+                    <div class="text-muted small">Pogoda</div>
+                    <div class="fs-5">@Model.Recommendation.Weather.WeatherDescription</div>
+                </div>
+            </div>
+
+            <div class="col-sm-6 col-lg-3">
+                <div class="border rounded p-3 h-100">
+                    <div class="text-muted small">Opady</div>
+                    <div class="fs-4">@Model.Recommendation.Weather.PrecipitationMm.ToString("0.#") mm</div>
+                    <div class="small">Deszcz: @Model.Recommendation.Weather.RainMm.ToString("0.#") mm</div>
+                </div>
+            </div>
+
+            <div class="col-sm-6 col-lg-3">
+                <div class="border rounded p-3 h-100">
+                    <div class="text-muted small">Wiatr</div>
+                    <div class="fs-4">@Model.Recommendation.Weather.WindSpeedKmh.ToString("0.#") km/h</div>
+                    <div class="small">Porywy: @Model.Recommendation.Weather.WindGustsKmh.ToString("0.#") km/h</div>
+                </div>
+            </div>
+        </div>
+    </section>
+}
