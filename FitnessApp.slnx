@@ -1,6 +1,0 @@
-<Solution>
-  <Folder Name="/Elementy rozwiązania/">
-    <File Path=".gitignore" />
-  </Folder>
-  <Project Path="FitnessApp/FitnessApp.csproj" />
-</Solution>
