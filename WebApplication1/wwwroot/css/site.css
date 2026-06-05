@@ -1,0 +1,246 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+
+.home-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin: 2rem 0 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #dee2e6;
+}
+
+.home-header h1 {
+  max-width: 760px;
+  margin: 0;
+  color: #1f2937;
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-weight: 700;
+  line-height: 1.05;
+}
+
+.home-header p {
+  max-width: 680px;
+  margin: 0.75rem 0 0;
+  color: #4b5563;
+  font-size: 1.05rem;
+}
+
+.home-eyebrow {
+  color: #0d6efd !important;
+  font-size: 0.8rem !important;
+  font-weight: 700;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.action-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 1rem;
+  margin-bottom: 2.5rem;
+}
+
+.training-plan-preview {
+  margin: 0 0 1.5rem;
+}
+
+.action-tile {
+  display: flex;
+  min-height: 180px;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 1.25rem;
+  border: 1px solid #d7dde5;
+  border-radius: 8px;
+  color: #172033;
+  text-decoration: none;
+  background: #fff;
+  box-shadow: 0 10px 22px rgba(17, 24, 39, 0.06);
+  transition: border-color 160ms ease, box-shadow 160ms ease, transform 160ms ease;
+}
+
+.action-tile:hover {
+  color: #172033;
+  border-color: #0d6efd;
+  box-shadow: 0 14px 28px rgba(13, 110, 253, 0.14);
+  transform: translateY(-2px);
+}
+
+.action-icon {
+  display: inline-flex;
+  width: 2.4rem;
+  height: 2.4rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  color: #fff;
+  background: #0d6efd;
+  font-size: 1.8rem;
+  line-height: 1;
+}
+
+.action-title {
+  display: block;
+  margin-top: 1rem;
+  font-size: 1.15rem;
+  font-weight: 700;
+}
+
+.action-text {
+  display: block;
+  margin-top: 0.5rem;
+  color: #5b6472;
+  font-size: 0.95rem;
+}
+
+.action-tile-exercise .action-icon {
+  background: #198754;
+}
+
+.action-tile-muscle .action-icon {
+  background: #dc3545;
+}
+
+.action-tile-machine .action-icon {
+  background: #6f42c1;
+}
+
+.action-tile-plan-item .action-icon {
+  background: #0dcaf0;
+}
+
+.action-tile-machine-exercise .action-icon {
+  background: #6610f2;
+}
+
+.action-tile-section .action-icon {
+  background: #fd7e14;
+}
+
+.form-shell {
+  max-width: 720px;
+  margin: 2rem auto 3rem;
+}
+
+.form-shell h1 {
+  margin-bottom: 1.5rem;
+  color: #1f2937;
+  font-weight: 700;
+}
+
+.back-link {
+  display: inline-block;
+  margin-bottom: 1rem;
+}
+
+.entity-form {
+  display: grid;
+  gap: 0.55rem;
+  padding: 1.25rem;
+  border: 1px solid #dee2e6;
+  border-radius: 8px;
+  background: #fff;
+}
+
+.entity-form label {
+  margin-top: 0.55rem;
+  font-weight: 600;
+}
+
+.entity-form button {
+  margin-top: 1rem;
+}
+
+.data-panel {
+  margin: 0 0 3rem;
+}
+
+.data-panel-header {
+  margin-bottom: 1rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid #dee2e6;
+}
+
+.data-panel-header h2 {
+  margin: 0;
+  color: #1f2937;
+  font-size: 1.8rem;
+  font-weight: 700;
+}
+
+.data-panel-header p {
+  margin: 0.35rem 0 0;
+  color: #5b6472;
+}
+
+.data-table-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 1rem;
+}
+
+.data-table-card {
+  overflow: hidden;
+  border: 1px solid #dee2e6;
+  border-radius: 8px;
+  background: #fff;
+}
+
+.data-table-card h3 {
+  margin: 0;
+  padding: 0.9rem 1rem;
+  border-bottom: 1px solid #dee2e6;
+  background: #f8f9fa;
+  color: #1f2937;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.data-table-card table {
+  margin-bottom: 0;
+}
+
+.data-table-card th:first-child,
+.data-table-card td:first-child {
+  width: 70px;
+  white-space: nowrap;
+}
+
+.data-table-card td {
+  vertical-align: top;
+}
+
+@media (max-width: 575.98px) {
+  .home-header {
+    margin-top: 1rem;
+  }
+
+  .action-tile {
+    min-height: 150px;
+  }
+
+  .data-table-grid {
+    grid-template-columns: 1fr;
+  }
+}

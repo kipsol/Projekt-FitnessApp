@@ -1,0 +1,118 @@
+@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Sesje";
+}
+
+<div class="d-flex flex-column flex-md-row justify-content-between gap-3 align-items-md-center mb-4">
+    <div>
+        <h1 class="h2 mb-1">Sesje treningowe</h1>
+        <p class="text-muted mb-0">Lista wykonanych albo zaplanowanych treningow.</p>
+    </div>
+</div>
+
+@if (!string.IsNullOrWhiteSpace(Model.StatusMessage))
+{
+    <div class="alert alert-success" role="alert">@Model.StatusMessage</div>
+}
+
+<div class="row g-4">
+    <div class="col-lg-4">
+        <form method="post" class="border rounded-2 p-4 bg-light">
+            <h2 class="h5 mb-3">Dodaj sesje</h2>
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="mb-3">
+                <label asp-for="Input.Name" class="form-label"></label>
+                <input asp-for="Input.Name" class="form-control" />
+                <span asp-validation-for="Input.Name" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Input.TrainingType" class="form-label"></label>
+                <input asp-for="Input.TrainingType" class="form-control" placeholder="Silowy, cardio, mobilnosc" />
+                <span asp-validation-for="Input.TrainingType" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Input.SessionDate" class="form-label"></label>
+                <input asp-for="Input.SessionDate" class="form-control" type="datetime-local" asp-format="{0:yyyy-MM-ddTHH:mm}" />
+                <span asp-validation-for="Input.SessionDate" class="text-danger"></span>
+            </div>
+
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <label asp-for="Input.DurationMinutes" class="form-label"></label>
+                    <input asp-for="Input.DurationMinutes" class="form-control" />
+                    <span asp-validation-for="Input.DurationMinutes" class="text-danger"></span>
+                </div>
+                <div class="col-md-6">
+                    <label asp-for="Input.CaloriesBurned" class="form-label"></label>
+                    <input asp-for="Input.CaloriesBurned" class="form-control" />
+                    <span asp-validation-for="Input.CaloriesBurned" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="mt-3 mb-3">
+                <label asp-for="Input.Notes" class="form-label"></label>
+                <textarea asp-for="Input.Notes" class="form-control" rows="3"></textarea>
+                <span asp-validation-for="Input.Notes" class="text-danger"></span>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Dodaj</button>
+        </form>
+    </div>
+
+    <div class="col-lg-8">
+        <div class="table-responsive border rounded-2">
+            <table class="table table-striped align-middle mb-0">
+                <thead>
+                    <tr>
+                        <th>Data</th>
+                        <th>Nazwa</th>
+                        <th>Typ</th>
+                        <th>Czas</th>
+                        <th>Kalorie</th>
+                        <th class="text-end">Akcje</th>
+                    </tr>
+                </thead>
+                <tbody>
+                @if (Model.Sessions.Count == 0)
+                {
+                    <tr>
+                        <td colspan="6" class="text-muted">Brak sesji treningowych.</td>
+                    </tr>
+                }
+                else
+                {
+                    @foreach (var session in Model.Sessions)
+                    {
+                        <tr>
+                            <td>@session.SessionDate.ToString("yyyy-MM-dd HH:mm")</td>
+                            <td>
+                                <div class="fw-semibold">@session.Name</div>
+                                @if (!string.IsNullOrWhiteSpace(session.Notes))
+                                {
+                                    <div class="small text-muted">@session.Notes</div>
+                                }
+                            </td>
+                            <td>@(string.IsNullOrWhiteSpace(session.TrainingType) ? "-" : session.TrainingType)</td>
+                            <td>@session.DurationMinutes min</td>
+                            <td>@session.CaloriesBurned</td>
+                            <td class="text-end">
+                                <form method="post" asp-page-handler="Delete" asp-route-id="@session.Id">
+                                    <button type="submit" class="btn btn-sm btn-outline-danger">Usun</button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

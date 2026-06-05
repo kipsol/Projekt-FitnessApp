@@ -1,0 +1,116 @@
+﻿@page "{id:int?}"
+@model WebApplication1.Pages.DietPages.IndexModel
+@{
+    ViewData["Title"] = "Jadłospis Tygodniowy";
+}
+
+@if (Model.Dieta == null)
+{
+    <div class="alert alert-info mt-5 text-center shadow-sm">
+        <h4>Nie znaleziono żadnej diety w bazie danych.</h4>
+        <p class="text-muted">Aby zacząć planować tygodniowy jadłospis, musisz najpierw zdefiniować plan.</p>
+        <a class="btn btn-success btn-lg" asp-page="/DietManagementPages/Create">➕ Stwórz swój pierwszy plan diety</a>
+    </div>
+}
+else
+{
+    <div class="container-fluid mt-4">
+        <div class="p-4 mb-4 bg-light rounded-3 shadow-sm d-flex justify-content-between align-items-center flex-wrap">
+            <div>
+                <label class="form-label h5 text-secondary">Wybierz plan diety:</label>
+                <div class="d-flex align-items-center gap-3 flex-wrap">
+                    <select class="form-select form-select-lg shadow-sm" style="min-width: 280px;"
+                            asp-items="Model.WszystkieDiety"
+                            onchange="location = '/DietPages/' + this.value;">
+                    </select>
+
+                    <a class="btn btn-outline-primary btn-md shadow-sm" asp-page="/DietManagementPages/Create" title="Dodaj zupełnie nową dietę do systemu">
+                        ➕ Nowa dieta
+                    </a>
+
+                    <a class="btn btn-outline-danger btn-md shadow-sm" asp-page="/DietManagementPages/Delete" asp-route-id="@Model.WybraneDietId" title="Usuń ten plan diety wraz z całym jego kalendarzem">
+                        🗑️ Usuń ten plan
+                    </a>
+                </div>
+                <p class="text-muted mt-3 mb-0"><strong>Opis planu:</strong> @Model.Dieta.Description</p>
+            </div>
+
+            <div class="text-end">
+                <div class="badge bg-primary fs-5 mb-2 d-block p-2 shadow-sm">Cel: @Model.Dieta.TargetCalories kcal</div>
+                <a class="btn btn-success btn-lg shadow-sm w-100" asp-page="/DietPlanPages/Create" asp-route-dietId="@Model.WybraneDietId">
+                    ➕ Zaplanuj posiłek w tym planie
+                </a>
+            </div>
+        </div>
+
+        <h2 class="mb-4 text-secondary">Twój Plan Tygodniowy</h2>
+
+        <div class="row row-cols-1 row-cols-md-7 g-2" style="display: flex; flex-wrap: nowrap; overflow-x: auto;">
+
+            @{
+                var dniTygodnia = new List<(DayOfWeek Dzien, string NazwaPl)>
+                {
+                    (DayOfWeek.Monday, "Poniedziałek"),
+                    (DayOfWeek.Tuesday, "Wtorek"),
+                    (DayOfWeek.Wednesday, "Środa"),
+                    (DayOfWeek.Thursday, "Czwartek"),
+                    (DayOfWeek.Friday, "Piątek"),
+                    (DayOfWeek.Saturday, "Sobota"),
+                    (DayOfWeek.Sunday, "Niedziela")
+                };
+            }
+
+            @foreach (var dzien in dniTygodnia)
+            {
+                var wpisyNaTenDzien = Model.PosiłkiNaDni[dzien.Dzien];
+                var sumaKalorii = wpisyNaTenDzien.Sum(w => w.Meal?.Calories ?? 0);
+
+                <div class="col" style="flex: 0 0 14.28%; min-width: 180px;">
+                    <div class="card h-100 shadow-sm border-@(sumaKalorii > Model.Dieta.TargetCalories ? "danger" : "success")">
+
+                        <div class="card-header bg-dark text-white text-center py-2">
+                            <h5 class="card-title mb-0 fs-6">@dzien.NazwaPl</h5>
+                        </div>
+
+                        <div class="card-body p-2 d-flex flex-column justify-content-between">
+                            <div class="mb-3">
+                                @if (wpisyNaTenDzien.Any())
+                                {
+                                    @foreach (var wpis in wpisyNaTenDzien)
+                                    {
+                                        <div class="p-2 mb-2 bg-light rounded border-start border-primary border-3 d-flex justify-content-between align-items-start" style="font-size: 0.85rem;">
+                                            <div>
+                                                <strong class="text-primary d-block">@wpis.MealType</strong>
+                                                <span>@wpis.Meal?.Name</span>
+                                                <span class="text-muted d-block" style="font-size: 0.75rem;">@wpis.Meal?.Calories kcal</span>
+                                            </div>
+
+                                            <form method="post" asp-page-handler="DeleteMeal" asp-route-planDayId="@wpis.Id" asp-route-currentDietId="@Model.WybraneDietId" onsubmit="return confirm('Usunąć ten posiłek z jadłospisu?');">
+                                                <button type="submit" class="btn btn-link text-danger p-0 px-1 border-0" style="line-height: 1; font-size: 1.1rem;" title="Usuń z jadłospisu">
+                                                    &times;
+                                                </button>
+                                            </form>
+                                        </div>
+                                    }
+                                }
+                                else
+                                {
+                                    <p class="text-muted text-center my-4" style="font-size: 0.85rem; font-style: italic;">Brak zaplanowanych posiłków.</p>
+                                }
+                            </div>
+
+                            <div class="border-top pt-2 mt-auto text-center" style="font-size: 0.9rem;">
+                                <strong>Suma:</strong>
+                                <span class="badge bg-@(sumaKalorii > Model.Dieta.TargetCalories ? "danger" : "secondary")">
+                                    @sumaKalorii / @Model.Dieta.TargetCalories kcal
+                                </span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            }
+
+        </div>
+    </div>
+}

@@ -1,0 +1,51 @@
+@page
+@model WebApplication1.Pages.DietManagementPages.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Diet</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Diet.Id" />
+            <div class="form-group">
+                <span class="text-danger">*</span>
+                <label asp-for="Diet.Name" class="control-label"></label>
+                <input asp-for="Diet.Name" class="form-control" aria-required="true"/>
+                <span asp-validation-for="Diet.Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Diet.Description" class="control-label"></label>
+                <input asp-for="Diet.Description" class="form-control" />
+                <span asp-validation-for="Diet.Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Diet.TargetCalories" class="control-label"></label>
+                <input asp-for="Diet.TargetCalories" class="form-control" />
+                <span asp-validation-for="Diet.TargetCalories" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Diet.PlanDays" class="control-label"></label>
+                <input asp-for="Diet.PlanDays" class="form-control" />
+                <span asp-validation-for="Diet.PlanDays" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

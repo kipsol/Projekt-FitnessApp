@@ -1,0 +1,97 @@
+@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Moj profil";
+}
+
+<div class="d-flex flex-column flex-md-row justify-content-between gap-3 align-items-md-center mb-4">
+    <div>
+        <h1 class="h2 mb-1">Moj profil</h1>
+        <p class="text-muted mb-0">Dane zapisane tylko dla konta: @Model.AccountName.</p>
+    </div>
+</div>
+
+@if (!string.IsNullOrWhiteSpace(Model.StatusMessage))
+{
+    <div class="alert alert-success" role="alert">@Model.StatusMessage</div>
+}
+
+<div class="row g-4">
+    <div class="col-lg-5">
+        <form method="post" class="border rounded-2 p-4 bg-light">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="mb-3">
+                <label asp-for="Input.FirstName" class="form-label"></label>
+                <input asp-for="Input.FirstName" class="form-control" />
+                <span asp-validation-for="Input.FirstName" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Input.LastName" class="form-label"></label>
+                <input asp-for="Input.LastName" class="form-control" />
+                <span asp-validation-for="Input.LastName" class="text-danger"></span>
+            </div>
+
+            <div class="row g-3">
+                <div class="col-md-4">
+                    <label asp-for="Input.Age" class="form-label"></label>
+                    <input asp-for="Input.Age" class="form-control" />
+                    <span asp-validation-for="Input.Age" class="text-danger"></span>
+                </div>
+                <div class="col-md-4">
+                    <label asp-for="Input.HeightCm" class="form-label"></label>
+                    <input asp-for="Input.HeightCm" class="form-control" step="0.1" />
+                    <span asp-validation-for="Input.HeightCm" class="text-danger"></span>
+                </div>
+                <div class="col-md-4">
+                    <label asp-for="Input.WeightKg" class="form-label"></label>
+                    <input asp-for="Input.WeightKg" class="form-control" step="0.1" />
+                    <span asp-validation-for="Input.WeightKg" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="mt-3 mb-3">
+                <label asp-for="Input.Goal" class="form-label"></label>
+                <textarea asp-for="Input.Goal" class="form-control" rows="3"></textarea>
+                <span asp-validation-for="Input.Goal" class="text-danger"></span>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Zapisz profil</button>
+        </form>
+    </div>
+
+    <div class="col-lg-7">
+        <div class="border rounded-2 p-4 h-100">
+            <h2 class="h5">Aktualny profil uzytkownika</h2>
+
+            @if (Model.UserProfile is null)
+            {
+                <p class="text-muted mb-0">Nie zapisano jeszcze profilu.</p>
+            }
+            else
+            {
+                <dl class="row mb-0">
+                    <dt class="col-sm-4">Imie i nazwisko</dt>
+                    <dd class="col-sm-8">@Model.UserProfile.FirstName @Model.UserProfile.LastName</dd>
+
+                    <dt class="col-sm-4">Wiek</dt>
+                    <dd class="col-sm-8">@Model.UserProfile.Age</dd>
+
+                    <dt class="col-sm-4">Wzrost</dt>
+                    <dd class="col-sm-8">@Model.UserProfile.HeightCm cm</dd>
+
+                    <dt class="col-sm-4">Waga</dt>
+                    <dd class="col-sm-8">@Model.UserProfile.WeightKg kg</dd>
+
+                    <dt class="col-sm-4">Cel</dt>
+                    <dd class="col-sm-8">@(string.IsNullOrWhiteSpace(Model.UserProfile.Goal) ? "-" : Model.UserProfile.Goal)</dd>
+                </dl>
+            }
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -1,0 +1,28 @@
+@page
+@model WebApplication1.Pages.Sections.CreateModel
+@{
+    ViewData["Title"] = "Dodaj sekcje";
+}
+
+<div class="form-shell">
+    <a class="back-link" asp-page="/TrainingPlans/Panel">Powrot</a>
+    <h1>Dodaj sekcje</h1>
+
+    <form method="post" class="entity-form">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        <label asp-for="Sekcja.Nazwa"></label>
+        <input asp-for="Sekcja.Nazwa" class="form-control" />
+        <span asp-validation-for="Sekcja.Nazwa" class="text-danger"></span>
+
+        <label asp-for="Sekcja.Pietro"></label>
+        <input asp-for="Sekcja.Pietro" class="form-control" type="number" />
+        <span asp-validation-for="Sekcja.Pietro" class="text-danger"></span>
+
+        <button type="submit" class="btn btn-primary">Zapisz sekcje</button>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

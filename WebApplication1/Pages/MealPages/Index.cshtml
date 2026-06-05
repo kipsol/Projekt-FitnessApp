@@ -1,0 +1,62 @@
+@page
+@model WebApplication1.Pages.MealPages.IndexModel
+
+@{
+    ViewData["Title"] = "Baza Posiłków";
+}
+
+<h1>Baza Posiłków</h1>
+
+<p>
+    <a asp-page="Create" class="btn btn-success">➕ Dodaj nowy posiłek</a>
+</p>
+
+<table class="table table-striped shadow-sm mt-3">
+    <thead class="table-dark">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Meal[0].Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Meal[0].Calories)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Meal[0].Description)
+            </th>
+            <th>Akcje</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Meal)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Calories) kcal
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@item.Id" class="btn btn-sm btn-outline-secondary">Edytuj</a> |
+                    <a asp-page="./Details" asp-route-id="@item.Id" class="btn btn-sm btn-outline-secondary">Szczegóły</a> |
+
+                    @if (item.PlanDays.Any())
+                    {
+                        <span class="d-inline-block" tabindex="0" data-bs-toggle="tooltip" title="Nie możesz usunąć tego posiłku, ponieważ jest obecnie przypisany do jadłospisu tygodniowego.">
+                            <button class="btn btn-sm btn-outline-danger disabled" style="pointer-events: none;" type="button">
+                                Usuń <span class="badge bg-secondary">@item.PlanDays.Count</span>
+                            </button>
+                        </span>
+                    }
+                    else
+                    {
+                        <a asp-page="./Delete" asp-route-id="@item.Id" class="btn btn-sm btn-outline-danger">Usuń</a>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
