@@ -1,0 +1,77 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Panel treningowy";
+}
+
+<section class="home-header">
+    <div>
+        <p class="home-eyebrow">FitnessApp</p>
+        <h1>Panel zarzadzania treningami</h1>
+        <p>Dodawaj elementy katalogu treningowego i buduj baze pod plany, cwiczenia oraz wyposazenie silowni.</p>
+    </div>
+</section>
+
+<section class="training-plan-preview" aria-label="Wyswietl plan treningowy">
+    <div class="data-table-card">
+        <h3>Wyswietl plan treningowy</h3>
+        <table class="table table-sm table-striped align-middle">
+            <thead>
+                <tr>
+                    <th>Nazwa planu</th>
+                    <th>Szczegoly</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.PlanyTreningowe.Any())
+                {
+                    foreach (var plan in Model.PlanyTreningowe)
+                    {
+                        <tr>
+                            <td>@plan.Nazwa</td>
+                            <td>@plan.PoziomZaawansowania | @plan.CzasTrwaniaTygodnie tyg. | cwiczenia: @(plan.Cwiczenia.Any() ? string.Join(", ", plan.Cwiczenia.Select(cwiczenie => cwiczenie.Nazwa)) : "brak")</td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="2">Brak planow treningowych.</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</section>
+
+<section class="action-grid" aria-label="Szybkie akcje">
+    <a class="action-tile action-tile-plan" asp-page="/TrainingPlans/Create">
+        <span class="action-icon">+</span>
+        <span class="action-title">Dodaj plan treningowy</span>
+        <span class="action-text">Nazwa, opis, poziom, czas trwania i cwiczenia.</span>
+    </a>
+
+    <a class="action-tile action-tile-exercise" asp-page="/Exercises/Create">
+        <span class="action-icon">+</span>
+        <span class="action-title">Dodaj cwiczenie</span>
+        <span class="action-text">Partia, maszyna, serie, powtorzenia i przerwa.</span>
+    </a>
+
+    <a class="action-tile action-tile-muscle" asp-page="/MuscleGroups/Create">
+        <span class="action-icon">+</span>
+        <span class="action-title">Dodaj partie miesniowa</span>
+        <span class="action-text">Kategoria ciala, np. plecy, nogi, klatka.</span>
+    </a>
+
+    <a class="action-tile action-tile-machine" asp-page="/GymMachines/Create">
+        <span class="action-icon">+</span>
+        <span class="action-title">Dodaj maszyne</span>
+        <span class="action-text">Sprzet, status i fizyczna sekcja silowni.</span>
+    </a>
+
+    <a class="action-tile action-tile-section" asp-page="/Sections/Create">
+        <span class="action-icon">+</span>
+        <span class="action-title">Dodaj sekcje</span>
+        <span class="action-text">Strefa silowni i numer pietra.</span>
+    </a>
+</section>

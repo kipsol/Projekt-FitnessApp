@@ -1,0 +1,39 @@
+@page
+@model WebApplication1.Pages.MealPages.DeleteModel
+
+@{
+    ViewData["Title"] = "Usuń Posiłek";
+}
+
+<h1>Usuwanie posiłku</h1>
+<h3>Czy na pewno chcesz usunąć ten posiłek?</h3>
+<div>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Meal.Name)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Meal.Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Meal.Calories)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Meal.Calories)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Meal.Description)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Meal.Description)
+        </dd>
+
+    </dl>
+
+    <form method="post">
+        <input type="hidden" asp-for="Meal.Id" />
+        <input type="submit" value="Usuń" class="btn btn-danger" /> |
+        <a asp-page="./Index">Powrót</a>
+    </form>
+</div>

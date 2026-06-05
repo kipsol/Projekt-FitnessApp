@@ -1,0 +1,44 @@
+@page
+@model WebApplication1.Pages.TrainingPlans.CreateModel
+@{
+    ViewData["Title"] = "Dodaj plan treningowy";
+}
+
+<div class="form-shell">
+    <a class="back-link" asp-page="/TrainingPlans/Panel">Powrot</a>
+    <h1>Dodaj plan treningowy</h1>
+
+    <form method="post" class="entity-form">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        <label asp-for="Plan.Nazwa"></label>
+        <input asp-for="Plan.Nazwa" class="form-control" />
+        <span asp-validation-for="Plan.Nazwa" class="text-danger"></span>
+
+        <label asp-for="Plan.Opis"></label>
+        <textarea asp-for="Plan.Opis" class="form-control" rows="4"></textarea>
+
+        <label asp-for="Plan.PoziomZaawansowania"></label>
+        <select asp-for="Plan.PoziomZaawansowania" class="form-select">
+            <option value="">Wybierz poziom</option>
+            <option>Poczatkujacy</option>
+            <option>Sredniozaawansowany</option>
+            <option>Zaawansowany</option>
+        </select>
+        <span asp-validation-for="Plan.PoziomZaawansowania" class="text-danger"></span>
+
+        <label asp-for="Plan.CzasTrwaniaTygodnie"></label>
+        <input asp-for="Plan.CzasTrwaniaTygodnie" class="form-control" type="number" min="1" />
+        <span asp-validation-for="Plan.CzasTrwaniaTygodnie" class="text-danger"></span>
+
+        <label asp-for="Plan.CwiczenieIds"></label>
+        <select asp-for="Plan.CwiczenieIds" asp-items="Model.Cwiczenia" class="form-select" multiple size="6"></select>
+        <span asp-validation-for="Plan.CwiczenieIds" class="text-danger"></span>
+
+        <button type="submit" class="btn btn-primary">Zapisz plan</button>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
