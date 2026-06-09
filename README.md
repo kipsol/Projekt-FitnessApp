@@ -51,6 +51,10 @@ dotnet ef database update
 ```powershell
 Update-Database
 ```
+*Uruchumienie kontenera w dokerze
+```powershell
+docker-compose up -d
+```
 ### 5. Uruchomienie aplikacji
 Aplikację można uruchomić z poziomu środowiska IDE (np. przyciskiem "Run" / klawisz F5 w Visual Studio) lub w terminalu korzystając z komendy:
 ```bash
