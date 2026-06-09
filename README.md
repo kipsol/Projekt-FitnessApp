@@ -42,6 +42,10 @@ W pliku `appsettings.json` (lub `appsettings.Development.json`) sprawdź wartoś
 ```
 *Dostosuj wartość (np. `Server=localhost\\SQLEXPRESS`), w zależności od posiadanego serwera SQL.*
 ### 4. Przygotowanie bazy danych (Migracje)
+Uruchumienie kontenera w dokerze
+```powershell
+docker-compose up -d
+```
 Upewnij się, że narzędzia Entity Framework Core (`dotnet ef`) są zainstalowane globalnie. W terminalu (w folderze z plikiem `WebApplication1.csproj`) uruchom komendę, aby zaktualizować (lub utworzyć) bazę danych wraz ze schematem wymaganym przez aplikację:
 ```bash
 dotnet tool install --global dotnet-ef
@@ -50,10 +54,6 @@ dotnet ef database update
 *Alternatywnie, korzystając z Konsoli Menedżera Pakietów (Package Manager Console) w Visual Studio, uruchom:*
 ```powershell
 Update-Database
-```
-Uruchumienie kontenera w dokerze
-```powershell
-docker-compose up -d
 ```
 ### 5. Uruchomienie aplikacji
 Aplikację można uruchomić z poziomu środowiska IDE (np. przyciskiem "Run" / klawisz F5 w Visual Studio) lub w terminalu korzystając z komendy:
