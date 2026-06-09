@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using WebApplication1.Data;
 using WebApplication1.Repositories;
+using WebApplication1.Security;
 using WebApplication1.Weather;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -23,7 +24,73 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options =>
 .AddRoles<IdentityRole>()
 .AddEntityFrameworkStores<ApplicationDbContext>();
 
-builder.Services.AddRazorPages();
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy(AppPolicies.LoggedInUser, policy =>
+        policy.RequireAuthenticatedUser()
+            .RequireRole(AppRoles.Klient, AppRoles.Trener));
+
+    options.AddPolicy(AppPolicies.TrainerOnly, policy =>
+        policy.RequireAuthenticatedUser()
+            .RequireRole(AppRoles.Trener)
+            .RequireClaim(AppClaimTypes.Permission, AppPermissions.ManageGymStructure));
+
+    options.AddPolicy(AppPolicies.AssignUserPlans, policy =>
+        policy.RequireAuthenticatedUser()
+            .RequireRole(AppRoles.Trener)
+            .RequireClaim(AppClaimTypes.Permission, AppPermissions.AssignUserPlans));
+
+    options.AddPolicy(AppPolicies.ManageFitnessClasses, policy =>
+        policy.RequireAuthenticatedUser()
+            .RequireRole(AppRoles.Trener)
+            .RequireClaim(AppClaimTypes.Permission, AppPermissions.ManageFitnessClasses));
+
+    options.AddPolicy(AppPolicies.ManageStore, policy =>
+        policy.RequireAuthenticatedUser()
+            .RequireRole(AppRoles.Trener)
+            .RequireClaim(AppClaimTypes.Permission, AppPermissions.ManageStore));
+});
+
+builder.Services.AddRazorPages(options =>
+{
+    options.Conventions.AuthorizePage("/GymMachines/Create", AppPolicies.TrainerOnly);
+    options.Conventions.AuthorizePage("/GymMachines/Edit", AppPolicies.TrainerOnly);
+    options.Conventions.AuthorizePage("/GymMachines/Delete", AppPolicies.TrainerOnly);
+
+    options.Conventions.AuthorizePage("/Sections/Create", AppPolicies.TrainerOnly);
+    options.Conventions.AuthorizePage("/Sections/Edit", AppPolicies.TrainerOnly);
+    options.Conventions.AuthorizePage("/Sections/Delete", AppPolicies.TrainerOnly);
+
+    options.Conventions.AuthorizePage("/TrainingPlans/Create", AppPolicies.AssignUserPlans);
+    options.Conventions.AuthorizePage("/TrainingPlans/Edit", AppPolicies.AssignUserPlans);
+    options.Conventions.AuthorizePage("/TrainingPlans/Delete", AppPolicies.AssignUserPlans);
+
+    options.Conventions.AuthorizeFolder("/DietManagementPages", AppPolicies.AssignUserPlans);
+    options.Conventions.AuthorizeFolder("/DietPlanPages", AppPolicies.AssignUserPlans);
+    options.Conventions.AuthorizePage("/MealPages/Create", AppPolicies.AssignUserPlans);
+    options.Conventions.AuthorizePage("/MealPages/Edit", AppPolicies.AssignUserPlans);
+    options.Conventions.AuthorizePage("/MealPages/Delete", AppPolicies.AssignUserPlans);
+    options.Conventions.AuthorizeFolder("/Trainer", AppPolicies.AssignUserPlans);
+
+    options.Conventions.AuthorizePage("/ClassEventPages/Create", AppPolicies.ManageFitnessClasses);
+    options.Conventions.AuthorizePage("/ClassEventPages/Edit", AppPolicies.ManageFitnessClasses);
+    options.Conventions.AuthorizePage("/ClassEventPages/Delete", AppPolicies.ManageFitnessClasses);
+    options.Conventions.AuthorizePage("/ClassSchedulePages/Index", AppPolicies.LoggedInUser);
+    options.Conventions.AuthorizePage("/ClassSchedulePages/Create", AppPolicies.LoggedInUser);
+    options.Conventions.AuthorizePage("/ClassSchedulePages/Details", AppPolicies.ManageFitnessClasses);
+    options.Conventions.AuthorizePage("/ClassSchedulePages/Edit", AppPolicies.ManageFitnessClasses);
+    options.Conventions.AuthorizePage("/ClassSchedulePages/Delete", AppPolicies.ManageFitnessClasses);
+
+    options.Conventions.AuthorizePage("/ProductPages/Create", AppPolicies.ManageStore);
+    options.Conventions.AuthorizePage("/ProductPages/Edit", AppPolicies.ManageStore);
+    options.Conventions.AuthorizePage("/ProductPages/Delete", AppPolicies.ManageStore);
+    options.Conventions.AuthorizePage("/OrderPages/Index", AppPolicies.LoggedInUser);
+    options.Conventions.AuthorizePage("/OrderPages/Create", AppPolicies.LoggedInUser);
+    options.Conventions.AuthorizePage("/OrderPages/Details", AppPolicies.LoggedInUser);
+    options.Conventions.AuthorizePage("/OrderPages/Edit", AppPolicies.ManageStore);
+    options.Conventions.AuthorizePage("/OrderPages/Delete", AppPolicies.ManageStore);
+    options.Conventions.AuthorizeFolder("/OrderItemPages", AppPolicies.ManageStore);
+});
 
 builder.Services.AddScoped<IClassEventRepository, ClassEventRepository>();
 builder.Services.AddScoped<IClassScheduleRepository, ClassScheduleRepository>();
@@ -68,19 +135,7 @@ using (var scope = app.Services.CreateScope())
         var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
         await dbContext.Database.MigrateAsync();
 
-        var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
-
-        string[] roleNames = { "Klient", "Trener" };
-
-        foreach (var roleName in roleNames)
-        {
-            bool roleExists = await roleManager.RoleExistsAsync(roleName);
-
-            if (!roleExists)
-            {
-                await roleManager.CreateAsync(new IdentityRole(roleName));
-            }
-        }
+        await IdentitySeedData.EnsureRolesAndClaimsAsync(scope.ServiceProvider);
     }
     catch (Exception exception) when (app.Environment.IsDevelopment())
     {

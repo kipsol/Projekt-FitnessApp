@@ -1,12 +1,14 @@
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
-using WebApplication1.Data;
-using WebApplication1.Models;
 
 namespace WebApplication1.Pages;
 
 public class IndexModel : PageModel
 {
+<<<<<<< HEAD
+    public IActionResult OnGet()
+        => RedirectToPage("/TrainingPlans/Panel");
+=======
     private readonly ApplicationDbContext _context;
 
     public IndexModel(ApplicationDbContext context)
@@ -23,4 +25,5 @@ public class IndexModel : PageModel
             .OrderBy(plan => plan.Nazwa)
             .ToListAsync();
     }
+>>>>>>> origin/master
 }

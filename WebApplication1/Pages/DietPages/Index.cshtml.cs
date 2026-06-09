@@ -1,9 +1,11 @@
+using System.Security.Claims;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using WebApplication1.Data;
 using WebApplication1.Models;
+using WebApplication1.Security;
 
 namespace WebApplication1.Pages.DietPages;
 
@@ -23,12 +25,40 @@ public class IndexModel : PageModel
     public List<SelectListItem> WszystkieDiety { get; set; } = new();
     public int WybraneDietId { get; set; }
 
+    public bool CanManageDiets => User.HasClaim(AppClaimTypes.Permission, AppPermissions.AssignUserPlans);
+
+    public string? EmptyMessage { get; set; }
+
     public async Task<IActionResult> OnGetAsync(int? id)
     {
-        var dietyZbazy = await _context.Diets.ToListAsync();
+        var dietyQuery = _context.Diets.AsQueryable();
+
+        if (!CanManageDiets && User.Identity?.IsAuthenticated == true)
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var assignedDietId = await _context.UserFitnessAssignments
+                .AsNoTracking()
+                .Where(assignment => assignment.UserId == userId)
+                .Select(assignment => assignment.DietId)
+                .FirstOrDefaultAsync();
+
+            if (!assignedDietId.HasValue)
+            {
+                EmptyMessage = "Trener nie przypisal Ci jeszcze diety.";
+                return Page();
+            }
+
+            dietyQuery = dietyQuery.Where(diet => diet.Id == assignedDietId.Value);
+            id = assignedDietId.Value;
+        }
+
+        var dietyZbazy = await dietyQuery
+            .OrderBy(diet => diet.Name)
+            .ToListAsync();
 
         if (!dietyZbazy.Any())
         {
+            EmptyMessage = "Brak diet do wyswietlenia.";
             return Page();
         }
 
@@ -57,6 +87,11 @@ public class IndexModel : PageModel
 
     public async Task<IActionResult> OnPostDeleteMealAsync(int planDayId, int currentDietId)
     {
+        if (!CanManageDiets)
+        {
+            return Forbid();
+        }
+
         var wpisDoUsuniecia = await _context.DietPlanDays.FindAsync(planDayId);
 
         if (wpisDoUsuniecia != null)

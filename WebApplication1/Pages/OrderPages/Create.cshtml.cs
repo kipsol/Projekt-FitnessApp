@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+using System.Security.Claims;
+=======
+>>>>>>> origin/master
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -28,29 +32,61 @@ public class CreateModel : PageModel
     [BindProperty]
     public int Ilosc { get; set; } = 1;
 
+<<<<<<< HEAD
+    public async Task<IActionResult> OnGetAsync(int? productId)
+    {
+        await LoadProductsAsync(productId);
+
+        if (productId.HasValue)
+        {
+            WybranyProduktId = productId.Value;
+        }
+
+=======
     public async Task<IActionResult> OnGetAsync()
     {
         var dostepne = await _productRepository.GetAvailableAsync();
         ViewData["ProductId"] = new SelectList(dostepne, "Id", "Name");
+>>>>>>> origin/master
         return Page();
     }
 
     public async Task<IActionResult> OnPostAsync()
     {
+<<<<<<< HEAD
+        var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+        if (userId is null)
+        {
+            return Challenge();
+        }
+
+        var produkt = await _productRepository.GetByIdAsync(WybranyProduktId);
+        if (produkt == null || produkt.Stock < Ilosc)
+        {
+            ModelState.AddModelError("", $"Brak towaru. Dostepna ilosc: {produkt?.Stock ?? 0} szt.");
+            await LoadProductsAsync(WybranyProduktId);
+=======
         var produkt = await _productRepository.GetByIdAsync(WybranyProduktId);
         if (produkt == null || produkt.Stock < Ilosc)
         {
             ModelState.AddModelError("", $"Brak towaru. Dostępna ilość: {produkt?.Stock ?? 0} szt.");
             var dostepne = await _productRepository.GetAvailableAsync();
             ViewData["ProductId"] = new SelectList(dostepne, "Id", "Name");
+>>>>>>> origin/master
             return Page();
         }
 
         var noweZamowienie = new Order
         {
             OrderDate = DateTime.Now,
+<<<<<<< HEAD
+            Status = "Oczekujace",
+            TotalPrice = produkt.Price * Ilosc,
+            UserId = userId
+=======
             Status = "Oczekujące",
             TotalPrice = produkt.Price * Ilosc
+>>>>>>> origin/master
         };
 
         await _orderRepository.AddAsync(noweZamowienie);
@@ -73,4 +109,13 @@ public class CreateModel : PageModel
 
         return RedirectToPage("./Index");
     }
+<<<<<<< HEAD
+
+    private async Task LoadProductsAsync(int? selectedProductId = null)
+    {
+        var dostepne = await _productRepository.GetAvailableAsync();
+        ViewData["ProductId"] = new SelectList(dostepne, "Id", "Name", selectedProductId);
+    }
+=======
+>>>>>>> origin/master
 }

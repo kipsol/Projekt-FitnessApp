@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebApplication1.Data;
 
@@ -11,9 +12,11 @@ using WebApplication1.Data;
 namespace WebApplication1.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260609152200_AddUserOwnershipForClassesAndOrders")]
+    partial class AddUserOwnershipForClassesAndOrders
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -271,23 +274,17 @@ namespace WebApplication1.Migrations
                     b.Property<int>("ClassEventId")
                         .HasColumnType("int");
 
-<<<<<<< HEAD
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
 
-=======
->>>>>>> origin/master
                     b.HasKey("Id");
 
                     b.HasIndex("ClassEventId");
 
-<<<<<<< HEAD
                     b.HasIndex("UserId", "ClassEventId")
                         .IsUnique()
                         .HasFilter("[UserId] IS NOT NULL");
 
-=======
->>>>>>> origin/master
                     b.ToTable("ClassSchedules", (string)null);
                 });
 
@@ -467,7 +464,6 @@ namespace WebApplication1.Migrations
                     b.Property<decimal>("TotalPrice")
                         .HasColumnType("decimal(18,2)");
 
-<<<<<<< HEAD
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
 
@@ -475,10 +471,6 @@ namespace WebApplication1.Migrations
 
                     b.HasIndex("UserId", "OrderDate");
 
-=======
-                    b.HasKey("Id");
-
->>>>>>> origin/master
                     b.ToTable("Orders", (string)null);
                 });
 
@@ -881,7 +873,6 @@ namespace WebApplication1.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-<<<<<<< HEAD
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
@@ -890,9 +881,6 @@ namespace WebApplication1.Migrations
                     b.Navigation("ClassEvent");
 
                     b.Navigation("User");
-=======
-                    b.Navigation("ClassEvent");
->>>>>>> origin/master
                 });
 
             modelBuilder.Entity("WebApplication1.Models.Cwiczenie", b =>
@@ -943,7 +931,6 @@ namespace WebApplication1.Migrations
                     b.Navigation("Sekcja");
                 });
 
-<<<<<<< HEAD
             modelBuilder.Entity("WebApplication1.Models.Order", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "User")
@@ -954,8 +941,6 @@ namespace WebApplication1.Migrations
                     b.Navigation("User");
                 });
 
-=======
->>>>>>> origin/master
             modelBuilder.Entity("WebApplication1.Models.OrderItem", b =>
                 {
                     b.HasOne("WebApplication1.Models.Order", "Order")

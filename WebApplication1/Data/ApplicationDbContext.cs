@@ -36,6 +36,8 @@ public class ApplicationDbContext : IdentityDbContext<IdentityUser, IdentityRole
 
     public DbSet<UserProfile> UserProfiles => Set<UserProfile>();
 
+    public DbSet<UserFitnessAssignment> UserFitnessAssignments => Set<UserFitnessAssignment>();
+
     public DbSet<TrainingSession> TrainingSessions => Set<TrainingSession>();
 
     public DbSet<ProgressEntry> ProgressEntries => Set<ProgressEntry>();
@@ -212,6 +214,34 @@ public class ApplicationDbContext : IdentityDbContext<IdentityUser, IdentityRole
                 .OnDelete(DeleteBehavior.Cascade);
         });
 
+        builder.Entity<UserFitnessAssignment>(entity =>
+        {
+            entity.ToTable("UserFitnessAssignments");
+
+            entity.HasIndex(assignment => assignment.UserId)
+                .IsUnique();
+
+            entity.HasOne(assignment => assignment.User)
+                .WithMany()
+                .HasForeignKey(assignment => assignment.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            entity.HasOne(assignment => assignment.AssignedByTrainer)
+                .WithMany()
+                .HasForeignKey(assignment => assignment.AssignedByTrainerId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            entity.HasOne(assignment => assignment.PlanTreningowy)
+                .WithMany()
+                .HasForeignKey(assignment => assignment.PlanTreningowyId)
+                .OnDelete(DeleteBehavior.SetNull);
+
+            entity.HasOne(assignment => assignment.Diet)
+                .WithMany()
+                .HasForeignKey(assignment => assignment.DietId)
+                .OnDelete(DeleteBehavior.SetNull);
+        });
+
         builder.Entity<TrainingSession>(entity =>
         {
             entity.ToTable("UserTrainingSessions");
@@ -266,6 +296,18 @@ public class ApplicationDbContext : IdentityDbContext<IdentityUser, IdentityRole
         {
             entity.ToTable("ClassSchedules");
 
+<<<<<<< HEAD
+            entity.HasIndex(schedule => new { schedule.UserId, schedule.ClassEventId })
+                .IsUnique()
+                .HasFilter("[UserId] IS NOT NULL");
+
+            entity.HasOne(schedule => schedule.User)
+                .WithMany()
+                .HasForeignKey(schedule => schedule.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+=======
+>>>>>>> origin/master
             entity.HasOne(cs => cs.ClassEvent)
                 .WithMany(ce => ce.Schedules)
                 .HasForeignKey(cs => cs.ClassEventId)
@@ -280,6 +322,16 @@ public class ApplicationDbContext : IdentityDbContext<IdentityUser, IdentityRole
         builder.Entity<Order>(entity =>
         {
             entity.ToTable("Orders");
+<<<<<<< HEAD
+
+            entity.HasIndex(order => new { order.UserId, order.OrderDate });
+
+            entity.HasOne(order => order.User)
+                .WithMany()
+                .HasForeignKey(order => order.UserId)
+                .OnDelete(DeleteBehavior.SetNull);
+=======
+>>>>>>> origin/master
         });
 
         builder.Entity<OrderItem>(entity =>

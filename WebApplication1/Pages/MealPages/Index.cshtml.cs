@@ -1,6 +1,10 @@
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using WebApplication1.Models;
 using WebApplication1.Repositories;
+<<<<<<< HEAD
+using WebApplication1.Security;
+=======
+>>>>>>> origin/master
 
 namespace WebApplication1.Pages.MealPages;
 
@@ -14,6 +18,8 @@ public class IndexModel : PageModel
     }
 
     public IList<Meal> Meal { get; set; } = default!;
+
+    public bool CanManageMeals => User.HasClaim(AppClaimTypes.Permission, AppPermissions.AssignUserPlans);
 
     public async Task OnGetAsync()
     {

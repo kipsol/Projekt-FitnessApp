@@ -16,6 +16,20 @@ public class OrderRepository : IOrderRepository
     public async Task<IList<Order>> GetAllAsync()
     {
         return await _context.Orders
+<<<<<<< HEAD
+            .Include(o => o.User)
+            .OrderByDescending(o => o.OrderDate)
+            .AsNoTracking()
+            .ToListAsync();
+    }
+
+    public async Task<IList<Order>> GetAllByUserIdAsync(string userId)
+    {
+        return await _context.Orders
+            .Where(o => o.UserId == userId)
+            .OrderByDescending(o => o.OrderDate)
+=======
+>>>>>>> origin/master
             .AsNoTracking()
             .ToListAsync();
     }
@@ -23,6 +37,12 @@ public class OrderRepository : IOrderRepository
     public async Task<Order?> GetByIdAsync(int id)
     {
         return await _context.Orders
+<<<<<<< HEAD
+            .Include(o => o.User)
+            .Include(o => o.OrderItems)
+                .ThenInclude(item => item.Product)
+=======
+>>>>>>> origin/master
             .AsNoTracking()
             .FirstOrDefaultAsync(o => o.Id == id);
     }
