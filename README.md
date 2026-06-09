@@ -28,7 +28,7 @@ Aby uruchomić projekt w środowisku lokalnym (deweloperskim), należy postępow
 - Zainstalowane środowisko programistyczne: **Visual Studio 2022**, **JetBrains Rider** lub **Visual Studio Code** z rozszerzeniem C# Dev Kit.
 - Serwer bazy danych **Microsoft SQL Server** (np. SQL Server Express lub LocalDB) zainstalowany i uruchomiony.
 ### 2. Pobranie projektu
-Skopiuj projekt z repozytorium do wybranego folderu na swoim komputerze:
+Skopiuj projekt z repozytorium z gałęzi main do wybranego folderu na swoim komputerze:
 ```bash
 git clone link do repozytorium
 cd nazwa folderu/WebApplication1
