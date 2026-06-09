@@ -244,3 +244,130 @@ body {
     grid-template-columns: 1fr;
   }
 }
+/**/
+body {
+    background-color: #121212 !important;
+    color: #e0e0e0 !important;
+}
+
+.container, .card, .bg-white {
+    background-color: transparent !important;
+    color: #e0e0e0 !important;
+}
+
+header {
+    background-color: #1a1a1a;
+    border-bottom: 2px solid #8a2be2;
+    box-shadow: 0 4px 15px rgba(138, 43, 226, 0.15);
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 40px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.brand {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: #8a2be2 !important;
+    text-decoration: none;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.nav-list {
+    display: flex;
+    gap: 30px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    align-items: center;
+}
+
+    .nav-list li a, .dropdown-title {
+        color: #cfcfcf;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: color 0.3s ease;
+        padding: 10px 0;
+    }
+
+        .nav-list li a:hover, .dropdown:hover .dropdown-title {
+            color: #b052ff;
+        }
+
+.dropdown {
+    position: relative;
+}
+
+.submenu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: -20px;
+    background-color: #252525;
+    list-style: none;
+    padding: 10px 0;
+    margin: 0;
+    min-width: 220px;
+    border-top: 3px solid #b052ff;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.6);
+    border-radius: 0 0 8px 8px;
+    z-index: 1000;
+}
+
+.dropdown:hover .submenu {
+    display: block;
+    animation: fadeIn 0.3s ease;
+}
+
+.submenu li {
+    width: 100%;
+}
+
+    .submenu li a {
+        display: block;
+        padding: 12px 25px;
+        color: #aaa;
+        border-bottom: 1px solid #333;
+        transition: all 0.2s ease;
+    }
+
+    .submenu li:last-child a {
+        border-bottom: none;
+    }
+
+    .submenu li a:hover {
+        background-color: #1a1a1a;
+        color: #b052ff;
+        padding-left: 30px;
+    }
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.login-panel a {
+    color: #8a2be2;
+    text-decoration: none;
+    font-weight: 600;
+    margin-left: 15px;
+}
+
+    .login-panel a:hover {
+        color: #b052ff;
+    }

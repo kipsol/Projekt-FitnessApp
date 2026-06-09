@@ -36,7 +36,7 @@ public class CreateModel : PageModel
         });
 
         await _context.SaveChangesAsync();
-        return RedirectToPage("/Index");
+        return RedirectToPage("./Index");
     }
 
     public class SekcjaInput

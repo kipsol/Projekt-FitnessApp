@@ -1,0 +1,57 @@
+@page
+@model WebApplication1.Pages.Exercises.IndexModel
+
+@{
+    ViewData["Title"] = "Cwiczenia";
+}
+
+<h1>Cwiczenia</h1>
+
+<p>
+    <a asp-page="Create" class="btn btn-success">Dodaj cwiczenie</a>
+</p>
+
+<table class="table table-striped shadow-sm mt-3">
+    <thead class="table-dark">
+        <tr>
+            <th>Nazwa</th>
+            <th>Partia miesniowa</th>
+            <th>Maszyna</th>
+            <th>Plany treningowe</th>
+            <th>Serie</th>
+            <th>Powtorzenia</th>
+            <th>Przerwa</th>
+            <th>Plik</th>
+            <th>Akcje</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Cwiczenia)
+        {
+            <tr>
+                <td>@item.Nazwa</td>
+                <td>@item.PartiaMiesniowa.Nazwa</td>
+                <td>@(item.Maszyna?.Nazwa ?? "-")</td>
+                <td>@(item.PozycjePlanu.Any() ? string.Join(", ", item.PozycjePlanu.Select(pozycja => pozycja.PlanTreningowy.Nazwa)) : "-")</td>
+                <td>@item.LiczbaSerii</td>
+                <td>@item.LiczbaPowtorzen</td>
+                <td>@item.PrzerwaSekundy s</td>
+                <td>
+                    @if (!string.IsNullOrWhiteSpace(item.PlikSciezka))
+                    {
+                        <a href="@item.PlikSciezka" target="_blank" rel="noopener">Otworz</a>
+                    }
+                    else
+                    {
+                        <span>-</span>
+                    }
+                </td>
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@item.Id" class="btn btn-sm btn-outline-secondary">Edytuj</a>
+                    <a asp-page="./Details" asp-route-id="@item.Id" class="btn btn-sm btn-outline-secondary">Szczegoly</a>
+                    <a asp-page="./Delete" asp-route-id="@item.Id" class="btn btn-sm btn-outline-danger">Usun</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

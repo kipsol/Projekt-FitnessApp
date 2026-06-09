@@ -1,0 +1,43 @@
+@page
+@model WebApplication1.Pages.MuscleGroups.IndexModel
+
+@{
+    ViewData["Title"] = "Partie miesniowe";
+}
+
+<h1>Partie miesniowe</h1>
+
+<p>
+    <a asp-page="Create" class="btn btn-success">Dodaj partie miesniowa</a>
+</p>
+
+<table class="table table-striped shadow-sm mt-3">
+    <thead class="table-dark">
+        <tr>
+            <th>Nazwa</th>
+            <th>Liczba cwiczen</th>
+            <th>Akcje</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.PartieMiesniowe)
+        {
+            <tr>
+                <td>@item.Nazwa</td>
+                <td>@item.Cwiczenia.Count</td>
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@item.Id" class="btn btn-sm btn-outline-secondary">Edytuj</a>
+                    <a asp-page="./Details" asp-route-id="@item.Id" class="btn btn-sm btn-outline-secondary">Szczegoly</a>
+                    @if (item.Cwiczenia.Any())
+                    {
+                        <button class="btn btn-sm btn-outline-danger disabled" type="button">Usun</button>
+                    }
+                    else
+                    {
+                        <a asp-page="./Delete" asp-route-id="@item.Id" class="btn btn-sm btn-outline-danger">Usun</a>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

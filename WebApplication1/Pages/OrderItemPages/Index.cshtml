@@ -1,0 +1,59 @@
+@page
+@model WebApplication1.Pages.OrderItemPages.IndexModel
+
+@{
+    ViewData["Title"] = "Skład Pozycji";
+}
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h2 class="text-dark">🛒 Szczegóły Koszyków</h2>
+            <p class="text-muted small">Przeglądaj zakupione produkty i błyskawicznie zarządzaj statusem zamówień</p>
+        </div>
+    </div> <div class="card shadow-sm border-0">
+    <div class="card-body p-0">
+        <table class="table table-hover align-middle mb-0">
+            <thead class="table-light">
+                <tr>
+                    <th class="ps-3">Nr Zamówienia</th>
+                    <th>Nazwa produktu</th>
+                    <th class="text-center">Ilość</th>
+                    <th class="text-end">Suma</th>
+                    <th class="text-center">Zmień status faktury</th>
+                    <th class="text-end pe-3">Akcje</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.OrderItem)
+                {
+                    var sumaCzesciowa = item.PriceAtPurchase * item.Quantity;
+                    <tr>
+                        <td class="ps-3"><span class="badge bg-dark">#@item.OrderId</span></td>
+
+                        <td class="fw-bold text-primary">@item.Product?.Name</td>
+
+                        <td class="text-center fw-bold text-secondary">@item.Quantity szt.</td>
+                        <td class="text-end fw-bold text-success">@sumaCzesciowa.ToString("F2") PLN</td>
+
+                        <td class="text-center">
+                            <form method="post" asp-page-handler="UpdateStatus" asp-route-orderId="@item.OrderId" class="d-flex justify-content-center align-items-center">
+                                <select name="nowyStatus" class="form-select form-select-sm shadow-none me-2" style="width: 180px; border-color: #ddd;">
+                                    <option value="Oczekujące" selected="@(item.Order?.Status == "Oczekujące")">⏳ Oczekujące</option>
+                                    <option value="Przyjęte" selected="@(item.Order?.Status == "Przyjęte")">⚙️ Przyjęte</option>
+                                    <option value="Gotowe do odbioru" selected="@(item.Order?.Status == "Gotowe do odbioru")">📦 Gotowe do odbioru</option>
+                                </select>
+                                <button type="submit" class="btn btn-sm btn-outline-secondary">Zapisz</button>
+                            </form>
+                        </td>
+
+                        <td class="text-end pe-3">
+                            <a asp-page="./Delete" asp-route-id="@item.Id" class="btn btn-sm btn-outline-danger">Usuń</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+</div>

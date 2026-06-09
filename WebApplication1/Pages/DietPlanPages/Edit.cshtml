@@ -15,7 +15,7 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="DietPlanDay.Id" />
             <div class="form-group">
-                <label asp-for="DietPlanDay.DietId" class="control-label"></label>
+                <label asp-for="DietPlanDay.DietId" class="control-label">Dieta</label>
                 <input asp-for="DietPlanDay.DietId" class="form-control" />
                 <span asp-validation-for="DietPlanDay.DietId" class="text-danger"></span>
             </div>
@@ -25,7 +25,7 @@
                 <span asp-validation-for="DietPlanDay.Diet" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="DietPlanDay.MealId" class="control-label"></label>
+                <label asp-for="DietPlanDay.MealId" class="control-label">Posilek</label>
                 <input asp-for="DietPlanDay.MealId" class="form-control" />
                 <span asp-validation-for="DietPlanDay.MealId" class="text-danger"></span>
             </div>

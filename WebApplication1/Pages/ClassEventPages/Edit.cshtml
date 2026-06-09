@@ -1,0 +1,59 @@
+@page
+@model WebApplication1.Pages.ClassEventPages.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>ClassEvent</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="ClassEvent.Id" />
+            <div class="form-group">
+                <span class="text-danger">*</span>
+                <label asp-for="ClassEvent.Name" class="control-label"></label>
+                <input asp-for="ClassEvent.Name" class="form-control" aria-required="true"/>
+                <span asp-validation-for="ClassEvent.Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <span class="text-danger">*</span>
+                <label asp-for="ClassEvent.Trainer" class="control-label"></label>
+                <input asp-for="ClassEvent.Trainer" class="form-control" aria-required="true"/>
+                <span asp-validation-for="ClassEvent.Trainer" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <span class="text-danger">*</span>
+                <label asp-for="ClassEvent.StartTime" class="control-label"></label>
+                <input asp-for="ClassEvent.StartTime" class="form-control" aria-required="true"/>
+                <span asp-validation-for="ClassEvent.StartTime" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <span class="text-danger">*</span>
+                <label asp-for="ClassEvent.Duration" class="control-label"></label>
+                <input asp-for="ClassEvent.Duration" class="form-control" aria-required="true"/>
+                <span asp-validation-for="ClassEvent.Duration" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ClassEvent.Description" class="control-label"></label>
+                <input asp-for="ClassEvent.Description" class="form-control" />
+                <span asp-validation-for="ClassEvent.Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

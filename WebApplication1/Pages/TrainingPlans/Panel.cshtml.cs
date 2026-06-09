@@ -19,7 +19,7 @@ public class PanelModel : PageModel
     public async Task OnGetAsync()
     {
         PlanyTreningowe = await _context.PlanyTreningowe
-            .Include(plan => plan.Cwiczenia)
+            .Include(plan => plan.PozycjePlanu)
             .OrderBy(plan => plan.Nazwa)
             .ToListAsync();
     }

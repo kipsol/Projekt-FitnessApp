@@ -1,0 +1,66 @@
+@page
+@model WebApplication1.Pages.ClassEventPages.CreateModel
+@{
+    ViewData["Title"] = "Dodaj Nowe Zajęcia";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6 shadow p-4 bg-white rounded">
+            <h2 class="mb-4 text-primary text-center">🆕 Dodaj nowe zajęcia do bazy</h2>
+            <hr />
+            <form method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="ClassEvent.Name" class="form-label fw-bold"></label>
+                    <input asp-for="ClassEvent.Name" class="form-control" />
+                    <span asp-validation-for="ClassEvent.Name" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="ClassEvent.Day" class="form-label fw-bold"></label>
+                    <select asp-for="ClassEvent.Day" class="form-select">
+                        <option value="Monday">Poniedziałek</option>
+                        <option value="Tuesday">Wtorek</option>
+                        <option value="Wednesday">Środa</option>
+                        <option value="Thursday">Czwartek</option>
+                        <option value="Friday">Piątek</option>
+                        <option value="Saturday">Sobota</option>
+                        <option value="Sunday">Niedziela</option>
+                    </select>
+                    <span asp-validation-for="ClassEvent.Day" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="ClassEvent.Trainer" class="form-label fw-bold"></label>
+                    <input asp-for="ClassEvent.Trainer" class="form-control" />
+                    <span asp-validation-for="ClassEvent.Trainer" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="ClassEvent.StartTime" class="form-label fw-bold"></label>
+                    <input asp-for="ClassEvent.StartTime" class="form-control" type="time" />
+                    <span asp-validation-for="ClassEvent.StartTime" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="ClassEvent.Duration" class="form-label fw-bold"></label>
+                    <input asp-for="ClassEvent.Duration" class="form-control" />
+                    <span asp-validation-for="ClassEvent.Duration" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-4">
+                    <label asp-for="ClassEvent.Description" class="form-label fw-bold"></label>
+                    <textarea asp-for="ClassEvent.Description" class="form-control" rows="3"></textarea>
+                    <span asp-validation-for="ClassEvent.Description" class="text-danger"></span>
+                </div>
+
+                <div class="d-grid gap-2">
+                    <input type="submit" value="Stwórz i dodaj zajęcia" class="btn btn-primary btn-lg" />
+                    <a class="btn btn-outline-secondary" asp-page="/ClassSchedulePages/Index">Anuluj</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

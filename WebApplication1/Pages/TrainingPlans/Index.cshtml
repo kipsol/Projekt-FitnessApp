@@ -1,0 +1,40 @@
+@page
+@model WebApplication1.Pages.TrainingPlans.IndexModel
+
+@{
+    ViewData["Title"] = "Plany treningowe";
+}
+
+<h1>Plany treningowe</h1>
+
+<p>
+    <a asp-page="Create" class="btn btn-success">Dodaj plan treningowy</a>
+</p>
+
+<table class="table table-striped shadow-sm mt-3">
+    <thead class="table-dark">
+        <tr>
+            <th>Nazwa</th>
+            <th>Poziom</th>
+            <th>Czas trwania</th>
+            <th>Cwiczenia</th>
+            <th>Akcje</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.PlanyTreningowe)
+        {
+            <tr>
+                <td>@item.Nazwa</td>
+                <td>@item.PoziomZaawansowania</td>
+                <td>@item.CzasTrwaniaTygodnie tyg.</td>
+                <td>@item.PozycjePlanu.Count</td>
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@item.Id" class="btn btn-sm btn-outline-secondary">Edytuj</a>
+                    <a asp-page="./Details" asp-route-id="@item.Id" class="btn btn-sm btn-outline-secondary">Szczegoly</a>
+                    <a asp-page="./Delete" asp-route-id="@item.Id" class="btn btn-sm btn-outline-danger">Usun</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

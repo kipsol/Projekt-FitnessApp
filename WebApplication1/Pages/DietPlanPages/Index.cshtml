@@ -35,32 +35,33 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.DietPlanDay) {
-        <tr>
-            <td>
-                @Html.DisplayFor(model => item.DietId)
-            </td>
-            <td>
-                @Html.DisplayFor(model => item.Diet)
-            </td>
-            <td>
-                @Html.DisplayFor(model => item.MealId)
-            </td>
-            <td>
-                @Html.DisplayFor(model => item.Meal)
-            </td>
-            <td>
-                @Html.DisplayFor(model => item.Day)
-            </td>
-            <td>
-                @Html.DisplayFor(model => item.MealType)
-            </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model.DietPlanDay)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(model => item.DietId)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => item.Diet)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => item.MealId)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => item.Meal)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => item.Day)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => item.MealType)
+                </td>
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

@@ -1,0 +1,65 @@
+@page
+@model WebApplication1.Pages.OrderPages.IndexModel
+
+@{
+    ViewData["Title"] = "Lista Zamówień";
+}
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h2 class="text-dark">📜 Rejestr Zamówień Sklepu</h2>
+            <p class="text-muted small">Zarządzaj transakcjami i statusami faktur</p>
+        </div>
+        <a asp-page="Create" class="btn btn-primary shadow-sm">➕ Stwórz nowe zamówienie</a>
+    </div>
+
+    <div class="card shadow-sm border-0">
+        <div class="card-body p-0">
+            <table class="table table-hover align-middle mb-0">
+                <thead class="table-dark">
+                    <tr>
+                        <th class="ps-3">ID Zamówienia</th>
+                        <th>Data zamówienia</th>
+                        <th>Łączna kwota</th>
+                        <th>Status</th>
+                        <th class="text-end pe-3">Akcje</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Order)
+                    {
+                        <tr>
+                            <td class="fw-bold ps-3">#@item.Id</td>
+                            <td>@item.OrderDate.ToString("dd.MM.yyyy HH:mm")</td>
+                            <td class="fw-bold text-success">@item.TotalPrice.ToString("F2") PLN</td>
+                            <td>
+                                @if (item.Status == "Oczekujące")
+                                {
+                                    <span class="badge bg-warning text-dark">⏳ Oczekujące</span>
+                                }
+                                else if (item.Status == "Przyjęte")
+                                {
+                                    <span class="badge bg-primary">⚙️ Przyjęte</span>
+                                }
+                                else if (item.Status == "Gotowe do odbioru")
+                                {
+                                    <span class="badge bg-success">📦 Gotowe do odbioru</span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-secondary">@item.Status</span>
+                                }
+                            </td>
+                            <td class="text-end pe-3">
+                                <a asp-page="./Edit" asp-route-id="@item.Id" class="btn btn-sm btn-outline-secondary me-1">Edytuj</a>
+                                <a asp-page="./Details" asp-route-id="@item.Id" class="btn btn-sm btn-outline-info me-1">Szczegóły</a>
+                                <a asp-page="./Delete" asp-route-id="@item.Id" class="btn btn-sm btn-outline-danger">Usuń</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

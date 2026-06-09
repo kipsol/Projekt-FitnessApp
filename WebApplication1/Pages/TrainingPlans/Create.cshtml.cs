@@ -54,13 +54,21 @@ public class CreateModel : PageModel
 
             foreach (var cwiczenie in cwiczenia)
             {
-                cwiczenie.PlanTreningowyId = plan.Id;
+                _context.PozycjePlanu.Add(new PozycjaPlanu
+                {
+                    PlanTreningowyId = plan.Id,
+                    CwiczenieId = cwiczenie.Id,
+                    DzienTreningowy = "Do ustalenia",
+                    LiczbaSerii = cwiczenie.LiczbaSerii,
+                    LiczbaPowtorzen = cwiczenie.LiczbaPowtorzen,
+                    PrzerwaSekundy = cwiczenie.PrzerwaSekundy
+                });
             }
 
             await _context.SaveChangesAsync();
         }
 
-        return RedirectToPage("/Index");
+        return RedirectToPage("./Index");
     }
 
     private async Task LoadCwiczeniaAsync()

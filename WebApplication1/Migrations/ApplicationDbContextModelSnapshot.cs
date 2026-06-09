@@ -224,6 +224,60 @@ namespace WebApplication1.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("WebApplication1.Models.ClassEvent", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("Day")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(1000)
+                        .HasColumnType("nvarchar(1000)");
+
+                    b.Property<int>("Duration")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<TimeSpan>("StartTime")
+                        .HasColumnType("time");
+
+                    b.Property<string>("Trainer")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ClassEvents", (string)null);
+                });
+
+            modelBuilder.Entity("WebApplication1.Models.ClassSchedule", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("ClassEventId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ClassEventId");
+
+                    b.ToTable("ClassSchedules", (string)null);
+                });
+
             modelBuilder.Entity("WebApplication1.Models.Cwiczenie", b =>
                 {
                     b.Property<int>("Id")
@@ -256,8 +310,9 @@ namespace WebApplication1.Migrations
                     b.Property<int>("PartiaMiesniowaId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("PlanTreningowyId")
-                        .HasColumnType("int");
+                    b.Property<string>("PlikSciezka")
+                        .HasMaxLength(260)
+                        .HasColumnType("nvarchar(260)");
 
                     b.Property<int>("PrzerwaSekundy")
                         .HasColumnType("int");
@@ -267,8 +322,6 @@ namespace WebApplication1.Migrations
                     b.HasIndex("MaszynaId");
 
                     b.HasIndex("PartiaMiesniowaId");
-
-                    b.HasIndex("PlanTreningowyId");
 
                     b.ToTable("Cwiczenia", (string)null);
                 });
@@ -382,6 +435,59 @@ namespace WebApplication1.Migrations
                     b.ToTable("Meals", (string)null);
                 });
 
+            modelBuilder.Entity("WebApplication1.Models.Order", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("OrderDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
+
+                    b.Property<decimal>("TotalPrice")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Orders", (string)null);
+                });
+
+            modelBuilder.Entity("WebApplication1.Models.OrderItem", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("OrderId")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("PriceAtPurchase")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("OrderId");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("OrderItems", (string)null);
+                });
+
             modelBuilder.Entity("WebApplication1.Models.PartiaMiesniowa", b =>
                 {
                     b.Property<int>("Id")
@@ -428,6 +534,78 @@ namespace WebApplication1.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("PlanyTreningowe", (string)null);
+                });
+
+            modelBuilder.Entity("WebApplication1.Models.PozycjaPlanu", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("CwiczenieId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("DzienTreningowy")
+                        .IsRequired()
+                        .HasMaxLength(40)
+                        .HasColumnType("nvarchar(40)");
+
+                    b.Property<string>("LiczbaPowtorzen")
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
+
+                    b.Property<int>("LiczbaSerii")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PlanTreningowyId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PrzerwaSekundy")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CwiczenieId");
+
+                    b.HasIndex("PlanTreningowyId", "CwiczenieId");
+
+                    b.ToTable("PozycjePlanu", (string)null);
+                });
+
+            modelBuilder.Entity("WebApplication1.Models.Product", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Category")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(1000)
+                        .HasColumnType("nvarchar(1000)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("Stock")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Products", (string)null);
                 });
 
             modelBuilder.Entity("WebApplication1.Models.ProgressEntry", b =>
@@ -633,6 +811,17 @@ namespace WebApplication1.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("WebApplication1.Models.ClassSchedule", b =>
+                {
+                    b.HasOne("WebApplication1.Models.ClassEvent", "ClassEvent")
+                        .WithMany("Schedules")
+                        .HasForeignKey("ClassEventId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ClassEvent");
+                });
+
             modelBuilder.Entity("WebApplication1.Models.Cwiczenie", b =>
                 {
                     b.HasOne("WebApplication1.Models.Maszyna", "Maszyna")
@@ -646,16 +835,9 @@ namespace WebApplication1.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("WebApplication1.Models.PlanTreningowy", "PlanTreningowy")
-                        .WithMany("Cwiczenia")
-                        .HasForeignKey("PlanTreningowyId")
-                        .OnDelete(DeleteBehavior.SetNull);
-
                     b.Navigation("Maszyna");
 
                     b.Navigation("PartiaMiesniowa");
-
-                    b.Navigation("PlanTreningowy");
                 });
 
             modelBuilder.Entity("WebApplication1.Models.DietPlanDay", b =>
@@ -686,6 +868,44 @@ namespace WebApplication1.Migrations
                         .IsRequired();
 
                     b.Navigation("Sekcja");
+                });
+
+            modelBuilder.Entity("WebApplication1.Models.OrderItem", b =>
+                {
+                    b.HasOne("WebApplication1.Models.Order", "Order")
+                        .WithMany("OrderItems")
+                        .HasForeignKey("OrderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("WebApplication1.Models.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Order");
+
+                    b.Navigation("Product");
+                });
+
+            modelBuilder.Entity("WebApplication1.Models.PozycjaPlanu", b =>
+                {
+                    b.HasOne("WebApplication1.Models.Cwiczenie", "Cwiczenie")
+                        .WithMany("PozycjePlanu")
+                        .HasForeignKey("CwiczenieId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("WebApplication1.Models.PlanTreningowy", "PlanTreningowy")
+                        .WithMany("PozycjePlanu")
+                        .HasForeignKey("PlanTreningowyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Cwiczenie");
+
+                    b.Navigation("PlanTreningowy");
                 });
 
             modelBuilder.Entity("WebApplication1.Models.ProgressEntry", b =>
@@ -721,6 +941,16 @@ namespace WebApplication1.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("WebApplication1.Models.ClassEvent", b =>
+                {
+                    b.Navigation("Schedules");
+                });
+
+            modelBuilder.Entity("WebApplication1.Models.Cwiczenie", b =>
+                {
+                    b.Navigation("PozycjePlanu");
+                });
+
             modelBuilder.Entity("WebApplication1.Models.Diet", b =>
                 {
                     b.Navigation("PlanDays");
@@ -736,6 +966,11 @@ namespace WebApplication1.Migrations
                     b.Navigation("PlanDays");
                 });
 
+            modelBuilder.Entity("WebApplication1.Models.Order", b =>
+                {
+                    b.Navigation("OrderItems");
+                });
+
             modelBuilder.Entity("WebApplication1.Models.PartiaMiesniowa", b =>
                 {
                     b.Navigation("Cwiczenia");
@@ -743,7 +978,7 @@ namespace WebApplication1.Migrations
 
             modelBuilder.Entity("WebApplication1.Models.PlanTreningowy", b =>
                 {
-                    b.Navigation("Cwiczenia");
+                    b.Navigation("PozycjePlanu");
                 });
 
             modelBuilder.Entity("WebApplication1.Models.Sekcja", b =>

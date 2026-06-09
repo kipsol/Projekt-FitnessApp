@@ -6,72 +6,39 @@
 
 <section class="home-header">
     <div>
-        <p class="home-eyebrow">FitnessApp</p>
         <h1>Panel zarzadzania treningami</h1>
-        <p>Dodawaj elementy katalogu treningowego i buduj baze pod plany, cwiczenia oraz wyposazenie silowni.</p>
+        <p>Tworz i rozbudowuj katalog fitness: dodawaj nowe cwiczenia, definiuj wyposazenie sal oraz przygotowuj fundamenty pod spersonalizowane plany treningowe.</p>
     </div>
 </section>
 
-<section class="training-plan-preview" aria-label="Wyswietl plan treningowy">
-    <div class="data-table-card">
-        <h3>Wyswietl plan treningowy</h3>
-        <table class="table table-sm table-striped align-middle">
-            <thead>
-                <tr>
-                    <th>Nazwa planu</th>
-                    <th>Szczegoly</th>
-                </tr>
-            </thead>
-            <tbody>
-                @if (Model.PlanyTreningowe.Any())
-                {
-                    foreach (var plan in Model.PlanyTreningowe)
-                    {
-                        <tr>
-                            <td>@plan.Nazwa</td>
-                            <td>@plan.PoziomZaawansowania | @plan.CzasTrwaniaTygodnie tyg. | cwiczenia: @(plan.Cwiczenia.Any() ? string.Join(", ", plan.Cwiczenia.Select(cwiczenie => cwiczenie.Nazwa)) : "brak")</td>
-                        </tr>
-                    }
-                }
-                else
-                {
-                    <tr>
-                        <td colspan="2">Brak planow treningowych.</td>
-                    </tr>
-                }
-            </tbody>
-        </table>
-    </div>
-</section>
-
-<section class="action-grid" aria-label="Szybkie akcje">
-    <a class="action-tile action-tile-plan" asp-page="/TrainingPlans/Create">
-        <span class="action-icon">+</span>
-        <span class="action-title">Dodaj plan treningowy</span>
-        <span class="action-text">Nazwa, opis, poziom, czas trwania i cwiczenia.</span>
+<section class="action-grid" aria-label="Zarzadzanie treningiem">
+    <a class="action-tile action-tile-plan" asp-page="/TrainingPlans/Index">
+        <span class="action-icon">#</span>
+        <span class="action-title">Plany treningowe</span>
+        <span class="action-text">Projektuj, modyfikuj i organizuj gotowe programy treningowe.</span>
     </a>
 
-    <a class="action-tile action-tile-exercise" asp-page="/Exercises/Create">
-        <span class="action-icon">+</span>
-        <span class="action-title">Dodaj cwiczenie</span>
-        <span class="action-text">Partia, maszyna, serie, powtorzenia i przerwa.</span>
+    <a class="action-tile action-tile-exercise" asp-page="/Exercises/Index">
+        <span class="action-icon">#</span>
+        <span class="action-title">Cwiczenia</span>
+        <span class="action-text">Buduj wlasna, profesjonalna baze cwiczen, precyzyjnie okreslajac parametry takie jak liczba serii, powtorzen oraz czas regeneracji.</span>
     </a>
 
-    <a class="action-tile action-tile-muscle" asp-page="/MuscleGroups/Create">
-        <span class="action-icon">+</span>
-        <span class="action-title">Dodaj partie miesniowa</span>
-        <span class="action-text">Kategoria ciala, np. plecy, nogi, klatka.</span>
+    <a class="action-tile action-tile-muscle" asp-page="/MuscleGroups/Index">
+        <span class="action-icon">#</span>
+        <span class="action-title">Partie miesniowe</span>
+        <span class="action-text">Kategoryzuj cwiczenia wedlug grup miesniowych, aby ulatwic i przyspieszyc proces ukladania optymalnych planow.</span>
     </a>
 
-    <a class="action-tile action-tile-machine" asp-page="/GymMachines/Create">
-        <span class="action-icon">+</span>
-        <span class="action-title">Dodaj maszyne</span>
-        <span class="action-text">Sprzet, status i fizyczna sekcja silowni.</span>
+    <a class="action-tile action-tile-machine" asp-page="/GymMachines/Index">
+        <span class="action-icon">#</span>
+        <span class="action-title">Maszyny</span>
+        <span class="action-text">Zarzadzaj baza wyposazenia: dodawaj nowy sprzet, aktualizuj jego status i przypisuj do konkretnych lokalizacji na sali.</span>
     </a>
 
-    <a class="action-tile action-tile-section" asp-page="/Sections/Create">
-        <span class="action-icon">+</span>
-        <span class="action-title">Dodaj sekcje</span>
-        <span class="action-text">Strefa silowni i numer pietra.</span>
+    <a class="action-tile action-tile-section" asp-page="/Sections/Index">
+        <span class="action-icon">#</span>
+        <span class="action-title">Sekcje</span>
+        <span class="action-text">Konfiguruj topografie klubu - definiuj strefy treningowe, np. cardio lub wolne ciezary.</span>
     </a>
 </section>

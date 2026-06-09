@@ -1,0 +1,40 @@
+@page
+@model WebApplication1.Pages.GymMachines.EditModel
+
+@{
+    ViewData["Title"] = "Edytuj maszyne";
+}
+
+<h1>Edytuj maszyne</h1>
+
+<form method="post" class="col-md-6">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input type="hidden" asp-for="Maszyna.Id" />
+
+    <div class="form-group mb-3">
+        <label asp-for="Maszyna.Nazwa"></label>
+        <input asp-for="Maszyna.Nazwa" class="form-control" />
+        <span asp-validation-for="Maszyna.Nazwa" class="text-danger"></span>
+    </div>
+
+    <div class="form-group mb-3">
+        <label asp-for="Maszyna.Status"></label>
+        <input asp-for="Maszyna.Status" class="form-control" />
+        <span asp-validation-for="Maszyna.Status" class="text-danger"></span>
+    </div>
+
+    <div class="form-group mb-3">
+        <label asp-for="Maszyna.SekcjaId">Sekcja</label>
+        <select asp-for="Maszyna.SekcjaId" asp-items="Model.Sekcje" class="form-select"></select>
+        <span asp-validation-for="Maszyna.SekcjaId" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Zapisz</button>
+    <a asp-page="./Index" class="btn btn-link">Powrot</a>
+</form>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

@@ -1,0 +1,45 @@
+@page
+@model WebApplication1.Pages.Sections.IndexModel
+
+@{
+    ViewData["Title"] = "Sekcje";
+}
+
+<h1>Sekcje</h1>
+
+<p>
+    <a asp-page="Create" class="btn btn-success">Dodaj sekcje</a>
+</p>
+
+<table class="table table-striped shadow-sm mt-3">
+    <thead class="table-dark">
+        <tr>
+            <th>Nazwa</th>
+            <th>Pietro</th>
+            <th>Maszyny</th>
+            <th>Akcje</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Sekcje)
+        {
+            <tr>
+                <td>@item.Nazwa</td>
+                <td>@item.Pietro</td>
+                <td>@item.Maszyny.Count</td>
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@item.Id" class="btn btn-sm btn-outline-secondary">Edytuj</a>
+                    <a asp-page="./Details" asp-route-id="@item.Id" class="btn btn-sm btn-outline-secondary">Szczegoly</a>
+                    @if (item.Maszyny.Any())
+                    {
+                        <button class="btn btn-sm btn-outline-danger disabled" type="button">Usun</button>
+                    }
+                    else
+                    {
+                        <a asp-page="./Delete" asp-route-id="@item.Id" class="btn btn-sm btn-outline-danger">Usun</a>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -10,15 +10,22 @@ namespace WebApplication1.Pages.Exercises;
 
 public class CreateModel : PageModel
 {
+    private static readonly string[] AllowedExtensions = [".jpg", ".jpeg", ".png", ".pdf"];
+    private const long MaxFileSize = 5 * 1024 * 1024;
     private readonly ApplicationDbContext _context;
+    private readonly IWebHostEnvironment _environment;
 
-    public CreateModel(ApplicationDbContext context)
+    public CreateModel(ApplicationDbContext context, IWebHostEnvironment environment)
     {
         _context = context;
+        _environment = environment;
     }
 
     [BindProperty]
     public CwiczenieInput Cwiczenie { get; set; } = new();
+
+    [BindProperty]
+    public IFormFile? PlikCwiczenia { get; set; }
 
     public SelectList PartieMiesniowe { get; set; } = null!;
 
@@ -37,6 +44,14 @@ public class CreateModel : PageModel
             return Page();
         }
 
+        var filePath = await SaveExerciseFileAsync(PlikCwiczenia);
+
+        if (!ModelState.IsValid)
+        {
+            await LoadListsAsync();
+            return Page();
+        }
+
         _context.Cwiczenia.Add(new Cwiczenie
         {
             Nazwa = Cwiczenie.Nazwa,
@@ -45,17 +60,51 @@ public class CreateModel : PageModel
             MaszynaId = Cwiczenie.MaszynaId,
             LiczbaSerii = Cwiczenie.LiczbaSerii,
             LiczbaPowtorzen = Cwiczenie.LiczbaPowtorzen,
-            PrzerwaSekundy = Cwiczenie.PrzerwaSekundy
+            PrzerwaSekundy = Cwiczenie.PrzerwaSekundy,
+            PlikSciezka = filePath
         });
 
         await _context.SaveChangesAsync();
-        return RedirectToPage("/Index");
+        return RedirectToPage("./Index");
     }
 
     private async Task LoadListsAsync()
     {
         PartieMiesniowe = new SelectList(await _context.PartieMiesniowe.OrderBy(partia => partia.Nazwa).ToListAsync(), "Id", "Nazwa");
         Maszyny = new SelectList(await _context.Maszyny.OrderBy(maszyna => maszyna.Nazwa).ToListAsync(), "Id", "Nazwa");
+    }
+
+    private async Task<string?> SaveExerciseFileAsync(IFormFile? file)
+    {
+        if (file is null || file.Length == 0)
+        {
+            return null;
+        }
+
+        if (file.Length > MaxFileSize)
+        {
+            ModelState.AddModelError(nameof(PlikCwiczenia), "Plik moze miec maksymalnie 5 MB.");
+            return null;
+        }
+
+        var extension = Path.GetExtension(file.FileName).ToLowerInvariant();
+
+        if (!AllowedExtensions.Contains(extension))
+        {
+            ModelState.AddModelError(nameof(PlikCwiczenia), "Dozwolone formaty: JPG, PNG lub PDF.");
+            return null;
+        }
+
+        var uploadsPath = Path.Combine(_environment.WebRootPath, "uploads", "exercises");
+        Directory.CreateDirectory(uploadsPath);
+
+        var fileName = $"{Guid.NewGuid():N}{extension}";
+        var physicalPath = Path.Combine(uploadsPath, fileName);
+
+        await using var stream = System.IO.File.Create(physicalPath);
+        await file.CopyToAsync(stream);
+
+        return $"/uploads/exercises/{fileName}";
     }
 
     public class CwiczenieInput

@@ -1,0 +1,27 @@
+@page
+@model WebApplication1.Pages.MuscleGroups.DetailsModel
+
+@{
+    ViewData["Title"] = "Szczegoly partii miesniowej";
+}
+
+<h1>Szczegoly partii miesniowej</h1>
+
+<dl class="row">
+    <dt class="col-sm-3">Nazwa</dt>
+    <dd class="col-sm-9">@Model.PartiaMiesniowa.Nazwa</dd>
+
+    <dt class="col-sm-3">Liczba cwiczen</dt>
+    <dd class="col-sm-9">@Model.PartiaMiesniowa.Cwiczenia.Count</dd>
+</dl>
+
+<h4>Cwiczenia</h4>
+<ul>
+    @foreach (var cwiczenie in Model.PartiaMiesniowa.Cwiczenia.OrderBy(item => item.Nazwa))
+    {
+        <li>@cwiczenie.Nazwa</li>
+    }
+</ul>
+
+<a asp-page="./Edit" asp-route-id="@Model.PartiaMiesniowa.Id" class="btn btn-primary">Edytuj</a>
+<a asp-page="./Index" class="btn btn-link">Powrot do listy</a>

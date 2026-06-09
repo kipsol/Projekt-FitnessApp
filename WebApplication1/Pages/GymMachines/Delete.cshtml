@@ -1,0 +1,26 @@
+@page
+@model WebApplication1.Pages.GymMachines.DeleteModel
+
+@{
+    ViewData["Title"] = "Usun maszyne";
+}
+
+<h1>Usun maszyne</h1>
+<h3>Czy na pewno chcesz usunac te maszyne?</h3>
+
+<dl class="row">
+    <dt class="col-sm-3">Nazwa</dt>
+    <dd class="col-sm-9">@Model.Maszyna.Nazwa</dd>
+
+    <dt class="col-sm-3">Status</dt>
+    <dd class="col-sm-9">@Model.Maszyna.Status</dd>
+
+    <dt class="col-sm-3">Sekcja</dt>
+    <dd class="col-sm-9">@Model.Maszyna.Sekcja.Nazwa</dd>
+</dl>
+
+<form method="post">
+    <input type="hidden" asp-for="Maszyna.Id" />
+    <button type="submit" class="btn btn-danger">Usun</button>
+    <a asp-page="./Index" class="btn btn-link">Powrot</a>
+</form>
