@@ -1,71 +1,57 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
+using WebApplication1.DTOs;
 using WebApplication1.Models;
-using WebApplication1.Data;
+using WebApplication1.Repositories;
 
 namespace WebApplication1.Pages.DietPlanDayPages;
 
 public class EditModel : PageModel
 {
-    private readonly ApplicationDbContext _context;
+    private readonly IDietPlanDayRepository _repository;
 
-    public EditModel(ApplicationDbContext context)
+    public EditModel(IDietPlanDayRepository repository)
     {
-        _context = context;
+        _repository = repository;
     }
 
     [BindProperty]
-    public DietPlanDay DietPlanDay { get; set; } = default!;
+    public DietPlanDayDto Input { get; set; } = default!;
 
     public async Task<IActionResult> OnGetAsync(int? id)
     {
-        if (id is null)
-        {
-            return NotFound();
-        }
+        if (id is null) return NotFound();
 
-        var dietplanday = await _context.DietPlanDays.FirstOrDefaultAsync(m => m.Id == id);
-        if (dietplanday is null)
+        var entity = await _repository.GetByIdAsync(id.Value);
+        if (entity is null) return NotFound();
+
+        Input = new DietPlanDayDto
         {
-            return NotFound();
-        }
-        DietPlanDay = dietplanday;
+            Id = entity.Id,
+            DietId = entity.DietId,
+            MealId = entity.MealId,
+            Day = entity.Day,
+            MealType = entity.MealType
+        };
+
         return Page();
     }
 
-    // To protect from overposting attacks, enable the specific properties you want to bind to.
-    // For more details, see https://aka.ms/RazorPagesCRUD.
     public async Task<IActionResult> OnPostAsync()
     {
-        if (!ModelState.IsValid)
-        {
-            return Page();
-        }
+        if (!ModelState.IsValid) return Page();
 
-        _context.Attach(DietPlanDay).State = EntityState.Modified;
-
-        try
+        var entity = new DietPlanDay
         {
-            await _context.SaveChangesAsync();
-        }
-        catch (DbUpdateConcurrencyException)
-        {
-            if (!DietPlanDayExists(DietPlanDay.Id))
-            {
-                return NotFound();
-            }
-            else
-            {
-                throw;
-            }
-        }
+            Id = Input.Id,
+            DietId = Input.DietId,
+            MealId = Input.MealId,
+            Day = Input.Day,
+            MealType = Input.MealType
+        };
 
+        await _repository.UpdateAsync(entity);
+        await _repository.SaveAsync();
         return RedirectToPage("./Index");
-    }
-
-    private bool DietPlanDayExists(int id)
-    {
-        return _context.DietPlanDays.Any(e => e.Id == id);
     }
 }

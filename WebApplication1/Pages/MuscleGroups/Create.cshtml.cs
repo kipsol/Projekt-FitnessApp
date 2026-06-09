@@ -1,22 +1,23 @@
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using WebApplication1.Data;
 using WebApplication1.Models;
+using WebApplication1.Repositories;
+using WebApplication1.DTOs;
 
 namespace WebApplication1.Pages.MuscleGroups;
 
 public class CreateModel : PageModel
 {
-    private readonly ApplicationDbContext _context;
+    private readonly IPartiaMiesniowaRepository _repository;
 
-    public CreateModel(ApplicationDbContext context)
+    public CreateModel(IPartiaMiesniowaRepository repository)
     {
-        _context = context;
+        _repository = repository;
     }
 
     [BindProperty]
-    public PartiaInput Partia { get; set; } = new();
+    public PartiaMiesniowaDto Partia { get; set; } = new();
 
     public void OnGet()
     {
@@ -29,20 +30,14 @@ public class CreateModel : PageModel
             return Page();
         }
 
-        _context.PartieMiesniowe.Add(new PartiaMiesniowa
+        var entity = new PartiaMiesniowa
         {
             Nazwa = Partia.Nazwa
-        });
+        };
 
-        await _context.SaveChangesAsync();
-        return RedirectToPage("/Index");
-    }
+        await _repository.AddAsync(entity);
+        await _repository.SaveAsync();
 
-    public class PartiaInput
-    {
-        [Display(Name = "Nazwa")]
-        [Required(ErrorMessage = "Podaj nazwe partii miesniowej.")]
-        [StringLength(120)]
-        public string Nazwa { get; set; } = string.Empty;
+        return RedirectToPage("./Index");
     }
 }

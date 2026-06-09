@@ -12,10 +12,6 @@ public class Cwiczenie
 
     public PartiaMiesniowa PartiaMiesniowa { get; set; } = null!;
 
-    public int? PlanTreningowyId { get; set; }
-
-    public PlanTreningowy? PlanTreningowy { get; set; }
-
     public int? MaszynaId { get; set; }
 
     public Maszyna? Maszyna { get; set; }
@@ -25,4 +21,8 @@ public class Cwiczenie
     public string LiczbaPowtorzen { get; set; } = string.Empty;
 
     public int PrzerwaSekundy { get; set; }
+
+    public string? PlikSciezka { get; set; }
+
+    public ICollection<PozycjaPlanu> PozycjePlanu { get; set; } = new List<PozycjaPlanu>();
 }

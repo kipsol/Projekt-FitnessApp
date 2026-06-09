@@ -1,38 +1,29 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
-using WebApplication1.Data;
 using WebApplication1.Models;
+using WebApplication1.Repositories;
 
 namespace WebApplication1.Pages.DietManagementPages;
 
 public class DetailsModel : PageModel
 {
-    private readonly ApplicationDbContext _context;
+    private readonly IDietRepository _repository;
 
-    public DetailsModel(ApplicationDbContext context)
+    public DetailsModel(IDietRepository repository)
     {
-        _context = context;
+        _repository = repository;
     }
 
     public Diet Diet { get; set; } = default!;
 
     public async Task<IActionResult> OnGetAsync(int? id)
     {
-        if (id == null)
-        {
-            return NotFound();
-        }
+        if (id is null) return NotFound();
 
-        var diet = await _context.Diets.FirstOrDefaultAsync(m => m.Id == id);
-        if (diet == null)
-        {
-            return NotFound();
-        }
-        else
-        {
-            Diet = diet;
-        }
+        var entity = await _repository.GetByIdAsync(id.Value);
+        if (entity is null) return NotFound();
+
+        Diet = entity;
         return Page();
     }
 }

@@ -10,58 +10,65 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand font-weight-bold" asp-area="" asp-page="/Index">FitnessApp</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-page="/Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-page="/TrainingPlans/Panel">Sekcja treningowa</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-page="/Profiles/Index">Mój profil</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-page="/TrainingSessions/Index">Sesje</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-page="/Progress/Index">Progres</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-page="/OutdoorGym">Trening w plenerze</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-page="/MealPages/Index">Baza Posiłków</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-page="/DietPages/Index">Moje Diety</a>
-                        </li>
-                    </ul>
+        <nav class="navbar">
+            <a class="brand" asp-page="/Index">FitnessApp</a>
 
-                    <div class="d-flex align-items-center">
-                        <partial name="_LoginPartial" />
-                    </div>
-                </div>
+            <ul class="nav-list">
+                <li><a asp-page="/TrainingPlans/Panel">Sekcja treningowa</a></li>
+
+                <li class="dropdown">
+                    <span class="dropdown-title">Trening ▾</span>
+                    <ul class="submenu">
+                        <li><a asp-page="/TrainingSessions/Index">Sesje</a></li>
+                        <li><a asp-page="/Progress/Index">Progres</a></li>
+                        <li><a asp-page="/OutdoorGym">Trening w plenerze</a></li>
+                        @if (User.HasClaim(AppClaimTypes.Permission, AppPermissions.AssignUserPlans))
+                        {
+                            <li><a asp-page="/Trainer/Assignments">Przypisania trenera</a></li>
+                        }
+                    </ul>
+                </li>
+
+                <li><a asp-page="/Profiles/Index">Mój profil</a></li>
+
+                <li class="dropdown">
+                    <span class="dropdown-title">Diety ▾</span>
+                    <ul class="submenu">
+                        <li><a asp-page="/MealPages/Index">Baza Posiłków</a></li>
+                        <li><a asp-page="/DietPages/Index">Moje Diety</a></li>
+                    </ul>
+                </li>
+
+                <li><a asp-page="/ClassSchedulePages/Index">Zajęcia</a></li>
+
+                <li class="dropdown">
+                    <span class="dropdown-title">Sklep ▾</span>
+                    <ul class="submenu">
+                        <li><a asp-page="/ProductPages/Index">Produkty</a></li>
+                        <li><a asp-page="/OrderPages/Index">Zamówienia</a></li>
+                        @if (User.HasClaim(AppClaimTypes.Permission, AppPermissions.ManageStore))
+                        {
+                            <li><a asp-page="/OrderItemPages/Index">Skład Pozycji</a></li>
+                        }
+                    </ul>
+                </li>
+            </ul>
+
+            <div class="login-panel">
+                <partial name="_LoginPartial" />
             </div>
         </nav>
     </header>
 
-    <div class="container">
+    <div class="container mt-4">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
+    <footer class="border-top footer text-muted mt-5" style="border-color: #333 !important;">
         <div class="container">
-            &copy; 2026 - FitnessApp - <a asp-area="" asp-page="/Privacy">Privacy</a>
+            &copy; 2026 - FitnessApp - <a asp-area="" asp-page="/Privacy" style="color: #8a2be2;">Privacy</a>
         </div>
     </footer>
 

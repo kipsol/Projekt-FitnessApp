@@ -1,18 +1,17 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
 using WebApplication1.Models;
-using WebApplication1.Data;
+using WebApplication1.Repositories;
 
 namespace WebApplication1.Pages.DietPlanDayPages;
 
 public class DeleteModel : PageModel
 {
-    private readonly ApplicationDbContext _context;
+    private readonly IDietPlanDayRepository _repository;
 
-    public DeleteModel(ApplicationDbContext context)
+    public DeleteModel(IDietPlanDayRepository repository)
     {
-        _context = context;
+        _repository = repository;
     }
 
     [BindProperty]
@@ -20,39 +19,21 @@ public class DeleteModel : PageModel
 
     public async Task<IActionResult> OnGetAsync(int? id)
     {
-        if (id is null)
-        {
-            return NotFound();
-        }
+        if (id is null) return NotFound();
 
-        var dietplanday = await _context.DietPlanDays.FirstOrDefaultAsync(m => m.Id == id);
-        if (dietplanday is null)
-        {
-            return NotFound();
-        }
-        else
-        {
-            DietPlanDay = dietplanday;
-        }
+        var entity = await _repository.GetByIdAsync(id.Value);
+        if (entity is null) return NotFound();
 
+        DietPlanDay = entity;
         return Page();
     }
 
     public async Task<IActionResult> OnPostAsync(int? id)
     {
-        if (id is null)
-        {
-            return NotFound();
-        }
+        if (id is null) return NotFound();
 
-        var dietplanday = await _context.DietPlanDays.FindAsync(id);
-        if (dietplanday != null)
-        {
-            DietPlanDay = dietplanday;
-            _context.DietPlanDays.Remove(DietPlanDay);
-            await _context.SaveChangesAsync();
-        }
-
+        await _repository.DeleteAsync(id.Value);
+        await _repository.SaveAsync();
         return RedirectToPage("./Index");
     }
 }

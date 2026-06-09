@@ -1,37 +1,38 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using WebApplication1.Data;
+using WebApplication1.DTOs;
 using WebApplication1.Models;
+using WebApplication1.Repositories;
 
 namespace WebApplication1.Pages.DietManagementPages;
 
 public class CreateModel : PageModel
 {
-    private readonly ApplicationDbContext _context;
+    private readonly IDietRepository _repository;
 
-    public CreateModel(ApplicationDbContext context)
+    public CreateModel(IDietRepository repository)
     {
-        _context = context;
+        _repository = repository;
     }
 
-    public IActionResult OnGet()
-    {
-        return Page();
-    }
+    public IActionResult OnGet() => Page();
 
     [BindProperty]
-    public Diet Diet { get; set; } = default!;
+    public DietDto Input { get; set; } = default!;
 
     public async Task<IActionResult> OnPostAsync()
     {
-        if (!ModelState.IsValid)
+        if (!ModelState.IsValid) return Page();
+
+        var entity = new Diet
         {
-            return Page();
-        }
+            Name = Input.Name,
+            Description = Input.Description,
+            TargetCalories = Input.TargetCalories
+        };
 
-        _context.Diets.Add(Diet);
-        await _context.SaveChangesAsync();
-
+        await _repository.AddAsync(entity);
+        await _repository.SaveAsync();
         return RedirectToPage("/DietPages/Index");
     }
 }

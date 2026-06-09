@@ -1,26 +1,22 @@
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
-using WebApplication1.Data;
 using WebApplication1.Models;
+using WebApplication1.Repositories;
 
 namespace WebApplication1.Pages;
 
 public class PanelModel : PageModel
 {
-    private readonly ApplicationDbContext _context;
+    private readonly IPlanTreningowyRepository _repository;
 
-    public PanelModel(ApplicationDbContext context)
+    public PanelModel(IPlanTreningowyRepository repository)
     {
-        _context = context;
+        _repository = repository;
     }
 
     public IList<PlanTreningowy> PlanyTreningowe { get; set; } = new List<PlanTreningowy>();
 
     public async Task OnGetAsync()
     {
-        PlanyTreningowe = await _context.PlanyTreningowe
-            .Include(plan => plan.Cwiczenia)
-            .OrderBy(plan => plan.Nazwa)
-            .ToListAsync();
+        PlanyTreningowe = await _repository.GetAllAsync();
     }
 }

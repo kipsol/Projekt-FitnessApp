@@ -1,18 +1,17 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
 using WebApplication1.Models;
-using WebApplication1.Data;
+using WebApplication1.Repositories;
 
 namespace WebApplication1.Pages.DietManagementPages;
 
 public class DeleteModel : PageModel
 {
-    private readonly ApplicationDbContext _context;
+    private readonly IDietRepository _repository;
 
-    public DeleteModel(ApplicationDbContext context)
+    public DeleteModel(IDietRepository repository)
     {
-        _context = context;
+        _repository = repository;
     }
 
     [BindProperty]
@@ -20,39 +19,21 @@ public class DeleteModel : PageModel
 
     public async Task<IActionResult> OnGetAsync(int? id)
     {
-        if (id is null)
-        {
-            return NotFound();
-        }
+        if (id is null) return NotFound();
 
-        var diet = await _context.Diets.FirstOrDefaultAsync(m => m.Id == id);
-        if (diet is null)
-        {
-            return NotFound();
-        }
-        else
-        {
-            Diet = diet;
-        }
+        var entity = await _repository.GetByIdAsync(id.Value);
+        if (entity is null) return NotFound();
 
+        Diet = entity;
         return Page();
     }
 
     public async Task<IActionResult> OnPostAsync(int? id)
     {
-        if (id is null)
-        {
-            return NotFound();
-        }
+        if (id is null) return NotFound();
 
-        var diet = await _context.Diets.FindAsync(id);
-        if (diet != null)
-        {
-            Diet = diet;
-            _context.Diets.Remove(Diet);
-            await _context.SaveChangesAsync();
-        }
-
+        await _repository.DeleteAsync(id.Value);
+        await _repository.SaveAsync();
         return RedirectToPage("/DietPages/Index");
     }
 }

@@ -31,7 +31,7 @@
         <input asp-for="Plan.CzasTrwaniaTygodnie" class="form-control" type="number" min="1" />
         <span asp-validation-for="Plan.CzasTrwaniaTygodnie" class="text-danger"></span>
 
-        <label asp-for="Plan.CwiczenieIds"></label>
+        <label asp-for="Plan.CwiczenieIds">Cwiczenia w planie</label>
         <select asp-for="Plan.CwiczenieIds" asp-items="Model.Cwiczenia" class="form-select" multiple size="6"></select>
         <span asp-validation-for="Plan.CwiczenieIds" class="text-danger"></span>
 

@@ -2,61 +2,127 @@
 @model WebApplication1.Pages.MealPages.IndexModel
 
 @{
-    ViewData["Title"] = "Baza Posiłków";
+    ViewData["Title"] = "Baza posiłków";
 }
 
-<h1>Baza Posiłków</h1>
+<style>
+    .dark-table-container {
+        background-color: #1a1a1a;
+        border-radius: 12px;
+        border: 1px solid #333;
+        overflow: hidden;
+        box-shadow: 0 8px 25px rgba(0,0,0,0.5);
+    }
 
-<p>
-    <a asp-page="Create" class="btn btn-success">➕ Dodaj nowy posiłek</a>
-</p>
+    .dark-table {
+        width: 100%;
+        margin-bottom: 0;
+        color: #cfcfcf;
+    }
 
-<table class="table table-striped shadow-sm mt-3">
-    <thead class="table-dark">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Meal[0].Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Meal[0].Calories)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Meal[0].Description)
-            </th>
-            <th>Akcje</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model.Meal)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Calories) kcal
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Description)
-                </td>
-                <td>
-                    <a asp-page="./Edit" asp-route-id="@item.Id" class="btn btn-sm btn-outline-secondary">Edytuj</a> |
-                    <a asp-page="./Details" asp-route-id="@item.Id" class="btn btn-sm btn-outline-secondary">Szczegóły</a> |
-
-                    @if (item.PlanDays.Any())
-                    {
-                        <span class="d-inline-block" tabindex="0" data-bs-toggle="tooltip" title="Nie możesz usunąć tego posiłku, ponieważ jest obecnie przypisany do jadłospisu tygodniowego.">
-                            <button class="btn btn-sm btn-outline-danger disabled" style="pointer-events: none;" type="button">
-                                Usuń <span class="badge bg-secondary">@item.PlanDays.Count</span>
-                            </button>
-                        </span>
-                    }
-                    else
-                    {
-                        <a asp-page="./Delete" asp-route-id="@item.Id" class="btn btn-sm btn-outline-danger">Usuń</a>
-                    }
-                </td>
-            </tr>
+        .dark-table thead {
+            background-color: #222;
+            border-bottom: 3px solid #8a2be2;
         }
-    </tbody>
-</table>
+
+        .dark-table th {
+            padding: 18px;
+            color: #fff;
+            font-weight: 600;
+            border: none;
+        }
+
+        .dark-table td {
+            padding: 18px;
+            vertical-align: middle;
+            border-bottom: 1px solid #2a2a2a;
+        }
+
+        .dark-table tr:hover {
+            background-color: #252525;
+        }
+
+    .action-btn {
+        color: #aaa;
+        text-decoration: none;
+        padding: 6px 12px;
+        border: 1px solid #444;
+        border-radius: 6px;
+        margin-right: 5px;
+        font-size: 0.85rem;
+        transition: all 0.3s ease;
+    }
+
+        .action-btn:hover {
+            color: #b052ff;
+            border-color: #8a2be2;
+            background-color: rgba(138,43,226,0.1);
+        }
+
+    .action-delete:hover {
+        color: #fff;
+        border-color: #ff4d4d;
+        background-color: rgba(255, 77, 77, 0.8);
+    }
+
+    .btn-neon {
+        background-color: #8a2be2;
+        color: #fff;
+        padding: 10px 20px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: bold;
+        transition: 0.3s;
+        border: none;
+    }
+
+        .btn-neon:hover {
+            background-color: #9d4edd;
+            color: #fff;
+            box-shadow: 0 0 15px rgba(138,43,226,0.4);
+        }
+</style>
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h2 class="text-light fw-bold">Baza posiłków</h2>
+            <p class="text-muted small">Przeglądaj przepisy i wartości odżywcze</p>
+        </div>
+        @if (Model.CanManageMeals)
+        {
+            <a asp-page="Create" class="btn-neon">Dodaj nowy posiłek</a>
+        }
+    </div>
+
+    <div class="dark-table-container">
+        <table class="dark-table">
+            <thead>
+                <tr>
+                    <th class="ps-4">Nazwa posiłku</th>
+                    <th>Kalorie (kcal)</th>
+                    <th>Opis</th>
+                    <th class="text-end pe-4">Akcje</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Meal)
+                {
+                    <tr>
+                        <td class="fw-bold ps-4" style="color: #b052ff;">@item.Name</td>
+                        <td><span class="badge bg-secondary">@item.Calories kcal</span></td>
+                        <td class="text-muted small">@item.Description</td>
+                        <td class="text-end pe-4">
+                            <a asp-page="./Details" asp-route-id="@item.Id" class="action-btn">Szczegóły</a>
+                            @if (Model.CanManageMeals)
+                            {
+                                <a asp-page="./Edit" asp-route-id="@item.Id" class="action-btn">Edytuj</a>
+                                <a asp-page="./Delete" asp-route-id="@item.Id" class="action-btn action-delete">Usuń</a>
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

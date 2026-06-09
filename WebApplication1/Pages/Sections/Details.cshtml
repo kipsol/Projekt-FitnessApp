@@ -1,0 +1,30 @@
+@page
+@model WebApplication1.Pages.Sections.DetailsModel
+
+@{
+    ViewData["Title"] = "Szczegoly sekcji";
+}
+
+<h1>Szczegoly sekcji</h1>
+
+<dl class="row">
+    <dt class="col-sm-3">Nazwa</dt>
+    <dd class="col-sm-9">@Model.Sekcja.Nazwa</dd>
+
+    <dt class="col-sm-3">Pietro</dt>
+    <dd class="col-sm-9">@Model.Sekcja.Pietro</dd>
+
+    <dt class="col-sm-3">Liczba maszyn</dt>
+    <dd class="col-sm-9">@Model.Sekcja.Maszyny.Count</dd>
+</dl>
+
+<h4>Maszyny</h4>
+<ul>
+    @foreach (var maszyna in Model.Sekcja.Maszyny.OrderBy(item => item.Nazwa))
+    {
+        <li>@maszyna.Nazwa (@maszyna.Status)</li>
+    }
+</ul>
+
+<a asp-page="./Edit" asp-route-id="@Model.Sekcja.Id" class="btn btn-primary">Edytuj</a>
+<a asp-page="./Index" class="btn btn-link">Powrot do listy</a>

@@ -1,0 +1,49 @@
+@page
+@model WebApplication1.Pages.Exercises.DetailsModel
+
+@{
+    ViewData["Title"] = "Szczegoly cwiczenia";
+}
+
+<h1>Szczegoly cwiczenia</h1>
+
+<dl class="row">
+    <dt class="col-sm-3">Nazwa</dt>
+    <dd class="col-sm-9">@Model.Cwiczenie.Nazwa</dd>
+
+    <dt class="col-sm-3">Opis wykonania</dt>
+    <dd class="col-sm-9">@Model.Cwiczenie.OpisWykonania</dd>
+
+    <dt class="col-sm-3">Partia miesniowa</dt>
+    <dd class="col-sm-9">@Model.Cwiczenie.PartiaMiesniowa.Nazwa</dd>
+
+    <dt class="col-sm-3">Maszyna</dt>
+    <dd class="col-sm-9">@(Model.Cwiczenie.Maszyna?.Nazwa ?? "-")</dd>
+
+    <dt class="col-sm-3">Plany treningowe</dt>
+    <dd class="col-sm-9">@(Model.Cwiczenie.PozycjePlanu.Any() ? string.Join(", ", Model.Cwiczenie.PozycjePlanu.Select(pozycja => pozycja.PlanTreningowy.Nazwa)) : "-")</dd>
+
+    <dt class="col-sm-3">Liczba serii</dt>
+    <dd class="col-sm-9">@Model.Cwiczenie.LiczbaSerii</dd>
+
+    <dt class="col-sm-3">Liczba powtorzen</dt>
+    <dd class="col-sm-9">@Model.Cwiczenie.LiczbaPowtorzen</dd>
+
+    <dt class="col-sm-3">Przerwa</dt>
+    <dd class="col-sm-9">@Model.Cwiczenie.PrzerwaSekundy s</dd>
+
+    <dt class="col-sm-3">Plik cwiczenia</dt>
+    <dd class="col-sm-9">
+        @if (!string.IsNullOrWhiteSpace(Model.Cwiczenie.PlikSciezka))
+        {
+            <a href="@Model.Cwiczenie.PlikSciezka" target="_blank" rel="noopener">Otworz plik</a>
+        }
+        else
+        {
+            <span>-</span>
+        }
+    </dd>
+</dl>
+
+<a asp-page="./Edit" asp-route-id="@Model.Cwiczenie.Id" class="btn btn-primary">Edytuj</a>
+<a asp-page="./Index" class="btn btn-link">Powrot do listy</a>

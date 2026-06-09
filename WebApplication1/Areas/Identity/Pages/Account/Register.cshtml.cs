@@ -17,6 +17,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
+using WebApplication1.Security;
 
 namespace WebApplication1.Areas.Identity.Pages.Account
 {
@@ -91,13 +92,16 @@ namespace WebApplication1.Areas.Identity.Pages.Account
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
 
+                var hasTrainer = (await _userManager.GetUsersInRoleAsync(AppRoles.Trener)).Any();
+                var roleName = hasTrainer ? AppRoles.Klient : AppRoles.Trener;
+
                 var result = await _userManager.CreateAsync(user, Input.Password);
 
                 if (result.Succeeded)
                 {
-                    await _userManager.AddToRoleAsync(user, "Klient");
+                    await _userManager.AddToRoleAsync(user, roleName);
 
-                    _logger.LogInformation("Utworzono nowe konto użytkownika z rolą Klient.");
+                    _logger.LogInformation("Utworzono nowe konto uzytkownika z rola {RoleName}.", roleName);
 
                     var userId = await _userManager.GetUserIdAsync(user);
 

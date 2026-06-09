@@ -1,0 +1,25 @@
+@page
+@model WebApplication1.Pages.GymMachines.DetailsModel
+
+@{
+    ViewData["Title"] = "Szczegoly maszyny";
+}
+
+<h1>Szczegoly maszyny</h1>
+
+<dl class="row">
+    <dt class="col-sm-3">Nazwa</dt>
+    <dd class="col-sm-9">@Model.Maszyna.Nazwa</dd>
+
+    <dt class="col-sm-3">Status</dt>
+    <dd class="col-sm-9">@Model.Maszyna.Status</dd>
+
+    <dt class="col-sm-3">Sekcja</dt>
+    <dd class="col-sm-9">@Model.Maszyna.Sekcja.Nazwa</dd>
+
+    <dt class="col-sm-3">Liczba cwiczen</dt>
+    <dd class="col-sm-9">@Model.Maszyna.Cwiczenia.Count</dd>
+</dl>
+
+<a asp-page="./Edit" asp-route-id="@Model.Maszyna.Id" class="btn btn-primary">Edytuj</a>
+<a asp-page="./Index" class="btn btn-link">Powrot do listy</a>

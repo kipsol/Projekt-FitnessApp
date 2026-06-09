@@ -12,5 +12,5 @@ public class PlanTreningowy
 
     public int CzasTrwaniaTygodnie { get; set; }
 
-    public ICollection<Cwiczenie> Cwiczenia { get; set; } = new List<Cwiczenie>();
+    public ICollection<PozycjaPlanu> PozycjePlanu { get; set; } = new List<PozycjaPlanu>();
 }

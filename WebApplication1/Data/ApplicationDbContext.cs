@@ -16,6 +16,8 @@ public class ApplicationDbContext : IdentityDbContext<IdentityUser, IdentityRole
 
     public DbSet<Cwiczenie> Cwiczenia => Set<Cwiczenie>();
 
+    public DbSet<PozycjaPlanu> PozycjePlanu => Set<PozycjaPlanu>();
+
     public DbSet<PartiaMiesniowa> PartieMiesniowe => Set<PartiaMiesniowa>();
 
     public DbSet<Maszyna> Maszyny => Set<Maszyna>();
@@ -28,11 +30,23 @@ public class ApplicationDbContext : IdentityDbContext<IdentityUser, IdentityRole
 
     public DbSet<DietPlanDay> DietPlanDays => Set<DietPlanDay>();
 
+    public DbSet<ClassEvent> ClassEvents => Set<ClassEvent>();
+
+    public DbSet<ClassSchedule> ClassSchedules => Set<ClassSchedule>();
+
     public DbSet<UserProfile> UserProfiles => Set<UserProfile>();
+
+    public DbSet<UserFitnessAssignment> UserFitnessAssignments => Set<UserFitnessAssignment>();
 
     public DbSet<TrainingSession> TrainingSessions => Set<TrainingSession>();
 
     public DbSet<ProgressEntry> ProgressEntries => Set<ProgressEntry>();
+
+    public DbSet<Product> Products => Set<Product>();
+
+    public DbSet<Order> Orders => Set<Order>();
+
+    public DbSet<OrderItem> OrderItems => Set<OrderItem>();
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
@@ -52,6 +66,11 @@ public class ApplicationDbContext : IdentityDbContext<IdentityUser, IdentityRole
             entity.Property(plan => plan.PoziomZaawansowania)
                 .HasMaxLength(40)
                 .IsRequired();
+
+            entity.HasMany(plan => plan.PozycjePlanu)
+                .WithOne(pozycja => pozycja.PlanTreningowy)
+                .HasForeignKey(pozycja => pozycja.PlanTreningowyId)
+                .OnDelete(DeleteBehavior.Cascade);
         });
 
         builder.Entity<Cwiczenie>(entity =>
@@ -70,20 +89,43 @@ public class ApplicationDbContext : IdentityDbContext<IdentityUser, IdentityRole
                 .HasMaxLength(30)
                 .IsRequired();
 
+            entity.Property(cwiczenie => cwiczenie.PlikSciezka)
+                .HasMaxLength(260);
+
             entity.HasOne(cwiczenie => cwiczenie.PartiaMiesniowa)
                 .WithMany(partia => partia.Cwiczenia)
                 .HasForeignKey(cwiczenie => cwiczenie.PartiaMiesniowaId)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            entity.HasOne(cwiczenie => cwiczenie.PlanTreningowy)
-                .WithMany(plan => plan.Cwiczenia)
-                .HasForeignKey(cwiczenie => cwiczenie.PlanTreningowyId)
-                .OnDelete(DeleteBehavior.SetNull);
-
             entity.HasOne(cwiczenie => cwiczenie.Maszyna)
                 .WithMany(maszyna => maszyna.Cwiczenia)
                 .HasForeignKey(cwiczenie => cwiczenie.MaszynaId)
                 .OnDelete(DeleteBehavior.SetNull);
+        });
+
+        builder.Entity<PozycjaPlanu>(entity =>
+        {
+            entity.ToTable("PozycjePlanu");
+
+            entity.Property(pozycja => pozycja.DzienTreningowy)
+                .HasMaxLength(40)
+                .IsRequired();
+
+            entity.Property(pozycja => pozycja.LiczbaPowtorzen)
+                .HasMaxLength(30)
+                .IsRequired();
+
+            entity.HasIndex(pozycja => new { pozycja.PlanTreningowyId, pozycja.CwiczenieId });
+
+            entity.HasOne(pozycja => pozycja.PlanTreningowy)
+                .WithMany(plan => plan.PozycjePlanu)
+                .HasForeignKey(pozycja => pozycja.PlanTreningowyId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            entity.HasOne(pozycja => pozycja.Cwiczenie)
+                .WithMany(cwiczenie => cwiczenie.PozycjePlanu)
+                .HasForeignKey(pozycja => pozycja.CwiczenieId)
+                .OnDelete(DeleteBehavior.Cascade);
         });
 
         builder.Entity<PartiaMiesniowa>(entity =>
@@ -172,6 +214,34 @@ public class ApplicationDbContext : IdentityDbContext<IdentityUser, IdentityRole
                 .OnDelete(DeleteBehavior.Cascade);
         });
 
+        builder.Entity<UserFitnessAssignment>(entity =>
+        {
+            entity.ToTable("UserFitnessAssignments");
+
+            entity.HasIndex(assignment => assignment.UserId)
+                .IsUnique();
+
+            entity.HasOne(assignment => assignment.User)
+                .WithMany()
+                .HasForeignKey(assignment => assignment.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            entity.HasOne(assignment => assignment.AssignedByTrainer)
+                .WithMany()
+                .HasForeignKey(assignment => assignment.AssignedByTrainerId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            entity.HasOne(assignment => assignment.PlanTreningowy)
+                .WithMany()
+                .HasForeignKey(assignment => assignment.PlanTreningowyId)
+                .OnDelete(DeleteBehavior.SetNull);
+
+            entity.HasOne(assignment => assignment.Diet)
+                .WithMany()
+                .HasForeignKey(assignment => assignment.DietId)
+                .OnDelete(DeleteBehavior.SetNull);
+        });
+
         builder.Entity<TrainingSession>(entity =>
         {
             entity.ToTable("UserTrainingSessions");
@@ -204,6 +274,73 @@ public class ApplicationDbContext : IdentityDbContext<IdentityUser, IdentityRole
                 .WithMany()
                 .HasForeignKey(progress => progress.UserId)
                 .OnDelete(DeleteBehavior.Cascade);
+        });
+
+        builder.Entity<ClassEvent>(entity =>
+        {
+            entity.ToTable("ClassEvents");
+
+            entity.Property(ce => ce.Name)
+                .HasMaxLength(100)
+                .IsRequired();
+
+            entity.Property(ce => ce.Trainer)
+                .HasMaxLength(100)
+                .IsRequired();
+
+            entity.Property(ce => ce.Description)
+                .HasMaxLength(1000);
+        });
+
+        builder.Entity<ClassSchedule>(entity =>
+        {
+            entity.ToTable("ClassSchedules");
+
+            entity.HasIndex(schedule => new { schedule.UserId, schedule.ClassEventId })
+                .IsUnique()
+                .HasFilter("[UserId] IS NOT NULL");
+
+            entity.HasOne(schedule => schedule.User)
+                .WithMany()
+                .HasForeignKey(schedule => schedule.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            entity.HasOne(cs => cs.ClassEvent)
+                .WithMany(ce => ce.Schedules)
+                .HasForeignKey(cs => cs.ClassEventId)
+                .OnDelete(DeleteBehavior.Cascade);
+        });
+
+        builder.Entity<Product>(entity =>
+        {
+            entity.ToTable("Products");
+        });
+
+        builder.Entity<Order>(entity =>
+        {
+            entity.ToTable("Orders");
+
+            entity.HasIndex(order => new { order.UserId, order.OrderDate });
+
+            entity.HasOne(order => order.User)
+                .WithMany()
+                .HasForeignKey(order => order.UserId)
+                .OnDelete(DeleteBehavior.SetNull);
+        });
+
+        builder.Entity<OrderItem>(entity =>
+        {
+            entity.ToTable("OrderItems");
+
+            entity.HasOne(oi => oi.Order)
+                .WithMany(o => o.OrderItems)
+                .HasForeignKey(oi => oi.OrderId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            entity.HasOne(oi => oi.Product)
+                .WithMany()
+                .HasForeignKey(oi => oi.ProductId)
+                .OnDelete(DeleteBehavior.Restrict);
         });
     }
 }

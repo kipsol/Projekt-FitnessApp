@@ -1,0 +1,28 @@
+@page
+@model WebApplication1.Pages.Sections.DeleteModel
+
+@{
+    ViewData["Title"] = "Usun sekcje";
+}
+
+<h1>Usun sekcje</h1>
+<h3>Czy na pewno chcesz usunac te sekcje?</h3>
+
+<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+<dl class="row">
+    <dt class="col-sm-3">Nazwa</dt>
+    <dd class="col-sm-9">@Model.Sekcja.Nazwa</dd>
+
+    <dt class="col-sm-3">Pietro</dt>
+    <dd class="col-sm-9">@Model.Sekcja.Pietro</dd>
+
+    <dt class="col-sm-3">Liczba maszyn</dt>
+    <dd class="col-sm-9">@Model.Sekcja.Maszyny.Count</dd>
+</dl>
+
+<form method="post">
+    <input type="hidden" asp-for="Sekcja.Id" />
+    <button type="submit" class="btn btn-danger" disabled="@Model.HasMaszyny">Usun</button>
+    <a asp-page="./Index" class="btn btn-link">Powrot</a>
+</form>

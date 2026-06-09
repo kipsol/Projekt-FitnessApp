@@ -1,24 +1,22 @@
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
 using WebApplication1.Models;
-using WebApplication1.Data;
+using WebApplication1.Repositories;
 
 namespace WebApplication1.Pages.DietPages;
 
 public class DietManagementIndexModel : PageModel
 {
-    private readonly ApplicationDbContext _context;
+    private readonly IDietRepository _repository;
 
-    public DietManagementIndexModel(ApplicationDbContext context)
+    public DietManagementIndexModel(IDietRepository repository)
     {
-        _context = context;
+        _repository = repository;
     }
 
     public IList<Diet> Diet { get; set; } = default!;
 
     public async Task OnGetAsync()
     {
-        Diet = await _context.Diets.ToListAsync();
+        Diet = await _repository.GetAllAsync();
     }
 }

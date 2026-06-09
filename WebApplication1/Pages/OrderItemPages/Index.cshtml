@@ -1,0 +1,160 @@
+@page
+@model WebApplication1.Pages.OrderItemPages.IndexModel
+
+@{
+    ViewData["Title"] = "Skład Pozycji";
+}
+
+<style>
+    .dark-table {
+        width: 100%;
+        margin-bottom: 0;
+        color: #cfcfcf;
+        border-collapse: collapse;
+    }
+
+        .dark-table thead {
+            background-color: #222;
+        }
+
+        .dark-table th {
+            padding: 18px;
+            color: #fff;
+            font-weight: 600;
+            border: none;
+            border-bottom: 3px solid #8a2be2;
+        }
+
+        .dark-table td {
+            padding: 18px;
+            vertical-align: middle;
+            border-bottom: 1px solid #2a2a2a;
+        }
+
+        .dark-table tr:hover {
+            background-color: #252525;
+        }
+
+        .dark-table tr:last-child td {
+            border-bottom: none;
+        }
+
+    .theme-input {
+        background-color: #252525;
+        color: #e0e0e0;
+        border: 1px solid #444;
+    }
+
+        .theme-input:focus {
+            border-color: #8a2be2;
+            box-shadow: 0 0 0 0.25rem rgba(138,43,226,0.25);
+            background-color: #2a2a2a;
+            color: #fff;
+        }
+
+    .btn-outline-neon-sm {
+        border: 1px solid #8a2be2;
+        color: #b052ff;
+        background-color: transparent;
+        transition: 0.3s ease;
+        border-radius: 6px;
+        padding: 5px 12px;
+        font-size: 0.85rem;
+        text-decoration: none;
+        display: inline-block;
+    }
+
+        .btn-outline-neon-sm:hover {
+            background-color: #8a2be2;
+            color: #fff;
+        }
+
+    .action-btn {
+        color: #aaa;
+        text-decoration: none;
+        padding: 6px 12px;
+        border: 1px solid #444;
+        border-radius: 6px;
+        font-size: 0.85rem;
+        transition: all 0.3s ease;
+        display: inline-block;
+    }
+
+        .action-btn:hover {
+            color: #b052ff;
+            border-color: #8a2be2;
+            background-color: rgba(138,43,226,0.1);
+        }
+
+    .action-delete:hover {
+        color: #fff;
+        border-color: #ff4d4d;
+        background-color: rgba(255, 77, 77, 0.8);
+    }
+</style>
+
+<div class="container mt-4 mb-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h2 class="text-light fw-bold mb-1">Baza zamówień</h2>
+            <p class="text-muted small mb-0">Przeglądaj zakupione produkty i zarządzaj statusem zamówień</p>
+        </div>
+    </div>
+
+    <div class="card shadow-sm border-0" style="background-color: #1a1a1a; border: 1px solid #333 !important; border-radius: 12px; overflow: hidden;">
+        <div class="card-body p-0">
+            <table class="dark-table mb-0">
+                <thead>
+                    <tr>
+                        <th class="ps-4">Nr Zam.</th>
+                        <th>Nazwa produktu</th>
+                        <th class="text-center">Ilość</th>
+                        <th class="text-end">Suma</th>
+                        <th class="text-center">Zmień status faktury</th>
+                        <th class="text-end pe-4">Akcje</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.OrderItem)
+                    {
+                        var sumaCzesciowa = item.PriceAtPurchase * item.Quantity;
+                        <tr>
+                            <td class="ps-4">
+                                <span class="badge" style="background-color: #333; border: 1px solid #555; font-size: 0.85rem;">#@item.OrderId</span>
+                            </td>
+
+                            <td class="fw-bold" style="color: #b052ff; font-size: 1.05rem;">@item.Product?.Name</td>
+
+                            <td class="text-center text-light">@item.Quantity szt.</td>
+
+                            <td class="text-end fw-bold text-success">@sumaCzesciowa.ToString("F2") PLN</td>
+
+                            <td class="text-center">
+                                <form method="post" asp-page-handler="UpdateStatus" asp-route-orderId="@item.OrderId" class="d-flex justify-content-center align-items-center m-0">
+                                    <select name="nowyStatus" class="form-select form-select-sm shadow-none me-2 theme-input" style="width: 180px;">
+                                        <option value="Oczekujące" selected="@(item.Order?.Status == "Oczekujące")">⏳ Oczekujące</option>
+                                        <option value="Przyjęte" selected="@(item.Order?.Status == "Przyjęte")">⚙️ Przyjęte</option>
+                                        <option value="Gotowe do odbioru" selected="@(item.Order?.Status == "Gotowe do odbioru")">📦 Gotowe do odbioru</option>
+                                    </select>
+                                    <button type="submit" class="btn-outline-neon-sm">Zapisz</button>
+                                </form>
+                            </td>
+
+                            <td class="text-end pe-4">
+                                <a asp-page="./Delete" asp-route-id="@item.Id" class="action-btn action-delete">Usuń</a>
+                            </td>
+                        </tr>
+                    }
+                    @if (!Model.OrderItem.Any())
+                    {
+                        <tr>
+                            <td colspan="6" class="text-center text-muted py-5" style="font-style: italic;">
+                                Brak pozycji w koszykach zamówień.
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

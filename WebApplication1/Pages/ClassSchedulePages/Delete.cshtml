@@ -1,0 +1,40 @@
+@page
+@model WebApplication1.Pages.ClassSchedulePages.DeleteModel
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>Delete</h1>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>WebApplication1.Models.ClassSchedule</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ClassSchedule.ClassEvent.Day)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ClassSchedule.ClassEvent.Day)
+        </dd>
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ClassSchedule.ClassEventId)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ClassSchedule.ClassEventId)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ClassSchedule.ClassEvent)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ClassSchedule.ClassEvent)
+        </dd>
+    </dl>
+    <form method="post">
+        <input type="hidden" asp-for="ClassSchedule.Id" />
+        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <a asp-page="./Index">Back to List</a>
+    </form>
+</div>

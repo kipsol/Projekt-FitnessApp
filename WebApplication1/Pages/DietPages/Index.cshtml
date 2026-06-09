@@ -1,116 +1,252 @@
-﻿@page "{id:int?}"
+﻿@page
 @model WebApplication1.Pages.DietPages.IndexModel
+
 @{
-    ViewData["Title"] = "Jadłospis Tygodniowy";
+    ViewData["Title"] = "Moje Diety";
+
+    var dniTygodnia = new Dictionary<string, DayOfWeek>
+    {
+        {"Poniedziałek", DayOfWeek.Monday},
+        {"Wtorek", DayOfWeek.Tuesday},
+        {"Środa", DayOfWeek.Wednesday},
+        {"Czwartek", DayOfWeek.Thursday},
+        {"Piątek", DayOfWeek.Friday},
+        {"Sobota", DayOfWeek.Saturday},
+        {"Niedziela", DayOfWeek.Sunday}
+    };
 }
 
-@if (Model.Dieta == null)
+<style>
+    .theme-card {
+        background-color: #1a1a1a;
+        border: 1px solid #333;
+        border-radius: 12px;
+        box-shadow: 0 8px 30px rgba(0,0,0,0.5);
+    }
+
+    .theme-input {
+        background-color: #252525;
+        color: #e0e0e0;
+        border: 1px solid #444;
+    }
+
+        .theme-input:focus {
+            border-color: #8a2be2;
+            box-shadow: 0 0 0 0.25rem rgba(138,43,226,0.25);
+            background-color: #2a2a2a;
+            color: #fff;
+        }
+
+    .btn-neon {
+        background-color: #8a2be2;
+        color: #fff;
+        border: none;
+        transition: 0.3s ease;
+    }
+
+        .btn-neon:hover {
+            background-color: #9d4edd;
+            color: #fff;
+            box-shadow: 0 0 15px rgba(138,43,226,0.5);
+        }
+
+    .btn-outline-neon {
+        border: 2px solid #8a2be2;
+        color: #b052ff;
+        background-color: transparent;
+        transition: 0.3s ease;
+    }
+
+        .btn-outline-neon:hover {
+            background-color: #8a2be2;
+            color: #fff;
+        }
+
+    .btn-outline-danger-dark {
+        border: 1px solid #ff4d4d;
+        color: #ff4d4d;
+        background-color: transparent;
+        transition: 0.3s ease;
+    }
+
+        .btn-outline-danger-dark:hover {
+            background-color: #ff4d4d;
+            color: #fff;
+        }
+
+    .day-box {
+        background-color: #1a1a1a;
+        border: 1px solid #333;
+        border-top: 4px solid #8a2be2;
+        border-radius: 10px;
+        padding: 15px;
+        height: 100%;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        display: flex;
+        flex-direction: column;
+    }
+
+        .day-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(138,43,226,0.15);
+            border-color: #555;
+        }
+
+    .meal-item {
+        background-color: #222;
+        border-radius: 6px;
+        padding: 8px;
+        margin-bottom: 8px;
+        border-left: 3px solid #b052ff;
+    }
+
+    .meal-name {
+        color: #e0e0e0;
+        font-weight: 600;
+        font-size: 0.85rem;
+        display: block;
+        line-height: 1.2;
+    }
+
+    .meal-kcal {
+        color: #aaa;
+        font-size: 0.75rem;
+    }
+
+    .delete-meal-btn {
+        color: #ff4d4d;
+        font-size: 0.75rem;
+        text-decoration: none;
+        padding: 0;
+        border: none;
+        background: none;
+        transition: 0.2s;
+    }
+
+        .delete-meal-btn:hover {
+            color: #ff8080;
+            text-decoration: underline;
+        }
+
+    .target-badge {
+        background-color: rgba(138,43,226,0.15);
+        border: 1px solid #8a2be2;
+        color: #b052ff;
+        font-weight: 800;
+        font-size: 1.2rem;
+    }
+</style>
+
+@if (!string.IsNullOrWhiteSpace(Model.EmptyMessage))
 {
-    <div class="alert alert-info mt-5 text-center shadow-sm">
-        <h4>Nie znaleziono żadnej diety w bazie danych.</h4>
-        <p class="text-muted">Aby zacząć planować tygodniowy jadłospis, musisz najpierw zdefiniować plan.</p>
-        <a class="btn btn-success btn-lg" asp-page="/DietManagementPages/Create">➕ Stwórz swój pierwszy plan diety</a>
-    </div>
+    <div class="alert alert-info">@Model.EmptyMessage</div>
 }
-else
-{
-    <div class="container-fluid mt-4">
-        <div class="p-4 mb-4 bg-light rounded-3 shadow-sm d-flex justify-content-between align-items-center flex-wrap">
-            <div>
-                <label class="form-label h5 text-secondary">Wybierz plan diety:</label>
-                <div class="d-flex align-items-center gap-3 flex-wrap">
-                    <select class="form-select form-select-lg shadow-sm" style="min-width: 280px;"
-                            asp-items="Model.WszystkieDiety"
-                            onchange="location = '/DietPages/' + this.value;">
-                    </select>
 
-                    <a class="btn btn-outline-primary btn-md shadow-sm" asp-page="/DietManagementPages/Create" title="Dodaj zupełnie nową dietę do systemu">
-                        ➕ Nowa dieta
-                    </a>
-
-                    <a class="btn btn-outline-danger btn-md shadow-sm" asp-page="/DietManagementPages/Delete" asp-route-id="@Model.WybraneDietId" title="Usuń ten plan diety wraz z całym jego kalendarzem">
-                        🗑️ Usuń ten plan
-                    </a>
-                </div>
-                <p class="text-muted mt-3 mb-0"><strong>Opis planu:</strong> @Model.Dieta.Description</p>
-            </div>
-
-            <div class="text-end">
-                <div class="badge bg-primary fs-5 mb-2 d-block p-2 shadow-sm">Cel: @Model.Dieta.TargetCalories kcal</div>
-                <a class="btn btn-success btn-lg shadow-sm w-100" asp-page="/DietPlanPages/Create" asp-route-dietId="@Model.WybraneDietId">
-                    ➕ Zaplanuj posiłek w tym planie
-                </a>
-            </div>
+<div class="theme-card p-4 mb-5">
+    <form method="get" class="row align-items-end g-3">
+        <div class="col-md-8">
+            <label class="form-label text-muted fw-bold">Wybierz plan diety:</label>
+            <select name="id" asp-for="WybraneDietId" class="form-select form-select-lg theme-input" onchange="this.form.submit()" asp-items="Model.WszystkieDiety">
+                <option value="">-- Wybierz swój plan --</option>
+            </select>
         </div>
-
-        <h2 class="mb-4 text-secondary">Twój Plan Tygodniowy</h2>
-
-        <div class="row row-cols-1 row-cols-md-7 g-2" style="display: flex; flex-wrap: nowrap; overflow-x: auto;">
-
-            @{
-                var dniTygodnia = new List<(DayOfWeek Dzien, string NazwaPl)>
-                {
-                    (DayOfWeek.Monday, "Poniedziałek"),
-                    (DayOfWeek.Tuesday, "Wtorek"),
-                    (DayOfWeek.Wednesday, "Środa"),
-                    (DayOfWeek.Thursday, "Czwartek"),
-                    (DayOfWeek.Friday, "Piątek"),
-                    (DayOfWeek.Saturday, "Sobota"),
-                    (DayOfWeek.Sunday, "Niedziela")
-                };
-            }
-
-            @foreach (var dzien in dniTygodnia)
+        <div class="col-md-4 text-md-end">
+            @if (Model.Dieta != null)
             {
-                var wpisyNaTenDzien = Model.PosiłkiNaDni[dzien.Dzien];
-                var sumaKalorii = wpisyNaTenDzien.Sum(w => w.Meal?.Calories ?? 0);
+                <div class="d-inline-block px-4 py-2 rounded-3 target-badge shadow-sm mb-2">
+                    Cel: @Model.Dieta.TargetCalories kcal
+                </div>
+            }
+        </div>
+    </form>
 
-                <div class="col" style="flex: 0 0 14.28%; min-width: 180px;">
-                    <div class="card h-100 shadow-sm border-@(sumaKalorii > Model.Dieta.TargetCalories ? "danger" : "success")">
+    @if (Model.Dieta != null && !string.IsNullOrEmpty(Model.Dieta.Description))
+    {
+        <div class="mt-4 p-3 rounded shadow-sm" style="background-color: #111; border: 1px solid #222; border-left: 4px solid #8a2be2;">
+            <span class="text-light"><strong>Opis planu:</strong> <span class="text-muted">@Model.Dieta.Description</span></span>
+        </div>
+    }
 
-                        <div class="card-header bg-dark text-white text-center py-2">
-                            <h5 class="card-title mb-0 fs-6">@dzien.NazwaPl</h5>
-                        </div>
+    <hr style="border-color: #333; margin: 25px 0;" />
 
-                        <div class="card-body p-2 d-flex flex-column justify-content-between">
-                            <div class="mb-3">
-                                @if (wpisyNaTenDzien.Any())
+    <div class="d-flex justify-content-between align-items-center flex-wrap gap-3">
+        @if (Model.CanManageDiets)
+        {
+            <div class="d-flex gap-2 flex-wrap">
+                <a asp-page="/DietManagementPages/Create" class="btn btn-outline-neon fw-bold px-4 py-2">➕ Nowa dieta</a>
+
+                @if (Model.Dieta != null)
+                {
+                    <a asp-page="/DietManagementPages/Delete" asp-route-id="@Model.Dieta.Id" class="btn btn-outline-danger-dark fw-bold px-4 py-2">🗑️ Usuń plan</a>
+                }
+            </div>
+
+            @if (Model.Dieta != null)
+            {
+                <a asp-page="/DietPlanPages/Create" asp-route-dietId="@Model.Dieta.Id" class="btn btn-neon fw-bold px-4 py-2 shadow-sm">
+                    ➕ Zaplanuj posiłek
+                </a>
+            }
+        }
+    </div>
+</div>
+
+@if (Model.Dieta != null)
+{
+    <h3 class="mb-4 text-light fw-bold border-bottom pb-3" style="border-color: #333 !important;">📅 Twój Plan Tygodniowy</h3>
+
+        <div class="row row-cols-1 row-cols-md-3 row-cols-lg-7 g-3 mb-5">
+            @foreach (var dzienKvp in dniTygodnia)
+            {
+                var nazwaDnia = dzienKvp.Key;
+                var EnumDnia = dzienKvp.Value;
+
+                var posilkiWdniu = Model.PosiłkiNaDni.ContainsKey(EnumDnia) ? Model.PosiłkiNaDni[EnumDnia] : new List<WebApplication1.Models.DietPlanDay>();
+                var sumaKcal = posilkiWdniu.Sum(p => p.Meal?.Calories ?? 0);
+
+                <div class="col">
+                    <div class="day-box">
+                        <h5 class="text-center mb-3 fw-bold" style="color: #b052ff; letter-spacing: 0.5px;">@nazwaDnia</h5>
+
+                        <div class="flex-grow-1 mb-3">
+                            @if (!posilkiWdniu.Any())
+                            {
+                                <div class="text-center text-muted small mt-4" style="font-style: italic;">
+                                    Brak zaplanowanych posiłków.
+                                </div>
+                            }
+                            else
+                            {
+                                @foreach (var posilek in posilkiWdniu)
                                 {
-                                    @foreach (var wpis in wpisyNaTenDzien)
-                                    {
-                                        <div class="p-2 mb-2 bg-light rounded border-start border-primary border-3 d-flex justify-content-between align-items-start" style="font-size: 0.85rem;">
-                                            <div>
-                                                <strong class="text-primary d-block">@wpis.MealType</strong>
-                                                <span>@wpis.Meal?.Name</span>
-                                                <span class="text-muted d-block" style="font-size: 0.75rem;">@wpis.Meal?.Calories kcal</span>
-                                            </div>
+                                    <div class="meal-item">
+                                        <span class="meal-name">@posilek.Meal?.Name</span>
+                                        <div class="d-flex justify-content-between align-items-center mt-1">
+                                            <span class="meal-kcal">@posilek.Meal?.Calories kcal</span>
 
-                                            <form method="post" asp-page-handler="DeleteMeal" asp-route-planDayId="@wpis.Id" asp-route-currentDietId="@Model.WybraneDietId" onsubmit="return confirm('Usunąć ten posiłek z jadłospisu?');">
-                                                <button type="submit" class="btn btn-link text-danger p-0 px-1 border-0" style="line-height: 1; font-size: 1.1rem;" title="Usuń z jadłospisu">
-                                                    &times;
-                                                </button>
-                                            </form>
+                                            @if (Model.CanManageDiets)
+                                            {
+                                                <form method="post" asp-page-handler="DeleteMeal">
+                                                    <input type="hidden" name="planDayId" value="@posilek.Id" />
+                                                    <input type="hidden" name="currentDietId" value="@Model.Dieta.Id" />
+                                                    <button type="submit" class="delete-meal-btn">Usuń</button>
+                                                </form>
+                                            }
                                         </div>
-                                    }
+                                    </div>
                                 }
-                                else
-                                {
-                                    <p class="text-muted text-center my-4" style="font-size: 0.85rem; font-style: italic;">Brak zaplanowanych posiłków.</p>
-                                }
-                            </div>
-
-                            <div class="border-top pt-2 mt-auto text-center" style="font-size: 0.9rem;">
-                                <strong>Suma:</strong>
-                                <span class="badge bg-@(sumaKalorii > Model.Dieta.TargetCalories ? "danger" : "secondary")">
-                                    @sumaKalorii / @Model.Dieta.TargetCalories kcal
-                                </span>
-                            </div>
+                            }
                         </div>
 
+                        <div class="mt-auto border-top pt-3 d-flex justify-content-between align-items-center" style="border-color: #333 !important;">
+                            <span class="text-secondary fw-bold" style="font-size: 0.85rem;">Suma:</span>
+                            <span class="badge @(sumaKcal > Model.Dieta.TargetCalories ? "bg-danger" : "bg-dark")" style="color: #ccc; font-size: 0.85rem; border: 1px solid #444;">
+                                @sumaKcal / @Model.Dieta.TargetCalories
+                            </span>
+                        </div>
                     </div>
                 </div>
             }
-
         </div>
-    </div>
-}
+    }
+</div>
