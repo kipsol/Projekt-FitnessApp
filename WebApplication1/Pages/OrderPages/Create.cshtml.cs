@@ -1,18 +1,25 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using WebApplication1.Data;
 using WebApplication1.Models;
+using WebApplication1.Repositories;
 
 namespace WebApplication1.Pages.OrderPages;
 
 public class CreateModel : PageModel
 {
-    private readonly ApplicationDbContext _context;
+    private readonly IOrderRepository _orderRepository;
+    private readonly IOrderItemRepository _orderItemRepository;
+    private readonly IProductRepository _productRepository;
 
-    public CreateModel(ApplicationDbContext context)
+    public CreateModel(
+        IOrderRepository orderRepository,
+        IOrderItemRepository orderItemRepository,
+        IProductRepository productRepository)
     {
-        _context = context;
+        _orderRepository = orderRepository;
+        _orderItemRepository = orderItemRepository;
+        _productRepository = productRepository;
     }
 
     [BindProperty]
@@ -21,19 +28,21 @@ public class CreateModel : PageModel
     [BindProperty]
     public int Ilosc { get; set; } = 1;
 
-    public IActionResult OnGet()
+    public async Task<IActionResult> OnGetAsync()
     {
-        ViewData["ProductId"] = new SelectList(_context.Products.Where(p => p.Stock > 0), "Id", "Name");
+        var dostepne = await _productRepository.GetAvailableAsync();
+        ViewData["ProductId"] = new SelectList(dostepne, "Id", "Name");
         return Page();
     }
 
     public async Task<IActionResult> OnPostAsync()
     {
-        var produkt = await _context.Products.FindAsync(WybranyProduktId);
+        var produkt = await _productRepository.GetByIdAsync(WybranyProduktId);
         if (produkt == null || produkt.Stock < Ilosc)
         {
             ModelState.AddModelError("", $"Brak towaru. Dostępna ilość: {produkt?.Stock ?? 0} szt.");
-            ViewData["ProductId"] = new SelectList(_context.Products.Where(p => p.Stock > 0), "Id", "Name");
+            var dostepne = await _productRepository.GetAvailableAsync();
+            ViewData["ProductId"] = new SelectList(dostepne, "Id", "Name");
             return Page();
         }
 
@@ -44,8 +53,8 @@ public class CreateModel : PageModel
             TotalPrice = produkt.Price * Ilosc
         };
 
-        _context.Orders.Add(noweZamowienie);
-        await _context.SaveChangesAsync();
+        await _orderRepository.AddAsync(noweZamowienie);
+        await _orderRepository.SaveAsync();
 
         var nowaPozycja = new OrderItem
         {
@@ -55,11 +64,12 @@ public class CreateModel : PageModel
             PriceAtPurchase = produkt.Price
         };
 
-        _context.OrderItems.Add(nowaPozycja);
+        await _orderItemRepository.AddAsync(nowaPozycja);
 
         produkt.Stock -= Ilosc;
+        await _productRepository.UpdateAsync(produkt);
 
-        await _context.SaveChangesAsync();
+        await _orderItemRepository.SaveAsync();
 
         return RedirectToPage("./Index");
     }

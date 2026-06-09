@@ -1,24 +1,22 @@
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
 using WebApplication1.Models;
-using WebApplication1.Data;
+using WebApplication1.Repositories;
 
 namespace WebApplication1.Pages.ProductPages;
 
 public class IndexModel : PageModel
 {
-    private readonly ApplicationDbContext _context;
+    private readonly IProductRepository _repository;
 
-    public IndexModel(ApplicationDbContext context)
+    public IndexModel(IProductRepository repository)
     {
-        _context = context;
+        _repository = repository;
     }
 
     public IList<Product> Product { get; set; } = default!;
 
     public async Task OnGetAsync()
     {
-        Product = await _context.Products.ToListAsync();
+        Product = await _repository.GetAllAsync();
     }
 }

@@ -2,23 +2,23 @@ using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using WebApplication1.Data;
 using WebApplication1.Models;
+using WebApplication1.Repositories;
+using WebApplication1.DTOs;
 
 namespace WebApplication1.Pages.GymMachines;
 
 public class CreateModel : PageModel
 {
-    private readonly ApplicationDbContext _context;
+    private readonly IMaszynaRepository _repository;
 
-    public CreateModel(ApplicationDbContext context)
+    public CreateModel(IMaszynaRepository repository)
     {
-        _context = context;
+        _repository = repository;
     }
 
     [BindProperty]
-    public MaszynaInput Maszyna { get; set; } = new();
+    public MaszynaDto Maszyna { get; set; } = new();
 
     public SelectList Sekcje { get; set; } = null!;
 
@@ -35,40 +35,21 @@ public class CreateModel : PageModel
             return Page();
         }
 
-        _context.Maszyny.Add(new Maszyna
+        var entity = new Maszyna
         {
             Nazwa = Maszyna.Nazwa,
             Status = Maszyna.Status,
             SekcjaId = Maszyna.SekcjaId
-        });
+        };
 
-        await _context.SaveChangesAsync();
+        await _repository.AddAsync(entity);
+        await _repository.SaveAsync();
         return RedirectToPage("./Index");
     }
 
     private async Task LoadSekcjeAsync()
     {
-        var sekcje = await _context.Sekcje
-            .OrderBy(sekcja => sekcja.Nazwa)
-            .ToListAsync();
-
+        var sekcje = await _repository.GetAllSekcjeAsync();
         Sekcje = new SelectList(sekcje, "Id", "Nazwa");
-    }
-
-    public class MaszynaInput
-    {
-        [Display(Name = "Nazwa")]
-        [Required(ErrorMessage = "Podaj nazwe maszyny.")]
-        [StringLength(120)]
-        public string Nazwa { get; set; } = string.Empty;
-
-        [Display(Name = "Status")]
-        [Required(ErrorMessage = "Wybierz status.")]
-        [StringLength(40)]
-        public string Status { get; set; } = string.Empty;
-
-        [Display(Name = "Sekcja")]
-        [Range(1, int.MaxValue, ErrorMessage = "Wybierz sekcje.")]
-        public int SekcjaId { get; set; }
     }
 }

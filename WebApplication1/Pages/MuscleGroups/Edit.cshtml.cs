@@ -1,22 +1,22 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
-using WebApplication1.Data;
+using WebApplication1.DTOs;
 using WebApplication1.Models;
+using WebApplication1.Repositories;
 
 namespace WebApplication1.Pages.MuscleGroups;
 
 public class EditModel : PageModel
 {
-    private readonly ApplicationDbContext _context;
+    private readonly IPartiaMiesniowaRepository _repository;
 
-    public EditModel(ApplicationDbContext context)
+    public EditModel(IPartiaMiesniowaRepository repository)
     {
-        _context = context;
+        _repository = repository;
     }
 
     [BindProperty]
-    public PartiaMiesniowa PartiaMiesniowa { get; set; } = null!;
+    public PartiaMiesniowaDto PartiaMiesniowa { get; set; } = null!;
 
     public async Task<IActionResult> OnGetAsync(int? id)
     {
@@ -25,14 +25,19 @@ public class EditModel : PageModel
             return NotFound();
         }
 
-        var partia = await _context.PartieMiesniowe.FindAsync(id);
+        var partia = await _repository.GetByIdAsync(id.Value);
 
         if (partia is null)
         {
             return NotFound();
         }
 
-        PartiaMiesniowa = partia;
+        PartiaMiesniowa = new PartiaMiesniowaDto
+        {
+            Id = partia.Id,
+            Nazwa = partia.Nazwa
+        };
+
         return Page();
     }
 
@@ -43,21 +48,14 @@ public class EditModel : PageModel
             return Page();
         }
 
-        _context.Attach(PartiaMiesniowa).State = EntityState.Modified;
-
-        try
+        var entity = new PartiaMiesniowa
         {
-            await _context.SaveChangesAsync();
-        }
-        catch (DbUpdateConcurrencyException)
-        {
-            if (!await _context.PartieMiesniowe.AnyAsync(item => item.Id == PartiaMiesniowa.Id))
-            {
-                return NotFound();
-            }
+            Id = PartiaMiesniowa.Id,
+            Nazwa = PartiaMiesniowa.Nazwa
+        };
 
-            throw;
-        }
+        await _repository.UpdateAsync(entity);
+        await _repository.SaveAsync();
 
         return RedirectToPage("./Index");
     }

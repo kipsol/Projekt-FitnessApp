@@ -1,71 +1,59 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
+using WebApplication1.DTOs;
 using WebApplication1.Models;
-using WebApplication1.Data;
+using WebApplication1.Repositories;
 
 namespace WebApplication1.Pages.ProductPages;
 
 public class EditModel : PageModel
 {
-    private readonly ApplicationDbContext _context;
+    private readonly IProductRepository _repository;
 
-    public EditModel(ApplicationDbContext context)
+    public EditModel(IProductRepository repository)
     {
-        _context = context;
+        _repository = repository;
     }
 
     [BindProperty]
-    public Product Product { get; set; } = default!;
+    public ProductDto Input { get; set; } = default!;
 
     public async Task<IActionResult> OnGetAsync(int? id)
     {
-        if (id is null)
-        {
-            return NotFound();
-        }
+        if (id is null) return NotFound();
 
-        var product = await _context.Products.FirstOrDefaultAsync(m => m.Id == id);
-        if (product is null)
+        var entity = await _repository.GetByIdAsync(id.Value);
+        if (entity is null) return NotFound();
+
+        Input = new ProductDto
         {
-            return NotFound();
-        }
-        Product = product;
+            Id = entity.Id,
+            Name = entity.Name,
+            Description = entity.Description,
+            Price = entity.Price,
+            Stock = entity.Stock,
+            Category = entity.Category
+        };
+
         return Page();
     }
 
-    // To protect from overposting attacks, enable the specific properties you want to bind to.
-    // For more details, see https://aka.ms/RazorPagesCRUD.
     public async Task<IActionResult> OnPostAsync()
     {
-        if (!ModelState.IsValid)
-        {
-            return Page();
-        }
+        if (!ModelState.IsValid) return Page();
 
-        _context.Attach(Product).State = EntityState.Modified;
-
-        try
+        var entity = new Product
         {
-            await _context.SaveChangesAsync();
-        }
-        catch (DbUpdateConcurrencyException)
-        {
-            if (!ProductExists(Product.Id))
-            {
-                return NotFound();
-            }
-            else
-            {
-                throw;
-            }
-        }
+            Id = Input.Id,
+            Name = Input.Name,
+            Description = Input.Description,
+            Price = Input.Price,
+            Stock = Input.Stock,
+            Category = Input.Category
+        };
 
+        await _repository.UpdateAsync(entity);
+        await _repository.SaveAsync();
         return RedirectToPage("./Index");
-    }
-
-    private bool ProductExists(int id)
-    {
-        return _context.Products.Any(e => e.Id == id);
     }
 }

@@ -1,43 +1,33 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
-using WebApplication1.Data;
 using WebApplication1.Models;
+using WebApplication1.Repositories;
 
 namespace WebApplication1.Pages.ClassSchedulePages;
 
 public class CreateModel : PageModel
 {
-    private readonly ApplicationDbContext _context;
+    private readonly IClassScheduleRepository _repository;
 
-    public CreateModel(ApplicationDbContext context)
+    public CreateModel(IClassScheduleRepository repository)
     {
-        _context = context;
+        _repository = repository;
     }
 
     public List<ClassEvent> DostepneZajecia { get; set; } = new();
-
     public List<int> JuzZapisanyId { get; set; } = new();
 
     public async Task OnGetAsync()
     {
-        DostepneZajecia = await _context.ClassEvents.OrderBy(c => c.Day).ThenBy(c => c.StartTime).ToListAsync();
-
-        JuzZapisanyId = await _context.ClassSchedules
-            .Select(cs => cs.ClassEventId)
-            .ToListAsync();
+        DostepneZajecia = (await _repository.GetAllClassEventsAsync()).ToList();
+        JuzZapisanyId = (await _repository.GetEnrolledEventIdsAsync()).ToList();
     }
 
     public async Task<IActionResult> OnPostZapiszAsync(int classEventId)
     {
-        var nowyZapis = new ClassSchedule
-        {
-            ClassEventId = classEventId
-        };
-
-        _context.ClassSchedules.Add(nowyZapis);
-        await _context.SaveChangesAsync();
-
+        var nowyZapis = new ClassSchedule { ClassEventId = classEventId };
+        await _repository.AddAsync(nowyZapis);
+        await _repository.SaveAsync();
         return RedirectToPage("./Index");
     }
 }

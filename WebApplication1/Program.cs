@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using WebApplication1.Data;
+using WebApplication1.Repositories;
 using WebApplication1.Weather;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -23,6 +24,20 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options =>
 .AddEntityFrameworkStores<ApplicationDbContext>();
 
 builder.Services.AddRazorPages();
+
+builder.Services.AddScoped<IClassEventRepository, ClassEventRepository>();
+builder.Services.AddScoped<IClassScheduleRepository, ClassScheduleRepository>();
+builder.Services.AddScoped<IDietRepository, DietRepository>();
+builder.Services.AddScoped<IDietPlanDayRepository, DietPlanDayRepository>();
+builder.Services.AddScoped<IMealRepository, MealRepository>();
+builder.Services.AddScoped<IProductRepository, ProductRepository>();
+builder.Services.AddScoped<IOrderRepository, OrderRepository>();
+builder.Services.AddScoped<IOrderItemRepository, OrderItemRepository>();
+builder.Services.AddScoped<ICwiczenieRepository, CwiczenieRepository>();
+builder.Services.AddScoped<IMaszynaRepository, MaszynaRepository>();
+builder.Services.AddScoped<IPartiaMiesniowaRepository, PartiaMiesniowaRepository>();
+builder.Services.AddScoped<IPlanTreningowyRepository, PlanTreningowyRepository>();
+builder.Services.AddScoped<ISekcjaRepository, SekcjaRepository>();
 
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession(options =>

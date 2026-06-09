@@ -1,39 +1,40 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
+using WebApplication1.DTOs;
 using WebApplication1.Models;
-using WebApplication1.Data;
+using WebApplication1.Repositories;
 
 namespace WebApplication1.Pages.ProductPages;
 
 public class CreateModel : PageModel
 {
-    private readonly ApplicationDbContext _context;
+    private readonly IProductRepository _repository;
 
-    public CreateModel(ApplicationDbContext context)
+    public CreateModel(IProductRepository repository)
     {
-        _context = context;
+        _repository = repository;
     }
 
-    public IActionResult OnGet()
-    {
-        return Page();
-    }
+    public IActionResult OnGet() => Page();
 
     [BindProperty]
-    public Product Product { get; set; } = default!;
+    public ProductDto Input { get; set; } = default!;
 
-    // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD.
     public async Task<IActionResult> OnPostAsync()
     {
-        if (!ModelState.IsValid)
+        if (!ModelState.IsValid) return Page();
+
+        var entity = new Product
         {
-            return Page();
-        }
+            Name = Input.Name,
+            Description = Input.Description,
+            Price = Input.Price,
+            Stock = Input.Stock,
+            Category = Input.Category
+        };
 
-        _context.Products.Add(Product);
-        await _context.SaveChangesAsync();
-
+        await _repository.AddAsync(entity);
+        await _repository.SaveAsync();
         return RedirectToPage("./Index");
     }
 }

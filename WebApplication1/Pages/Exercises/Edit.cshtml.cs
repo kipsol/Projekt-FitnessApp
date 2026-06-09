@@ -1,9 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using WebApplication1.Data;
+using WebApplication1.DTOs;
 using WebApplication1.Models;
+using WebApplication1.Repositories;
 
 namespace WebApplication1.Pages.Exercises;
 
@@ -11,17 +11,17 @@ public class EditModel : PageModel
 {
     private static readonly string[] AllowedExtensions = [".jpg", ".jpeg", ".png", ".pdf"];
     private const long MaxFileSize = 5 * 1024 * 1024;
-    private readonly ApplicationDbContext _context;
+    private readonly ICwiczenieRepository _repository;
     private readonly IWebHostEnvironment _environment;
 
-    public EditModel(ApplicationDbContext context, IWebHostEnvironment environment)
+    public EditModel(ICwiczenieRepository repository, IWebHostEnvironment environment)
     {
-        _context = context;
+        _repository = repository;
         _environment = environment;
     }
 
     [BindProperty]
-    public Cwiczenie Cwiczenie { get; set; } = null!;
+    public CwiczenieDto Cwiczenie { get; set; } = null!;
 
     [BindProperty]
     public IFormFile? PlikCwiczenia { get; set; }
@@ -37,31 +37,39 @@ public class EditModel : PageModel
             return NotFound();
         }
 
-        var cwiczenie = await _context.Cwiczenia.FindAsync(id);
+        var cwiczenie = await _repository.GetByIdAsync(id.Value);
 
         if (cwiczenie is null)
         {
             return NotFound();
         }
 
-        Cwiczenie = cwiczenie;
+        Cwiczenie = new CwiczenieDto
+        {
+            Id = cwiczenie.Id,
+            Nazwa = cwiczenie.Nazwa,
+            OpisWykonania = cwiczenie.OpisWykonania,
+            PartiaMiesniowaId = cwiczenie.PartiaMiesniowaId,
+            MaszynaId = cwiczenie.MaszynaId,
+            LiczbaSerii = cwiczenie.LiczbaSerii,
+            LiczbaPowtorzen = cwiczenie.LiczbaPowtorzen,
+            PrzerwaSekundy = cwiczenie.PrzerwaSekundy,
+            PlikSciezka = cwiczenie.PlikSciezka
+        };
+
         await LoadListsAsync();
         return Page();
     }
 
     public async Task<IActionResult> OnPostAsync()
     {
-        ModelState.Remove("Cwiczenie.PartiaMiesniowa");
-        ModelState.Remove("Cwiczenie.Maszyna");
-        ModelState.Remove("Cwiczenie.PozycjePlanu");
-
         if (!ModelState.IsValid)
         {
             await LoadListsAsync();
             return Page();
         }
 
-        var existing = await _context.Cwiczenia.AsNoTracking().FirstOrDefaultAsync(item => item.Id == Cwiczenie.Id);
+        var existing = await _repository.GetByIdAsync(Cwiczenie.Id);
 
         if (existing is null)
         {
@@ -83,29 +91,29 @@ public class EditModel : PageModel
             Cwiczenie.PlikSciezka = filePath;
         }
 
-        _context.Attach(Cwiczenie).State = EntityState.Modified;
-
-        try
+        var entity = new Cwiczenie
         {
-            await _context.SaveChangesAsync();
-        }
-        catch (DbUpdateConcurrencyException)
-        {
-            if (!await _context.Cwiczenia.AnyAsync(item => item.Id == Cwiczenie.Id))
-            {
-                return NotFound();
-            }
+            Id = Cwiczenie.Id,
+            Nazwa = Cwiczenie.Nazwa,
+            OpisWykonania = Cwiczenie.OpisWykonania,
+            PartiaMiesniowaId = Cwiczenie.PartiaMiesniowaId,
+            MaszynaId = Cwiczenie.MaszynaId,
+            LiczbaSerii = Cwiczenie.LiczbaSerii,
+            LiczbaPowtorzen = Cwiczenie.LiczbaPowtorzen,
+            PrzerwaSekundy = Cwiczenie.PrzerwaSekundy,
+            PlikSciezka = Cwiczenie.PlikSciezka
+        };
 
-            throw;
-        }
+        await _repository.UpdateAsync(entity);
+        await _repository.SaveAsync();
 
         return RedirectToPage("./Index");
     }
 
     private async Task LoadListsAsync()
     {
-        PartieMiesniowe = new SelectList(await _context.PartieMiesniowe.OrderBy(item => item.Nazwa).ToListAsync(), "Id", "Nazwa");
-        Maszyny = new SelectList(await _context.Maszyny.OrderBy(item => item.Nazwa).ToListAsync(), "Id", "Nazwa");
+        PartieMiesniowe = new SelectList(await _repository.GetAllPartieAsync(), "Id", "Nazwa");
+        Maszyny = new SelectList(await _repository.GetAllMaszynyAsync(), "Id", "Nazwa");
     }
 
     private async Task<string?> SaveExerciseFileAsync(IFormFile? file)

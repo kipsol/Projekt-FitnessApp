@@ -1,38 +1,29 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
 using WebApplication1.Models;
-using WebApplication1.Data;
+using WebApplication1.Repositories;
 
 namespace WebApplication1.Pages.ProductPages;
 
 public class DetailsModel : PageModel
 {
-    private readonly ApplicationDbContext _context;
-    public DetailsModel(ApplicationDbContext context)
+    private readonly IProductRepository _repository;
+
+    public DetailsModel(IProductRepository repository)
     {
-        _context = context;
+        _repository = repository;
     }
 
     public Product Product { get; set; } = default!;
 
     public async Task<IActionResult> OnGetAsync(int? id)
     {
-        if (id is null)
-        {
-            return NotFound();
-        }
+        if (id is null) return NotFound();
 
-        var product = await _context.Products.FirstOrDefaultAsync(m => m.Id == id);
-        if (product is null)
-        {
-            return NotFound();
-        }
-        else
-        {
-            Product = product;
-        }
+        var entity = await _repository.GetByIdAsync(id.Value);
+        if (entity is null) return NotFound();
 
+        Product = entity;
         return Page();
     }
 }

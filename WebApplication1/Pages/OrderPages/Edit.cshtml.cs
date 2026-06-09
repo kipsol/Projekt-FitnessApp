@@ -1,71 +1,55 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
+using WebApplication1.DTOs;
 using WebApplication1.Models;
-using WebApplication1.Data;
+using WebApplication1.Repositories;
 
 namespace WebApplication1.Pages.OrderPages;
 
 public class EditModel : PageModel
 {
-    private readonly ApplicationDbContext _context;
+    private readonly IOrderRepository _repository;
 
-    public EditModel(ApplicationDbContext context)
+    public EditModel(IOrderRepository repository)
     {
-        _context = context;
+        _repository = repository;
     }
 
     [BindProperty]
-    public Order Order { get; set; } = default!;
+    public OrderDto Input { get; set; } = default!;
 
     public async Task<IActionResult> OnGetAsync(int? id)
     {
-        if (id is null)
-        {
-            return NotFound();
-        }
+        if (id is null) return NotFound();
 
-        var order = await _context.Orders.FirstOrDefaultAsync(m => m.Id == id);
-        if (order is null)
+        var entity = await _repository.GetByIdAsync(id.Value);
+        if (entity is null) return NotFound();
+
+        Input = new OrderDto
         {
-            return NotFound();
-        }
-        Order = order;
+            Id = entity.Id,
+            OrderDate = entity.OrderDate,
+            TotalPrice = entity.TotalPrice,
+            Status = entity.Status
+        };
+
         return Page();
     }
 
-    // To protect from overposting attacks, enable the specific properties you want to bind to.
-    // For more details, see https://aka.ms/RazorPagesCRUD.
     public async Task<IActionResult> OnPostAsync()
     {
-        if (!ModelState.IsValid)
-        {
-            return Page();
-        }
+        if (!ModelState.IsValid) return Page();
 
-        _context.Attach(Order).State = EntityState.Modified;
-
-        try
+        var entity = new Order
         {
-            await _context.SaveChangesAsync();
-        }
-        catch (DbUpdateConcurrencyException)
-        {
-            if (!OrderExists(Order.Id))
-            {
-                return NotFound();
-            }
-            else
-            {
-                throw;
-            }
-        }
+            Id = Input.Id,
+            OrderDate = Input.OrderDate,
+            TotalPrice = Input.TotalPrice,
+            Status = Input.Status
+        };
 
+        await _repository.UpdateAsync(entity);
+        await _repository.SaveAsync();
         return RedirectToPage("./Index");
-    }
-
-    private bool OrderExists(int id)
-    {
-        return _context.Orders.Any(e => e.Id == id);
     }
 }

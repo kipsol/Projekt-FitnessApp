@@ -1,18 +1,17 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
-using WebApplication1.Data;
 using WebApplication1.Models;
+using WebApplication1.Repositories;
 
 namespace WebApplication1.Pages.Exercises;
 
 public class DeleteModel : PageModel
 {
-    private readonly ApplicationDbContext _context;
+    private readonly ICwiczenieRepository _repository;
 
-    public DeleteModel(ApplicationDbContext context)
+    public DeleteModel(ICwiczenieRepository repository)
     {
-        _context = context;
+        _repository = repository;
     }
 
     [BindProperty]
@@ -25,10 +24,7 @@ public class DeleteModel : PageModel
             return NotFound();
         }
 
-        var cwiczenie = await _context.Cwiczenia
-            .Include(item => item.PartiaMiesniowa)
-            .Include(item => item.Maszyna)
-            .FirstOrDefaultAsync(item => item.Id == id);
+        var cwiczenie = await _repository.GetByIdWithDetailsAsync(id.Value);
 
         if (cwiczenie is null)
         {
@@ -46,13 +42,8 @@ public class DeleteModel : PageModel
             return NotFound();
         }
 
-        var cwiczenie = await _context.Cwiczenia.FindAsync(id);
-
-        if (cwiczenie is not null)
-        {
-            _context.Cwiczenia.Remove(cwiczenie);
-            await _context.SaveChangesAsync();
-        }
+        await _repository.DeleteAsync(id.Value);
+        await _repository.SaveAsync();
 
         return RedirectToPage("./Index");
     }

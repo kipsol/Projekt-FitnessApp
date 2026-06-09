@@ -1,23 +1,23 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using WebApplication1.Data;
+using WebApplication1.DTOs;
 using WebApplication1.Models;
+using WebApplication1.Repositories;
 
 namespace WebApplication1.Pages.GymMachines;
 
 public class EditModel : PageModel
 {
-    private readonly ApplicationDbContext _context;
+    private readonly IMaszynaRepository _repository;
 
-    public EditModel(ApplicationDbContext context)
+    public EditModel(IMaszynaRepository repository)
     {
-        _context = context;
+        _repository = repository;
     }
 
     [BindProperty]
-    public Maszyna Maszyna { get; set; } = null!;
+    public MaszynaDto Maszyna { get; set; } = null!;
 
     public SelectList Sekcje { get; set; } = null!;
 
@@ -28,38 +28,50 @@ public class EditModel : PageModel
             return NotFound();
         }
 
-        var maszyna = await _context.Maszyny.FindAsync(id);
+        var maszyna = await _repository.GetByIdAsync(id.Value);
 
         if (maszyna is null)
         {
             return NotFound();
         }
 
-        Maszyna = maszyna;
+        Maszyna = new MaszynaDto
+        {
+            Id = maszyna.Id,
+            Nazwa = maszyna.Nazwa,
+            Status = maszyna.Status,
+            SekcjaId = maszyna.SekcjaId
+        };
+
         await LoadSekcjeAsync();
         return Page();
     }
 
     public async Task<IActionResult> OnPostAsync()
     {
-        ModelState.Remove("Maszyna.Sekcja");
-        ModelState.Remove("Maszyna.Cwiczenia");
-
         if (!ModelState.IsValid)
         {
             await LoadSekcjeAsync();
             return Page();
         }
 
-        _context.Attach(Maszyna).State = EntityState.Modified;
+        var entity = new Maszyna
+        {
+            Id = Maszyna.Id,
+            Nazwa = Maszyna.Nazwa,
+            Status = Maszyna.Status,
+            SekcjaId = Maszyna.SekcjaId
+        };
 
         try
         {
-            await _context.SaveChangesAsync();
+            await _repository.UpdateAsync(entity);
+            await _repository.SaveAsync();
         }
-        catch (DbUpdateConcurrencyException)
+        catch (Exception)
         {
-            if (!await _context.Maszyny.AnyAsync(item => item.Id == Maszyna.Id))
+            var existing = await _repository.GetByIdAsync(Maszyna.Id);
+            if (existing is null)
             {
                 return NotFound();
             }
@@ -72,6 +84,7 @@ public class EditModel : PageModel
 
     private async Task LoadSekcjeAsync()
     {
-        Sekcje = new SelectList(await _context.Sekcje.OrderBy(item => item.Nazwa).ToListAsync(), "Id", "Nazwa");
+        var sekcje = await _repository.GetAllSekcjeAsync();
+        Sekcje = new SelectList(sekcje, "Id", "Nazwa");
     }
 }

@@ -1,17 +1,17 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
 using WebApplication1.Models;
-using WebApplication1.Data;
+using WebApplication1.Repositories;
 
 namespace WebApplication1.Pages.ClassEventPages;
 
 public class DetailsModel : PageModel
 {
-    private readonly ApplicationDbContext _context;
-    public DetailsModel(ApplicationDbContext context)
+    private readonly IClassEventRepository _repository;
+
+    public DetailsModel(IClassEventRepository repository)
     {
-        _context = context;
+        _repository = repository;
     }
 
     public ClassEvent ClassEvent { get; set; } = default!;
@@ -23,16 +23,13 @@ public class DetailsModel : PageModel
             return NotFound();
         }
 
-        var classevent = await _context.ClassEvents.FirstOrDefaultAsync(m => m.Id == id);
-        if (classevent is null)
+        var entity = await _repository.GetByIdAsync(id.Value);
+        if (entity is null)
         {
             return NotFound();
         }
-        else
-        {
-            ClassEvent = classevent;
-        }
 
+        ClassEvent = entity;
         return Page();
     }
 }

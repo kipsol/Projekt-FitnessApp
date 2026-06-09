@@ -1,71 +1,41 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
+using WebApplication1.DTOs;
 using WebApplication1.Models;
-using WebApplication1.Data;
+using WebApplication1.Repositories;
 
 namespace WebApplication1.Pages.ClassSchedulePages;
 
 public class EditModel : PageModel
 {
-    private readonly ApplicationDbContext _context;
+    private readonly IClassScheduleRepository _repository;
 
-    public EditModel(ApplicationDbContext context)
+    public EditModel(IClassScheduleRepository repository)
     {
-        _context = context;
+        _repository = repository;
     }
 
     [BindProperty]
-    public ClassSchedule ClassSchedule { get; set; } = default!;
+    public ClassScheduleDto Input { get; set; } = default!;
 
     public async Task<IActionResult> OnGetAsync(int? id)
     {
-        if (id is null)
-        {
-            return NotFound();
-        }
+        if (id is null) return NotFound();
 
-        var classschedule = await _context.ClassSchedules.FirstOrDefaultAsync(m => m.Id == id);
-        if (classschedule is null)
-        {
-            return NotFound();
-        }
-        ClassSchedule = classschedule;
+        var entity = await _repository.GetByIdAsync(id.Value);
+        if (entity is null) return NotFound();
+
+        Input = new ClassScheduleDto { Id = entity.Id, ClassEventId = entity.ClassEventId };
         return Page();
     }
 
-    // To protect from overposting attacks, enable the specific properties you want to bind to.
-    // For more details, see https://aka.ms/RazorPagesCRUD.
     public async Task<IActionResult> OnPostAsync()
     {
-        if (!ModelState.IsValid)
-        {
-            return Page();
-        }
+        if (!ModelState.IsValid) return Page();
 
-        _context.Attach(ClassSchedule).State = EntityState.Modified;
-
-        try
-        {
-            await _context.SaveChangesAsync();
-        }
-        catch (DbUpdateConcurrencyException)
-        {
-            if (!ClassScheduleExists(ClassSchedule.Id))
-            {
-                return NotFound();
-            }
-            else
-            {
-                throw;
-            }
-        }
-
+        var entity = new ClassSchedule { Id = Input.Id, ClassEventId = Input.ClassEventId };
+        await _repository.UpdateAsync(entity);
+        await _repository.SaveAsync();
         return RedirectToPage("./Index");
-    }
-
-    private bool ClassScheduleExists(int id)
-    {
-        return _context.ClassSchedules.Any(e => e.Id == id);
     }
 }

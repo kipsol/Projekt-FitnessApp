@@ -1,71 +1,57 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
+using WebApplication1.DTOs;
 using WebApplication1.Models;
-using WebApplication1.Data;
+using WebApplication1.Repositories;
 
 namespace WebApplication1.Pages.OrderItemPages;
 
 public class EditModel : PageModel
 {
-    private readonly ApplicationDbContext _context;
+    private readonly IOrderItemRepository _repository;
 
-    public EditModel(ApplicationDbContext context)
+    public EditModel(IOrderItemRepository repository)
     {
-        _context = context;
+        _repository = repository;
     }
 
     [BindProperty]
-    public OrderItem OrderItem { get; set; } = default!;
+    public OrderItemDto Input { get; set; } = default!;
 
     public async Task<IActionResult> OnGetAsync(int? id)
     {
-        if (id is null)
-        {
-            return NotFound();
-        }
+        if (id is null) return NotFound();
 
-        var orderitem = await _context.OrderItems.FirstOrDefaultAsync(m => m.Id == id);
-        if (orderitem is null)
+        var entity = await _repository.GetByIdAsync(id.Value);
+        if (entity is null) return NotFound();
+
+        Input = new OrderItemDto
         {
-            return NotFound();
-        }
-        OrderItem = orderitem;
+            Id = entity.Id,
+            OrderId = entity.OrderId,
+            ProductId = entity.ProductId,
+            Quantity = entity.Quantity,
+            PriceAtPurchase = entity.PriceAtPurchase
+        };
+
         return Page();
     }
 
-    // To protect from overposting attacks, enable the specific properties you want to bind to.
-    // For more details, see https://aka.ms/RazorPagesCRUD.
     public async Task<IActionResult> OnPostAsync()
     {
-        if (!ModelState.IsValid)
-        {
-            return Page();
-        }
+        if (!ModelState.IsValid) return Page();
 
-        _context.Attach(OrderItem).State = EntityState.Modified;
-
-        try
+        var entity = new OrderItem
         {
-            await _context.SaveChangesAsync();
-        }
-        catch (DbUpdateConcurrencyException)
-        {
-            if (!OrderItemExists(OrderItem.Id))
-            {
-                return NotFound();
-            }
-            else
-            {
-                throw;
-            }
-        }
+            Id = Input.Id,
+            OrderId = Input.OrderId,
+            ProductId = Input.ProductId,
+            Quantity = Input.Quantity,
+            PriceAtPurchase = Input.PriceAtPurchase
+        };
 
+        await _repository.UpdateAsync(entity);
+        await _repository.SaveAsync();
         return RedirectToPage("./Index");
-    }
-
-    private bool OrderItemExists(int id)
-    {
-        return _context.OrderItems.Any(e => e.Id == id);
     }
 }

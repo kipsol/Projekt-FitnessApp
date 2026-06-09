@@ -15,13 +15,13 @@
 
                 <div class="form-group mb-3">
                     <label class="form-label fw-bold">Wybierz Plan Diety</label>
-                    <select asp-for="DietPlanDay.DietId" class="form-select form-select-lg" asp-items="Model.DietyLista"></select>
-                    <span asp-validation-for="DietPlanDay.DietId" class="text-danger"></span>
+                    <select asp-for="Input.DietId" class="form-select form-select-lg" asp-items="Model.DietyLista"></select>
+                    <span asp-validation-for="Input.DietId" class="text-danger"></span>
                 </div>
 
                 <div class="form-group mb-3">
                     <label class="form-label fw-bold">Dzień Tygodnia</label>
-                    <select asp-for="DietPlanDay.Day" class="form-select form-select-lg">
+                    <select asp-for="Input.Day" class="form-select form-select-lg">
                         <option value="Monday">Poniedziałek</option>
                         <option value="Tuesday">Wtorek</option>
                         <option value="Wednesday">Środa</option>
@@ -30,19 +30,19 @@
                         <option value="Saturday">Sobota</option>
                         <option value="Sunday">Niedziela</option>
                     </select>
-                    <span asp-validation-for="DietPlanDay.Day" class="text-danger"></span>
+                    <span asp-validation-for="Input.Day" class="text-danger"></span>
                 </div>
 
                 <div class="form-group mb-3">
                     <label class="form-label fw-bold">Typ Posiłku (np. Śniadanie, Obiad)</label>
-                    <input asp-for="DietPlanDay.MealType" class="form-control form-control-lg" placeholder="np. Drugie śniadanie" />
-                    <span asp-validation-for="DietPlanDay.MealType" class="text-danger"></span>
+                    <input asp-for="Input.MealType" class="form-control form-control-lg" placeholder="np. Drugie śniadanie" />
+                    <span asp-validation-for="Input.MealType" class="text-danger"></span>
                 </div>
 
                 <div class="form-group mb-4">
                     <label class="form-label fw-bold">Wybierz Posiłek z bazy</label>
-                    <select asp-for="DietPlanDay.MealId" class="form-select form-select-lg" asp-items="Model.PosilkiLista"></select>
-                    <span asp-validation-for="DietPlanDay.MealId" class="text-danger"></span>
+                    <select asp-for="Input.MealId" class="form-select form-select-lg" asp-items="Model.PosilkiLista"></select>
+                    <span asp-validation-for="Input.MealId" class="text-danger"></span>
                 </div>
 
                 <div class="d-grid gap-2">

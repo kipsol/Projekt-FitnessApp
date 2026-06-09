@@ -1,73 +1,75 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using WebApplication1.Data;
+using WebApplication1.DTOs;
 using WebApplication1.Models;
+using WebApplication1.Repositories;
 
 namespace WebApplication1.Pages.OrderItemPages;
 
 public class CreateModel : PageModel
 {
-    private readonly ApplicationDbContext _context;
+    private readonly IOrderItemRepository _repository;
 
-    public CreateModel(ApplicationDbContext context)
+    public CreateModel(IOrderItemRepository repository)
     {
-        _context = context;
+        _repository = repository;
     }
 
     [BindProperty]
-    public OrderItem OrderItem { get; set; } = default!;
+    public OrderItemDto Input { get; set; } = default!;
 
-    public IActionResult OnGet()
+    public async Task<IActionResult> OnGetAsync()
     {
-        ViewData["OrderId"] = new SelectList(_context.Orders.OrderByDescending(o => o.Id), "Id", "Id");
-
-        ViewData["ProductId"] = new SelectList(_context.Products.Where(p => p.Stock > 0), "Id", "Name");
-
+        var zamowienia = await _repository.GetAllOrdersAsync();
+        var produkty = await _repository.GetAvailableProductsAsync();
+        ViewData["OrderId"] = new SelectList(zamowienia, "Id", "Id");
+        ViewData["ProductId"] = new SelectList(produkty, "Id", "Name");
         return Page();
     }
 
     public async Task<IActionResult> OnPostAsync()
     {
-        ModelState.Remove("OrderItem.Order");
-        ModelState.Remove("OrderItem.Product");
-        ModelState.Remove("OrderItem.PriceAtPurchase");
-
         if (!ModelState.IsValid)
         {
-            ViewData["OrderId"] = new SelectList(_context.Orders.OrderByDescending(o => o.Id), "Id", "Id");
-            ViewData["ProductId"] = new SelectList(_context.Products.Where(p => p.Stock > 0), "Id", "Name");
+            var zamowienia = await _repository.GetAllOrdersAsync();
+            var produkty = await _repository.GetAvailableProductsAsync();
+            ViewData["OrderId"] = new SelectList(zamowienia, "Id", "Id");
+            ViewData["ProductId"] = new SelectList(produkty, "Id", "Name");
             return Page();
         }
 
-        var produkt = await _context.Products.FindAsync(OrderItem.ProductId);
+        var produkt = await _repository.GetProductByIdAsync(Input.ProductId);
         if (produkt == null)
         {
             ModelState.AddModelError("", "Wybrany produkt nie istnieje.");
             return Page();
         }
 
-        if (produkt.Stock < OrderItem.Quantity)
+        if (produkt.Stock < Input.Quantity)
         {
-            ModelState.AddModelError("", $"Brak wystarczającej ilości towaru w magazynie. Dostępne: {produkt.Stock} szt.");
-            OnGet();
+            ModelState.AddModelError("", $"Brak wystarczającej ilości towaru. Dostępne: {produkt.Stock} szt.");
             return Page();
         }
 
-        OrderItem.PriceAtPurchase = produkt.Price;
-
-        produkt.Stock -= OrderItem.Quantity;
-
-        var zamowienie = await _context.Orders.FindAsync(OrderItem.OrderId);
-        if (zamowienie != null)
+        var entity = new OrderItem
         {
-            zamowienie.TotalPrice += OrderItem.PriceAtPurchase * OrderItem.Quantity;
+            OrderId = Input.OrderId,
+            ProductId = Input.ProductId,
+            Quantity = Input.Quantity,
+            PriceAtPurchase = produkt.Price
+        };
+
+        produkt.Stock -= Input.Quantity;
+
+        var zamowienie = await _repository.GetOrderByIdAsync(Input.OrderId);
+        if (zamowienie is not null)
+        {
+            zamowienie.TotalPrice += entity.PriceAtPurchase * entity.Quantity;
         }
 
-        _context.OrderItems.Add(OrderItem);
-        await _context.SaveChangesAsync();
-
+        await _repository.AddAsync(entity);
+        await _repository.SaveAsync();
         return RedirectToPage("./Index");
     }
 }

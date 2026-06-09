@@ -2,23 +2,23 @@ using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using WebApplication1.Data;
 using WebApplication1.Models;
+using WebApplication1.Repositories;
+using WebApplication1.DTOs;
 
 namespace WebApplication1.Pages.TrainingPlans;
 
 public class CreateModel : PageModel
 {
-    private readonly ApplicationDbContext _context;
+    private readonly IPlanTreningowyRepository _repository;
 
-    public CreateModel(ApplicationDbContext context)
+    public CreateModel(IPlanTreningowyRepository repository)
     {
-        _context = context;
+        _repository = repository;
     }
 
     [BindProperty]
-    public PlanInput Plan { get; set; } = new();
+    public PlanTreningowyDto Plan { get; set; } = new();
 
     public SelectList Cwiczenia { get; set; } = null!;
 
@@ -43,18 +43,19 @@ public class CreateModel : PageModel
             CzasTrwaniaTygodnie = Plan.CzasTrwaniaTygodnie
         };
 
-        _context.PlanyTreningowe.Add(plan);
-        await _context.SaveChangesAsync();
+        await _repository.AddAsync(plan);
+        await _repository.SaveAsync();
 
         if (Plan.CwiczenieIds is { Count: > 0 })
         {
-            var cwiczenia = await _context.Cwiczenia
+            var allCwiczenia = await _repository.GetAllCwiczeniaAsync();
+            var selectedCwiczenia = allCwiczenia
                 .Where(cwiczenie => Plan.CwiczenieIds.Contains(cwiczenie.Id))
-                .ToListAsync();
+                .ToList();
 
-            foreach (var cwiczenie in cwiczenia)
+            foreach (var cwiczenie in selectedCwiczenia)
             {
-                _context.PozycjePlanu.Add(new PozycjaPlanu
+                await _repository.AddPozycjaAsync(new PozycjaPlanu
                 {
                     PlanTreningowyId = plan.Id,
                     CwiczenieId = cwiczenie.Id,
@@ -65,7 +66,7 @@ public class CreateModel : PageModel
                 });
             }
 
-            await _context.SaveChangesAsync();
+            await _repository.SaveAsync();
         }
 
         return RedirectToPage("./Index");
@@ -73,34 +74,7 @@ public class CreateModel : PageModel
 
     private async Task LoadCwiczeniaAsync()
     {
-        var cwiczenia = await _context.Cwiczenia
-            .OrderBy(cwiczenie => cwiczenie.Nazwa)
-            .ToListAsync();
-
+        var cwiczenia = await _repository.GetAllCwiczeniaAsync();
         Cwiczenia = new SelectList(cwiczenia, "Id", "Nazwa");
-    }
-
-    public class PlanInput
-    {
-        [Display(Name = "Nazwa")]
-        [Required(ErrorMessage = "Podaj nazwe planu.")]
-        [StringLength(120)]
-        public string Nazwa { get; set; } = string.Empty;
-
-        [Display(Name = "Opis")]
-        [StringLength(1000)]
-        public string? Opis { get; set; }
-
-        [Display(Name = "Poziom zaawansowania")]
-        [Required(ErrorMessage = "Wybierz poziom zaawansowania.")]
-        [StringLength(40)]
-        public string PoziomZaawansowania { get; set; } = string.Empty;
-
-        [Display(Name = "Czas trwania w tygodniach")]
-        [Range(1, 104, ErrorMessage = "Podaj czas od 1 do 104 tygodni.")]
-        public int CzasTrwaniaTygodnie { get; set; } = 8;
-
-        [Display(Name = "Cwiczenia w planie")]
-        public List<int>? CwiczenieIds { get; set; }
     }
 }

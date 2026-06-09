@@ -1,38 +1,29 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
 using WebApplication1.Models;
-using WebApplication1.Data;
+using WebApplication1.Repositories;
 
 namespace WebApplication1.Pages.OrderItemPages;
 
 public class DetailsModel : PageModel
 {
-    private readonly ApplicationDbContext _context;
-    public DetailsModel(ApplicationDbContext context)
+    private readonly IOrderItemRepository _repository;
+
+    public DetailsModel(IOrderItemRepository repository)
     {
-        _context = context;
+        _repository = repository;
     }
 
     public OrderItem OrderItem { get; set; } = default!;
 
     public async Task<IActionResult> OnGetAsync(int? id)
     {
-        if (id is null)
-        {
-            return NotFound();
-        }
+        if (id is null) return NotFound();
 
-        var orderitem = await _context.OrderItems.FirstOrDefaultAsync(m => m.Id == id);
-        if (orderitem is null)
-        {
-            return NotFound();
-        }
-        else
-        {
-            OrderItem = orderitem;
-        }
+        var entity = await _repository.GetByIdAsync(id.Value);
+        if (entity is null) return NotFound();
 
+        OrderItem = entity;
         return Page();
     }
 }

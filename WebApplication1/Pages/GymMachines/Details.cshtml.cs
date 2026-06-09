@@ -1,18 +1,17 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
-using WebApplication1.Data;
 using WebApplication1.Models;
+using WebApplication1.Repositories;
 
 namespace WebApplication1.Pages.GymMachines;
 
 public class DetailsModel : PageModel
 {
-    private readonly ApplicationDbContext _context;
+    private readonly IMaszynaRepository _repository;
 
-    public DetailsModel(ApplicationDbContext context)
+    public DetailsModel(IMaszynaRepository repository)
     {
-        _context = context;
+        _repository = repository;
     }
 
     public Maszyna Maszyna { get; set; } = null!;
@@ -24,10 +23,7 @@ public class DetailsModel : PageModel
             return NotFound();
         }
 
-        var maszyna = await _context.Maszyny
-            .Include(item => item.Sekcja)
-            .Include(item => item.Cwiczenia)
-            .FirstOrDefaultAsync(item => item.Id == id);
+        var maszyna = await _repository.GetByIdWithDetailsAsync(id.Value);
 
         if (maszyna is null)
         {

@@ -1,22 +1,22 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
-using WebApplication1.Data;
+using WebApplication1.DTOs;
 using WebApplication1.Models;
+using WebApplication1.Repositories;
 
 namespace WebApplication1.Pages.Sections;
 
 public class EditModel : PageModel
 {
-    private readonly ApplicationDbContext _context;
+    private readonly ISekcjaRepository _repository;
 
-    public EditModel(ApplicationDbContext context)
+    public EditModel(ISekcjaRepository repository)
     {
-        _context = context;
+        _repository = repository;
     }
 
     [BindProperty]
-    public Sekcja Sekcja { get; set; } = null!;
+    public SekcjaDto Sekcja { get; set; } = null!;
 
     public async Task<IActionResult> OnGetAsync(int? id)
     {
@@ -25,14 +25,19 @@ public class EditModel : PageModel
             return NotFound();
         }
 
-        var sekcja = await _context.Sekcje.FindAsync(id);
+        var sekcja = await _repository.GetByIdAsync(id.Value);
 
         if (sekcja is null)
         {
             return NotFound();
         }
 
-        Sekcja = sekcja;
+        Sekcja = new SekcjaDto
+        {
+            Id = sekcja.Id,
+            Nazwa = sekcja.Nazwa,
+            Pietro = sekcja.Pietro
+        };
         return Page();
     }
 
@@ -43,21 +48,15 @@ public class EditModel : PageModel
             return Page();
         }
 
-        _context.Attach(Sekcja).State = EntityState.Modified;
-
-        try
+        var entity = new Sekcja
         {
-            await _context.SaveChangesAsync();
-        }
-        catch (DbUpdateConcurrencyException)
-        {
-            if (!await _context.Sekcje.AnyAsync(item => item.Id == Sekcja.Id))
-            {
-                return NotFound();
-            }
+            Id = Sekcja.Id,
+            Nazwa = Sekcja.Nazwa,
+            Pietro = Sekcja.Pietro
+        };
 
-            throw;
-        }
+        await _repository.UpdateAsync(entity);
+        await _repository.SaveAsync();
 
         return RedirectToPage("./Index");
     }

@@ -1,18 +1,17 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
-using WebApplication1.Data;
 using WebApplication1.Models;
+using WebApplication1.Repositories;
 
 namespace WebApplication1.Pages.Exercises;
 
 public class DetailsModel : PageModel
 {
-    private readonly ApplicationDbContext _context;
+    private readonly ICwiczenieRepository _repository;
 
-    public DetailsModel(ApplicationDbContext context)
+    public DetailsModel(ICwiczenieRepository repository)
     {
-        _context = context;
+        _repository = repository;
     }
 
     public Cwiczenie Cwiczenie { get; set; } = null!;
@@ -24,12 +23,7 @@ public class DetailsModel : PageModel
             return NotFound();
         }
 
-        var cwiczenie = await _context.Cwiczenia
-            .Include(item => item.PartiaMiesniowa)
-            .Include(item => item.Maszyna)
-            .Include(item => item.PozycjePlanu)
-            .ThenInclude(pozycja => pozycja.PlanTreningowy)
-            .FirstOrDefaultAsync(item => item.Id == id);
+        var cwiczenie = await _repository.GetByIdWithDetailsAsync(id.Value);
 
         if (cwiczenie is null)
         {

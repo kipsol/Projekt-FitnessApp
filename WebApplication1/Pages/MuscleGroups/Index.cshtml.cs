@@ -1,26 +1,22 @@
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
-using WebApplication1.Data;
 using WebApplication1.Models;
+using WebApplication1.Repositories;
 
 namespace WebApplication1.Pages.MuscleGroups;
 
 public class IndexModel : PageModel
 {
-    private readonly ApplicationDbContext _context;
+    private readonly IPartiaMiesniowaRepository _repository;
 
-    public IndexModel(ApplicationDbContext context)
+    public IndexModel(IPartiaMiesniowaRepository repository)
     {
-        _context = context;
+        _repository = repository;
     }
 
     public IList<PartiaMiesniowa> PartieMiesniowe { get; set; } = new List<PartiaMiesniowa>();
 
     public async Task OnGetAsync()
     {
-        PartieMiesniowe = await _context.PartieMiesniowe
-            .Include(partia => partia.Cwiczenia)
-            .OrderBy(partia => partia.Nazwa)
-            .ToListAsync();
+        PartieMiesniowe = await _repository.GetAllAsync();
     }
 }

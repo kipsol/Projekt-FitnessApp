@@ -5,61 +5,153 @@
     ViewData["Title"] = "Lista Zamówień";
 }
 
-<div class="container mt-4">
-    <div class="d-flex justify-content-between align-items-center mb-4">
+<style>
+    .dark-table {
+        width: 100%;
+        margin-bottom: 0;
+        color: #cfcfcf;
+        background-color: #1a1a1a;
+        border-radius: 12px;
+        overflow: hidden;
+        border-collapse: separate;
+        border-spacing: 0;
+        border: 1px solid #333;
+    }
+
+        .dark-table thead {
+            background-color: #222;
+        }
+
+        .dark-table th {
+            padding: 18px;
+            color: #fff;
+            font-weight: 600;
+            border: none;
+            border-bottom: 3px solid #8a2be2;
+        }
+
+        .dark-table td {
+            padding: 18px;
+            vertical-align: middle;
+            border-bottom: 1px solid #2a2a2a;
+        }
+
+        .dark-table tr:hover {
+            background-color: #252525;
+        }
+
+        .dark-table tr:last-child td {
+            border-bottom: none;
+        }
+
+    .btn-neon {
+        background-color: #8a2be2;
+        color: #fff;
+        padding: 10px 20px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: bold;
+        transition: 0.3s;
+        border: none;
+        display: inline-block;
+    }
+
+        .btn-neon:hover {
+            background-color: #9d4edd;
+            color: #fff;
+            box-shadow: 0 0 15px rgba(138,43,226,0.4);
+        }
+
+    .status-badge {
+        padding: 6px 12px;
+        border-radius: 6px;
+        font-weight: 600;
+        font-size: 0.85rem;
+        border: 1px solid transparent;
+        display: inline-block;
+    }
+
+    .status-pending {
+        background-color: rgba(255, 193, 7, 0.15);
+        color: #ffcd39;
+        border-color: rgba(255, 193, 7, 0.4);
+    }
+
+    .status-accepted {
+        background-color: rgba(13, 110, 253, 0.15);
+        color: #6ea8fe;
+        border-color: rgba(13, 110, 253, 0.4);
+    }
+
+    .status-ready {
+        background-color: rgba(25, 135, 84, 0.15);
+        color: #75b798;
+        border-color: rgba(25, 135, 84, 0.4);
+    }
+
+    .status-default {
+        background-color: rgba(108, 117, 125, 0.15);
+        color: #adb5bd;
+        border-color: rgba(108, 117, 125, 0.4);
+    }
+</style>
+
+<div class="container mt-4 mb-5">
+
+    <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-3">
         <div>
-            <h2 class="text-dark">📜 Rejestr Zamówień Sklepu</h2>
-            <p class="text-muted small">Zarządzaj transakcjami i statusami faktur</p>
+            <h2 class="text-light fw-bold mb-1">Twoje zamówienia</h2>
         </div>
-        <a asp-page="Create" class="btn btn-primary shadow-sm">➕ Stwórz nowe zamówienie</a>
+        <a asp-page="Create" class="btn-neon shadow-sm">➕ Stwórz nowe zamówienie</a>
     </div>
 
-    <div class="card shadow-sm border-0">
-        <div class="card-body p-0">
-            <table class="table table-hover align-middle mb-0">
-                <thead class="table-dark">
-                    <tr>
-                        <th class="ps-3">ID Zamówienia</th>
-                        <th>Data zamówienia</th>
-                        <th>Łączna kwota</th>
-                        <th>Status</th>
-                        <th class="text-end pe-3">Akcje</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var item in Model.Order)
-                    {
-                        <tr>
-                            <td class="fw-bold ps-3">#@item.Id</td>
-                            <td>@item.OrderDate.ToString("dd.MM.yyyy HH:mm")</td>
-                            <td class="fw-bold text-success">@item.TotalPrice.ToString("F2") PLN</td>
-                            <td>
-                                @if (item.Status == "Oczekujące")
-                                {
-                                    <span class="badge bg-warning text-dark">⏳ Oczekujące</span>
-                                }
-                                else if (item.Status == "Przyjęte")
-                                {
-                                    <span class="badge bg-primary">⚙️ Przyjęte</span>
-                                }
-                                else if (item.Status == "Gotowe do odbioru")
-                                {
-                                    <span class="badge bg-success">📦 Gotowe do odbioru</span>
-                                }
-                                else
-                                {
-                                    <span class="badge bg-secondary">@item.Status</span>
-                                }
-                            </td>
-                            <td class="text-end pe-3">
-                                <a asp-page="./Edit" asp-route-id="@item.Id" class="btn btn-sm btn-outline-secondary me-1">Edytuj</a>
-                                <a asp-page="./Details" asp-route-id="@item.Id" class="btn btn-sm btn-outline-info me-1">Szczegóły</a>
-                                <a asp-page="./Delete" asp-route-id="@item.Id" class="btn btn-sm btn-outline-danger">Usuń</a>
-                            </td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
-        </div>
-    </div>
+    <table class="dark-table shadow-sm">
+        <thead>
+            <tr>
+                <th class="ps-4">ID Zamówienia</th>
+                <th>Data zamówienia</th>
+                <th>Łączna kwota</th>
+                <th class="pe-4">Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Order)
+            {
+                <tr>
+                    <td class="fw-bold ps-4" style="color: #b052ff; font-size: 1.05rem;">#@item.Id</td>
+
+                    <td class="text-light">@item.OrderDate.ToString("dd.MM.yyyy HH:mm")</td>
+
+                    <td class="fw-bold text-success">@item.TotalPrice.ToString("F2") PLN</td>
+
+                    <td class="pe-4">
+                        @if (item.Status == "Oczekujące")
+                        {
+                            <span class="status-badge status-pending">⏳ Oczekujące</span>
+                        }
+                        else if (item.Status == "Przyjęte")
+                        {
+                            <span class="status-badge status-accepted">⚙️ Przyjęte</span>
+                        }
+                        else if (item.Status == "Gotowe do odbioru")
+                        {
+                            <span class="status-badge status-ready">📦 Gotowe do odbioru</span>
+                        }
+                        else
+                        {
+                            <span class="status-badge status-default">@item.Status</span>
+                        }
+                    </td>
+                </tr>
+            }
+            @if (!Model.Order.Any())
+            {
+                <tr>
+                    <td colspan="4" class="text-center text-muted py-5" style="font-style: italic;">
+                        Brak zamówień w rejestrze.
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
 </div>

@@ -1,18 +1,17 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
-using WebApplication1.Data;
 using WebApplication1.Models;
+using WebApplication1.Repositories;
 
 namespace WebApplication1.Pages.GymMachines;
 
 public class DeleteModel : PageModel
 {
-    private readonly ApplicationDbContext _context;
+    private readonly IMaszynaRepository _repository;
 
-    public DeleteModel(ApplicationDbContext context)
+    public DeleteModel(IMaszynaRepository repository)
     {
-        _context = context;
+        _repository = repository;
     }
 
     [BindProperty]
@@ -25,9 +24,7 @@ public class DeleteModel : PageModel
             return NotFound();
         }
 
-        var maszyna = await _context.Maszyny
-            .Include(item => item.Sekcja)
-            .FirstOrDefaultAsync(item => item.Id == id);
+        var maszyna = await _repository.GetByIdWithDetailsAsync(id.Value);
 
         if (maszyna is null)
         {
@@ -45,13 +42,8 @@ public class DeleteModel : PageModel
             return NotFound();
         }
 
-        var maszyna = await _context.Maszyny.FindAsync(id);
-
-        if (maszyna is not null)
-        {
-            _context.Maszyny.Remove(maszyna);
-            await _context.SaveChangesAsync();
-        }
+        await _repository.DeleteAsync(id.Value);
+        await _repository.SaveAsync();
 
         return RedirectToPage("./Index");
     }

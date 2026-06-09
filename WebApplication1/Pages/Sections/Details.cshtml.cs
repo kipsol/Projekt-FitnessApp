@@ -1,18 +1,17 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
-using WebApplication1.Data;
 using WebApplication1.Models;
+using WebApplication1.Repositories;
 
 namespace WebApplication1.Pages.Sections;
 
 public class DetailsModel : PageModel
 {
-    private readonly ApplicationDbContext _context;
+    private readonly ISekcjaRepository _repository;
 
-    public DetailsModel(ApplicationDbContext context)
+    public DetailsModel(ISekcjaRepository repository)
     {
-        _context = context;
+        _repository = repository;
     }
 
     public Sekcja Sekcja { get; set; } = null!;
@@ -24,9 +23,7 @@ public class DetailsModel : PageModel
             return NotFound();
         }
 
-        var sekcja = await _context.Sekcje
-            .Include(item => item.Maszyny)
-            .FirstOrDefaultAsync(item => item.Id == id);
+        var sekcja = await _repository.GetByIdWithDetailsAsync(id.Value);
 
         if (sekcja is null)
         {

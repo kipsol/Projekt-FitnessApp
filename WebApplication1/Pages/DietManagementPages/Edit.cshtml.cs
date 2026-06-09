@@ -1,71 +1,55 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
+using WebApplication1.DTOs;
 using WebApplication1.Models;
-using WebApplication1.Data;
+using WebApplication1.Repositories;
 
 namespace WebApplication1.Pages.DietManagementPages;
 
 public class EditModel : PageModel
 {
-    private readonly ApplicationDbContext _context;
+    private readonly IDietRepository _repository;
 
-    public EditModel(ApplicationDbContext context)
+    public EditModel(IDietRepository repository)
     {
-        _context = context;
+        _repository = repository;
     }
 
     [BindProperty]
-    public Diet Diet { get; set; } = default!;
+    public DietDto Input { get; set; } = default!;
 
     public async Task<IActionResult> OnGetAsync(int? id)
     {
-        if (id is null)
-        {
-            return NotFound();
-        }
+        if (id is null) return NotFound();
 
-        var diet = await _context.Diets.FirstOrDefaultAsync(m => m.Id == id);
-        if (diet is null)
+        var entity = await _repository.GetByIdAsync(id.Value);
+        if (entity is null) return NotFound();
+
+        Input = new DietDto
         {
-            return NotFound();
-        }
-        Diet = diet;
+            Id = entity.Id,
+            Name = entity.Name,
+            Description = entity.Description,
+            TargetCalories = entity.TargetCalories
+        };
+
         return Page();
     }
 
-    // To protect from overposting attacks, enable the specific properties you want to bind to.
-    // For more details, see https://aka.ms/RazorPagesCRUD.
     public async Task<IActionResult> OnPostAsync()
     {
-        if (!ModelState.IsValid)
-        {
-            return Page();
-        }
+        if (!ModelState.IsValid) return Page();
 
-        _context.Attach(Diet).State = EntityState.Modified;
-
-        try
+        var entity = new Diet
         {
-            await _context.SaveChangesAsync();
-        }
-        catch (DbUpdateConcurrencyException)
-        {
-            if (!DietExists(Diet.Id))
-            {
-                return NotFound();
-            }
-            else
-            {
-                throw;
-            }
-        }
+            Id = Input.Id,
+            Name = Input.Name,
+            Description = Input.Description,
+            TargetCalories = Input.TargetCalories
+        };
 
+        await _repository.UpdateAsync(entity);
+        await _repository.SaveAsync();
         return RedirectToPage("./Index");
-    }
-
-    private bool DietExists(int id)
-    {
-        return _context.Diets.Any(e => e.Id == id);
     }
 }

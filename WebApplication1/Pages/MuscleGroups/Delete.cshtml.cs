@@ -1,18 +1,17 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
-using WebApplication1.Data;
 using WebApplication1.Models;
+using WebApplication1.Repositories;
 
 namespace WebApplication1.Pages.MuscleGroups;
 
 public class DeleteModel : PageModel
 {
-    private readonly ApplicationDbContext _context;
+    private readonly IPartiaMiesniowaRepository _repository;
 
-    public DeleteModel(ApplicationDbContext context)
+    public DeleteModel(IPartiaMiesniowaRepository repository)
     {
-        _context = context;
+        _repository = repository;
     }
 
     [BindProperty]
@@ -27,9 +26,7 @@ public class DeleteModel : PageModel
             return NotFound();
         }
 
-        var partia = await _context.PartieMiesniowe
-            .Include(item => item.Cwiczenia)
-            .FirstOrDefaultAsync(item => item.Id == id);
+        var partia = await _repository.GetByIdWithDetailsAsync(id.Value);
 
         if (partia is null)
         {
@@ -48,9 +45,7 @@ public class DeleteModel : PageModel
             return NotFound();
         }
 
-        var partia = await _context.PartieMiesniowe
-            .Include(item => item.Cwiczenia)
-            .FirstOrDefaultAsync(item => item.Id == id);
+        var partia = await _repository.GetByIdWithDetailsAsync(id.Value);
 
         if (partia is null)
         {
@@ -65,8 +60,8 @@ public class DeleteModel : PageModel
             return Page();
         }
 
-        _context.PartieMiesniowe.Remove(partia);
-        await _context.SaveChangesAsync();
+        await _repository.DeleteAsync(partia.Id);
+        await _repository.SaveAsync();
 
         return RedirectToPage("./Index");
     }

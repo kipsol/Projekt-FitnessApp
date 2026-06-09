@@ -1,26 +1,22 @@
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
-using WebApplication1.Data;
 using WebApplication1.Models;
+using WebApplication1.Repositories;
 
 namespace WebApplication1.Pages.Sections;
 
 public class IndexModel : PageModel
 {
-    private readonly ApplicationDbContext _context;
+    private readonly ISekcjaRepository _repository;
 
-    public IndexModel(ApplicationDbContext context)
+    public IndexModel(ISekcjaRepository repository)
     {
-        _context = context;
+        _repository = repository;
     }
 
     public IList<Sekcja> Sekcje { get; set; } = new List<Sekcja>();
 
     public async Task OnGetAsync()
     {
-        Sekcje = await _context.Sekcje
-            .Include(sekcja => sekcja.Maszyny)
-            .OrderBy(sekcja => sekcja.Nazwa)
-            .ToListAsync();
+        Sekcje = await _repository.GetAllAsync();
     }
 }

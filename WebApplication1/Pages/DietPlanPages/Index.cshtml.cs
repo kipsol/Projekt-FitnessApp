@@ -1,24 +1,22 @@
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
 using WebApplication1.Models;
-using WebApplication1.Data;
+using WebApplication1.Repositories;
 
 namespace WebApplication1.Pages.DietPlanDayPages;
 
 public class IndexModel : PageModel
 {
-    private readonly ApplicationDbContext _context;
+    private readonly IDietPlanDayRepository _repository;
 
-    public IndexModel(ApplicationDbContext context)
+    public IndexModel(IDietPlanDayRepository repository)
     {
-        _context = context;
+        _repository = repository;
     }
 
     public IList<DietPlanDay> DietPlanDay { get; set; } = default!;
 
     public async Task OnGetAsync()
     {
-        DietPlanDay = await _context.DietPlanDays.ToListAsync();
+        DietPlanDay = await _repository.GetAllAsync();
     }
 }

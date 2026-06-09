@@ -2,58 +2,77 @@
 @model WebApplication1.Pages.ClassEventPages.EditModel
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Edytuj Zajęcia";
 }
 
-<h1>Edit</h1>
+<div class="container mt-5 mb-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8 p-5 rounded" style="background-color: #1a1a1a; border: 1px solid #333; border-top: 4px solid #8a2be2; box-shadow: 0 8px 30px rgba(0,0,0,0.5);">
+            <h2 class="mb-2 text-light fw-bold text-center">✏️ Edytuj zajęcia</h2>
+            <hr style="border-color: #333;" />
 
-<h4>ClassEvent</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="ClassEvent.Id" />
-            <div class="form-group">
-                <span class="text-danger">*</span>
-                <label asp-for="ClassEvent.Name" class="control-label"></label>
-                <input asp-for="ClassEvent.Name" class="form-control" aria-required="true"/>
-                <span asp-validation-for="ClassEvent.Name" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <span class="text-danger">*</span>
-                <label asp-for="ClassEvent.Trainer" class="control-label"></label>
-                <input asp-for="ClassEvent.Trainer" class="form-control" aria-required="true"/>
-                <span asp-validation-for="ClassEvent.Trainer" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <span class="text-danger">*</span>
-                <label asp-for="ClassEvent.StartTime" class="control-label"></label>
-                <input asp-for="ClassEvent.StartTime" class="form-control" aria-required="true"/>
-                <span asp-validation-for="ClassEvent.StartTime" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <span class="text-danger">*</span>
-                <label asp-for="ClassEvent.Duration" class="control-label"></label>
-                <input asp-for="ClassEvent.Duration" class="form-control" aria-required="true"/>
-                <span asp-validation-for="ClassEvent.Duration" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ClassEvent.Description" class="control-label"></label>
-                <input asp-for="ClassEvent.Description" class="form-control" />
-                <span asp-validation-for="ClassEvent.Description" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
+            <form method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+                <input type="hidden" asp-for="Input.Id" />
+
+                <div class="form-group mb-4">
+                    <label asp-for="Input.Name" class="form-label text-light fw-bold"></label>
+                    <input asp-for="Input.Name" class="form-control shadow-none" style="background-color: #252525; color: #e0e0e0; border: 1px solid #444;" />
+                    <span asp-validation-for="Input.Name" class="text-danger small"></span>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6 form-group mb-4">
+                        <label asp-for="Input.Trainer" class="form-label text-light fw-bold"></label>
+                        <input asp-for="Input.Trainer" class="form-control shadow-none" style="background-color: #252525; color: #e0e0e0; border: 1px solid #444;" />
+                        <span asp-validation-for="Input.Trainer" class="text-danger small"></span>
+                    </div>
+                    <div class="col-md-6 form-group mb-4">
+                        <label asp-for="Input.Day" class="form-label text-light fw-bold"></label>
+                        <select asp-for="Input.Day" class="form-select shadow-none" style="background-color: #252525; color: #e0e0e0; border: 1px solid #444;">
+                            <option value="Monday">Poniedziałek</option>
+                            <option value="Tuesday">Wtorek</option>
+                            <option value="Wednesday">Środa</option>
+                            <option value="Thursday">Czwartek</option>
+                            <option value="Friday">Piątek</option>
+                            <option value="Saturday">Sobota</option>
+                            <option value="Sunday">Niedziela</option>
+                        </select>
+                        <span asp-validation-for="Input.Day" class="text-danger small"></span>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6 form-group mb-4">
+                        <label asp-for="Input.StartTime" class="form-label text-light fw-bold"></label>
+                        <input asp-for="Input.StartTime" class="form-control shadow-none" style="background-color: #252525; color: #e0e0e0; border: 1px solid #444;" type="time" />
+                        <span asp-validation-for="Input.StartTime" class="text-danger small"></span>
+                    </div>
+
+                    <div class="col-md-6 form-group mb-4">
+                        <label asp-for="Input.Duration" class="form-label text-light fw-bold"></label>
+                        <input asp-for="Input.Duration" class="form-control shadow-none" style="background-color: #252525; color: #e0e0e0; border: 1px solid #444;" type="number" />
+                        <span asp-validation-for="Input.Duration" class="text-danger small"></span>
+                    </div>
+                </div>
+
+                <div class="form-group mb-5">
+                    <label asp-for="Input.Description" class="form-label text-light fw-bold"></label>
+                    <textarea asp-for="Input.Description" class="form-control shadow-none" style="background-color: #252525; color: #e0e0e0; border: 1px solid #444;" rows="3"></textarea>
+                    <span asp-validation-for="Input.Description" class="text-danger small"></span>
+                </div>
+
+                <div class="d-flex justify-content-between mt-2">
+                    <a class="btn px-4 py-2 fw-bold" style="border: 1px solid #555; color: #ccc;" asp-page="./Index">Anuluj</a>
+                    <input type="submit" value="Zapisz zmiany" class="btn px-5 py-2 fw-bold" style="background-color: #8a2be2; color: #fff; border: none;" />
+                </div>
+            </form>
+        </div>
     </div>
 </div>
 
-<div>
-    <a asp-page="./Index">Back to List</a>
-</div>
-
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }
