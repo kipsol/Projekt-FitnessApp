@@ -51,7 +51,7 @@ dotnet ef database update
 ```powershell
 Update-Database
 ```
-*Uruchumienie kontenera w dokerze
+Uruchumienie kontenera w dokerze
 ```powershell
 docker-compose up -d
 ```
