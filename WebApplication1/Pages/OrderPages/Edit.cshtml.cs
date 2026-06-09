@@ -40,23 +40,16 @@ public class EditModel : PageModel
     {
         if (!ModelState.IsValid) return Page();
 
-<<<<<<< HEAD
         var existing = await _repository.GetByIdAsync(Input.Id);
         if (existing is null) return NotFound();
 
-=======
->>>>>>> origin/master
         var entity = new Order
         {
             Id = Input.Id,
             OrderDate = Input.OrderDate,
             TotalPrice = Input.TotalPrice,
-<<<<<<< HEAD
             Status = Input.Status,
             UserId = existing.UserId
-=======
-            Status = Input.Status
->>>>>>> origin/master
         };
 
         await _repository.UpdateAsync(entity);

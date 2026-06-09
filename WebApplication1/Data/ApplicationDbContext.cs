@@ -296,7 +296,6 @@ public class ApplicationDbContext : IdentityDbContext<IdentityUser, IdentityRole
         {
             entity.ToTable("ClassSchedules");
 
-<<<<<<< HEAD
             entity.HasIndex(schedule => new { schedule.UserId, schedule.ClassEventId })
                 .IsUnique()
                 .HasFilter("[UserId] IS NOT NULL");
@@ -306,8 +305,6 @@ public class ApplicationDbContext : IdentityDbContext<IdentityUser, IdentityRole
                 .HasForeignKey(schedule => schedule.UserId)
                 .OnDelete(DeleteBehavior.Cascade);
 
-=======
->>>>>>> origin/master
             entity.HasOne(cs => cs.ClassEvent)
                 .WithMany(ce => ce.Schedules)
                 .HasForeignKey(cs => cs.ClassEventId)
@@ -322,7 +319,6 @@ public class ApplicationDbContext : IdentityDbContext<IdentityUser, IdentityRole
         builder.Entity<Order>(entity =>
         {
             entity.ToTable("Orders");
-<<<<<<< HEAD
 
             entity.HasIndex(order => new { order.UserId, order.OrderDate });
 
@@ -330,8 +326,6 @@ public class ApplicationDbContext : IdentityDbContext<IdentityUser, IdentityRole
                 .WithMany()
                 .HasForeignKey(order => order.UserId)
                 .OnDelete(DeleteBehavior.SetNull);
-=======
->>>>>>> origin/master
         });
 
         builder.Entity<OrderItem>(entity =>

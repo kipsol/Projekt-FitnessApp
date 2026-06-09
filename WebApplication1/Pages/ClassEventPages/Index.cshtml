@@ -108,7 +108,6 @@
         </div>
         <div class="d-flex gap-2 flex-wrap">
             <a asp-page="/ClassSchedulePages/Index" class="btn-outline-dark-theme shadow-sm">🔙 Wróć do grafiku</a>
-<<<<<<< HEAD
             @if (Model.CanManageClasses)
             {
                 <a asp-page="./Create" class="btn-neon shadow-sm">➕ Dodaj nowe zajęcia</a>
@@ -117,9 +116,6 @@
             {
                 <a asp-page="/ClassSchedulePages/Create" class="btn-neon shadow-sm">Zapisz się</a>
             }
-=======
-            <a asp-page="./Create" class="btn-neon shadow-sm">➕ Dodaj nowe zajęcia</a>
->>>>>>> origin/master
         </div>
     </div>
 
@@ -152,7 +148,6 @@
                         </td>
 
                         <td class="text-end pe-4">
-<<<<<<< HEAD
                             @if (Model.CanManageClasses)
                             {
                                 <a asp-page="./Edit" asp-route-id="@item.Id" class="action-btn">Edytuj</a>
@@ -162,11 +157,6 @@
                             {
                                 <a asp-page="./Delete" asp-route-id="@item.Id" class="action-btn action-delete">Usuń</a>
                             }
-=======
-                            <a asp-page="./Edit" asp-route-id="@item.Id" class="action-btn">Edytuj</a>
-                            <a asp-page="./Details" asp-route-id="@item.Id" class="action-btn">Szczegóły</a>
-                            <a asp-page="./Delete" asp-route-id="@item.Id" class="action-btn action-delete">Usuń</a>
->>>>>>> origin/master
                         </td>
                     </tr>
                 }

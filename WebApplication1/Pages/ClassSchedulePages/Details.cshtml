@@ -12,23 +12,22 @@
     <hr />
     <dl class="row">
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.ClassSchedule.ClassEvent.Day)
+            Class event ID
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.ClassSchedule.ClassEvent.Day)
-        </dd>
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ClassSchedule.ClassEventId)
-        </dt>
-        <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.ClassSchedule.ClassEventId)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ClassSchedule.ClassEvent)
+        <dt class="col-sm-2">
+            Day
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ClassSchedule.ClassEvent)
+        <dd class="col-sm-10">
+            @(Model.ClassSchedule.ClassEvent?.Day.ToString() ?? "-")
+        </dd>
+        <dt class="col-sm-2">
+            Class
+        </dt>
+        <dd class="col-sm-10">
+            @(Model.ClassSchedule.ClassEvent?.Name ?? "-")
         </dd>
     </dl>
 </div>

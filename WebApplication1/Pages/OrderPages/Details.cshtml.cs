@@ -1,15 +1,9 @@
-<<<<<<< HEAD
 using System.Security.Claims;
-=======
->>>>>>> origin/master
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using WebApplication1.Models;
 using WebApplication1.Repositories;
-<<<<<<< HEAD
 using WebApplication1.Security;
-=======
->>>>>>> origin/master
 
 namespace WebApplication1.Pages.OrderPages;
 
@@ -31,7 +25,6 @@ public class DetailsModel : PageModel
         var entity = await _repository.GetByIdAsync(id.Value);
         if (entity is null) return NotFound();
 
-<<<<<<< HEAD
         var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
         var canManageStore = User.HasClaim(AppClaimTypes.Permission, AppPermissions.ManageStore);
 
@@ -40,8 +33,6 @@ public class DetailsModel : PageModel
             return Forbid();
         }
 
-=======
->>>>>>> origin/master
         Order = entity;
         return Page();
     }
