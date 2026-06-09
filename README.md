@@ -1,4 +1,4 @@
-# Projekt-FitnessApp-Szymon
+# Projekt-FitnessApp
 Aplikacja webowa ASP.NET Core stworzona z myślą o kompleksowym zarządzaniu siłownią, treningami oraz dietą.
 ---
 ## Wykorzystane technologie i biblioteki
