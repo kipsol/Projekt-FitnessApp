@@ -1,9 +1,15 @@
+<<<<<<< HEAD
 using System.Security.Claims;
+=======
+>>>>>>> origin/master
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using WebApplication1.Models;
 using WebApplication1.Repositories;
+<<<<<<< HEAD
 using WebApplication1.Security;
+=======
+>>>>>>> origin/master
 
 namespace WebApplication1.Pages.ClassSchedulePages;
 
@@ -18,6 +24,7 @@ public class IndexModel : PageModel
 
     public Dictionary<DayOfWeek, List<ClassSchedule>> GrafikTygodniowy { get; set; } = new();
 
+<<<<<<< HEAD
     public bool CanManageClasses => User.HasClaim(AppClaimTypes.Permission, AppPermissions.ManageFitnessClasses);
 
     public async Task OnGetAsync()
@@ -28,6 +35,11 @@ public class IndexModel : PageModel
             : userId is null
                 ? new List<ClassSchedule>()
                 : await _repository.GetAllWithDetailsAsync(userId);
+=======
+    public async Task OnGetAsync()
+    {
+        var zapisy = await _repository.GetAllWithDetailsAsync();
+>>>>>>> origin/master
 
         foreach (DayOfWeek dzien in Enum.GetValues(typeof(DayOfWeek)))
         {
@@ -40,6 +52,7 @@ public class IndexModel : PageModel
 
     public async Task<IActionResult> OnPostDeleteFromScheduleAsync(int scheduleId)
     {
+<<<<<<< HEAD
         var zapis = await _repository.GetByIdAsync(scheduleId);
 
         if (zapis is null)
@@ -53,6 +66,8 @@ public class IndexModel : PageModel
             return Forbid();
         }
 
+=======
+>>>>>>> origin/master
         await _repository.DeleteAsync(scheduleId);
         await _repository.SaveAsync();
         return RedirectToPage();

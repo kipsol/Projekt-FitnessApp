@@ -14,11 +14,16 @@
             <a class="brand" asp-page="/Index">FitnessApp</a>
 
             <ul class="nav-list">
+<<<<<<< HEAD
                 <li><a asp-page="/TrainingPlans/Panel">Sekcja treningowa</a></li>
+=======
+                <li><a asp-page="/Index">Home</a></li>
+>>>>>>> origin/master
 
                 <li class="dropdown">
                     <span class="dropdown-title">Trening ▾</span>
                     <ul class="submenu">
+<<<<<<< HEAD
                         <li><a asp-page="/TrainingSessions/Index">Sesje</a></li>
                         <li><a asp-page="/Progress/Index">Progres</a></li>
                         <li><a asp-page="/OutdoorGym">Trening w plenerze</a></li>
@@ -26,6 +31,12 @@
                         {
                             <li><a asp-page="/Trainer/Assignments">Przypisania trenera</a></li>
                         }
+=======
+                        <li><a asp-page="/TrainingPlans/Panel">Sekcja treningowa</a></li>
+                        <li><a asp-page="/TrainingSessions/Index">Sesje</a></li>
+                        <li><a asp-page="/Progress/Index">Progres</a></li>
+                        <li><a asp-page="/OutdoorGym">Trening w plenerze</a></li>
+>>>>>>> origin/master
                     </ul>
                 </li>
 
@@ -46,10 +57,14 @@
                     <ul class="submenu">
                         <li><a asp-page="/ProductPages/Index">Produkty</a></li>
                         <li><a asp-page="/OrderPages/Index">Zamówienia</a></li>
+<<<<<<< HEAD
                         @if (User.HasClaim(AppClaimTypes.Permission, AppPermissions.ManageStore))
                         {
                             <li><a asp-page="/OrderItemPages/Index">Skład Pozycji</a></li>
                         }
+=======
+                        <li><a asp-page="/OrderItemPages/Index">Skład Pozycji</a></li>
+>>>>>>> origin/master
                     </ul>
                 </li>
             </ul>

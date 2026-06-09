@@ -11,10 +11,14 @@
             <h2 class="text-light fw-bold">Produkty</h2>
             <p class="text-muted small">Kupuj, dźwigaj, ROŚNIJ!</p>
         </div>
+<<<<<<< HEAD
         @if (Model.CanManageStore)
         {
             <a asp-page="Create" class="btn btn-primary shadow-sm" style="background-color: #8a2be2; border: none;">➕ Dodaj nowy produkt</a>
         }
+=======
+        <a asp-page="Create" class="btn btn-primary shadow-sm" style="background-color: #8a2be2; border: none;">➕ Dodaj nowy produkt</a>
+>>>>>>> origin/master
     </div>
 
     <div class="card shadow-sm border-0" style="background-color: #1a1a1a; border: 1px solid #333;">
@@ -62,6 +66,7 @@
                             </td>
 
                             <td class="text-end pe-4">
+<<<<<<< HEAD
                                 @if (Model.CanManageStore)
                                 {
                                     <a asp-page="./Edit" asp-route-id="@item.Id" class="btn btn-sm btn-outline-secondary me-1">Edytuj</a>
@@ -72,6 +77,11 @@
                                 {
                                     <a asp-page="./Delete" asp-route-id="@item.Id" class="btn btn-sm btn-outline-danger">Usuń</a>
                                 }
+=======
+                                <a asp-page="./Edit" asp-route-id="@item.Id" class="btn btn-sm btn-outline-secondary me-1">Edytuj</a>
+                                <a asp-page="./Details" asp-route-id="@item.Id" class="btn btn-sm btn-outline-info me-1">Szczegóły</a>
+                                <a asp-page="./Delete" asp-route-id="@item.Id" class="btn btn-sm btn-outline-danger">Usuń</a>
+>>>>>>> origin/master
                             </td>
                         </tr>
                     }
@@ -79,4 +89,8 @@
             </table>
         </div>
     </div>
+<<<<<<< HEAD
 </div>
+=======
+</div>
+>>>>>>> origin/master

@@ -1,7 +1,10 @@
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using WebApplication1.Models;
 using WebApplication1.Repositories;
+<<<<<<< HEAD
 using WebApplication1.Security;
+=======
+>>>>>>> origin/master
 
 namespace WebApplication1.Pages.MealPages;
 

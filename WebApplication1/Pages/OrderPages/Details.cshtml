@@ -38,10 +38,14 @@
     </dl>
 </div>
 <div>
+<<<<<<< HEAD
     @if (User.HasClaim(AppClaimTypes.Permission, AppPermissions.ManageStore))
     {
         <a asp-page="./Edit" asp-route-id="@Model.Order.Id">Edit</a>
         <span>|</span>
     }
+=======
+    <a asp-page="./Edit" asp-route-id="@Model.Order.Id">Edit</a> |
+>>>>>>> origin/master
     <a asp-page="./Index">Back to List</a>
 </div>

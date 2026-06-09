@@ -130,7 +130,11 @@
         </div>
         <div class="d-flex gap-2 flex-wrap">
             <a asp-page="/ClassEventPages/Index" class="btn btn-outline-neon fw-bold px-4 py-2">
+<<<<<<< HEAD
                 @(Model.CanManageClasses ? "⚙️ Zarządzaj bazą" : "Baza zajęć")
+=======
+                ⚙️ Zarządzaj bazą
+>>>>>>> origin/master
             </a>
             <a asp-page="./Create" class="btn btn-neon fw-bold px-4 py-2 shadow-sm">
                 ➕ Zapisz się na zajęcia
@@ -173,12 +177,15 @@
                                     <div class="class-trainer">
                                         👤 Prowadzący: @wpis.ClassEvent?.Trainer
                                     </div>
+<<<<<<< HEAD
                                     @if (Model.CanManageClasses && !string.IsNullOrWhiteSpace(wpis.User?.Email))
                                     {
                                         <div class="class-trainer">
                                             Uczestnik: @wpis.User.Email
                                         </div>
                                     }
+=======
+>>>>>>> origin/master
                                     <div class="mt-3">
                                         <span class="badge" style="background-color: #333; color: #ccc; border: 1px solid #444; font-size: 0.75rem;">
                                             ⏳ @wpis.ClassEvent?.Duration min
@@ -192,4 +199,8 @@
             </div>
         }
     </div>
+<<<<<<< HEAD
 </div>
+=======
+</div>
+>>>>>>> origin/master

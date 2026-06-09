@@ -361,6 +361,7 @@ header {
     }
 }
 
+<<<<<<< HEAD
 .login-panel {
     margin-left: auto;
 }
@@ -440,3 +441,15 @@ header {
         flex-wrap: wrap;
     }
 }
+=======
+.login-panel a {
+    color: #8a2be2;
+    text-decoration: none;
+    font-weight: 600;
+    margin-left: 15px;
+}
+
+    .login-panel a:hover {
+        color: #b052ff;
+    }
+>>>>>>> origin/master
