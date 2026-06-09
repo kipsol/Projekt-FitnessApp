@@ -33,7 +33,6 @@ public class EditModel : PageModel
     {
         if (!ModelState.IsValid) return Page();
 
-<<<<<<< HEAD
         var existing = await _repository.GetByIdAsync(Input.Id);
         if (existing is null) return NotFound();
 
@@ -44,9 +43,6 @@ public class EditModel : PageModel
             UserId = existing.UserId
         };
 
-=======
-        var entity = new ClassSchedule { Id = Input.Id, ClassEventId = Input.ClassEventId };
->>>>>>> origin/master
         await _repository.UpdateAsync(entity);
         await _repository.SaveAsync();
         return RedirectToPage("./Index");
