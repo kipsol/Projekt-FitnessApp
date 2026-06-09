@@ -1,0 +1,27 @@
+@page
+@model WebApplication1.Pages.ClassEventPages.DeleteModel
+
+@{
+    ViewData["Title"] = "Usuń";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6 p-5 rounded text-center" style="background-color: #1a1a1a; border: 1px solid #333; border-top: 4px solid #ff4d4d; box-shadow: 0 8px 30px rgba(0,0,0,0.5);">
+            <h2 class="text-danger fw-bold mb-3">⚠️ Usunięcie zajęć</h2>
+            <h5 class="text-light mb-4">Czy na pewno chcesz usunąć te zajęcia?</h5>
+
+            <div class="p-3 rounded mb-4 text-start" style="background-color: #222; border: 1px solid #444;">
+                <h4 class="fw-bold mb-1" style="color: #b052ff;">@Model.ClassEvent.Name</h4>
+                <div class="text-muted small">👤 Prowadzący: @Model.ClassEvent.Trainer</div>
+                <div class="text-muted small">🕒 Godzina: @Model.ClassEvent.StartTime.ToString(@"hh\:mm") | ⏳ @Model.ClassEvent.Duration min</div>
+            </div>
+
+            <form method="post" class="d-flex justify-content-between mt-4">
+                <input type="hidden" asp-for="ClassEvent.Id" />
+                <a asp-page="./Index" class="btn px-4 fw-bold" style="border: 1px solid #555; color: #ccc;">Anuluj</a>
+                <input type="submit" value="Usuń bezpowrotnie" class="btn btn-danger px-4 fw-bold shadow-sm" />
+            </form>
+        </div>
+    </div>
+</div>

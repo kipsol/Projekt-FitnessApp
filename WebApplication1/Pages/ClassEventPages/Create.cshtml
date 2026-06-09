@@ -1,0 +1,79 @@
+@page
+@model WebApplication1.Pages.ClassEventPages.CreateModel
+
+@{
+    ViewData["Title"] = "Dodaj Nowe Zajęcia";
+}
+
+<div class="container mt-5 mb-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8 p-5 rounded" style="background-color: #1a1a1a; border: 1px solid #333; border-top: 4px solid #8a2be2; box-shadow: 0 8px 30px rgba(0,0,0,0.5);">
+            <h2 class="mb-2 text-light fw-bold text-center">🆕 Dodaj nowe zajęcia</h2>
+            <p class="text-muted text-center mb-4">Wypełnij formularz, aby dodać szablon zajęć do bazy</p>
+            <hr style="border-color: #333;" />
+            
+            <form method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+                <div class="form-group mb-4">
+                    <label asp-for="Input.Name" class="form-label text-light fw-bold"></label>
+                    <input asp-for="Input.Name" class="form-control shadow-none" style="background-color: #252525; color: #e0e0e0; border: 1px solid #444;" placeholder="np. Joga, Zumba..." />
+                    <span asp-validation-for="Input.Name" class="text-danger small"></span>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6 form-group mb-4">
+                        <label asp-for="Input.Day" class="form-label text-light fw-bold"></label>
+                        <select asp-for="Input.Day" class="form-select shadow-none" style="background-color: #252525; color: #e0e0e0; border: 1px solid #444;">
+                            <option value="Monday">Poniedziałek</option>
+                            <option value="Tuesday">Wtorek</option>
+                            <option value="Wednesday">Środa</option>
+                            <option value="Thursday">Czwartek</option>
+                            <option value="Friday">Piątek</option>
+                            <option value="Saturday">Sobota</option>
+                            <option value="Sunday">Niedziela</option>
+                        </select>
+                        <span asp-validation-for="Input.Day" class="text-danger small"></span>
+                    </div>
+
+                    <div class="col-md-6 form-group mb-4">
+                        <label asp-for="Input.Trainer" class="form-label text-light fw-bold"></label>
+                        <input asp-for="Input.Trainer" class="form-control shadow-none" style="background-color: #252525; color: #e0e0e0; border: 1px solid #444;" />
+                        <span asp-validation-for="Input.Trainer" class="text-danger small"></span>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6 form-group mb-4">
+                        <label asp-for="Input.StartTime" class="form-label text-light fw-bold"></label>
+                        <input asp-for="Input.StartTime" class="form-control shadow-none" style="background-color: #252525; color: #e0e0e0; border: 1px solid #444;" type="time" />
+                        <span asp-validation-for="Input.StartTime" class="text-danger small"></span>
+                    </div>
+
+                    <div class="col-md-6 form-group mb-4">
+                        <label asp-for="Input.Duration" class="form-label text-light fw-bold"></label>
+                        <input asp-for="Input.Duration" class="form-control shadow-none" style="background-color: #252525; color: #e0e0e0; border: 1px solid #444;" type="number" />
+                        <span asp-validation-for="Input.Duration" class="text-danger small"></span>
+                    </div>
+                </div>
+
+                <div class="form-group mb-5">
+                    <label asp-for="Input.Description" class="form-label text-light fw-bold"></label>
+                    <textarea asp-for="Input.Description" class="form-control shadow-none" style="background-color: #252525; color: #e0e0e0; border: 1px solid #444;" rows="3"></textarea>
+                    <span asp-validation-for="Input.Description" class="text-danger small"></span>
+                </div>
+
+                <div class="d-flex justify-content-between mt-2">
+                    <a class="btn px-4 py-2 fw-bold" style="border: 1px solid #555; color: #ccc;" asp-page="/ClassSchedulePages/Index">Anuluj</a>
+                    <input type="submit" value="Stwórz i dodaj zajęcia" class="btn px-5 py-2 fw-bold" style="background-color: #8a2be2; color: #fff; border: none;" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

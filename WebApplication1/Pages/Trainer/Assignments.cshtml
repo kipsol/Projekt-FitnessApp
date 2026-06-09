@@ -1,0 +1,284 @@
+@page
+@model WebApplication1.Pages.Trainer.AssignmentsModel
+
+@{
+    ViewData["Title"] = "Przypisania trenera";
+}
+
+<style>
+    .trainer-page {
+        display: grid;
+        gap: 1.25rem;
+    }
+
+    .trainer-header {
+        padding-bottom: 1rem;
+        border-bottom: 1px solid #333;
+    }
+
+    .trainer-header h1 {
+        margin: 0;
+        color: #fff;
+        font-size: 2.2rem;
+        font-weight: 800;
+    }
+
+    .trainer-header p {
+        max-width: 760px;
+        margin: 0.5rem 0 0;
+        color: #b9b9c3;
+    }
+
+    .trainer-alert {
+        border: 1px solid #3d3150;
+        border-left: 4px solid #8a2be2;
+        border-radius: 8px;
+        background-color: #1c1724;
+        color: #eadfff;
+    }
+
+    .trainer-alert-success {
+        border-color: #245c3d;
+        border-left-color: #20c997;
+        background-color: #12251d;
+        color: #d6ffed;
+    }
+
+    .trainer-validation {
+        color: #ff8f8f;
+        font-weight: 700;
+    }
+
+    .assignment-shell {
+        overflow: hidden;
+        border: 1px solid #333;
+        border-radius: 8px;
+        background-color: #171717;
+        box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35);
+    }
+
+    .assignment-table {
+        width: 100%;
+        margin: 0;
+        color: #e6e6e6;
+        border-collapse: collapse;
+    }
+
+    .assignment-table thead {
+        background-color: #24202d;
+        border-bottom: 2px solid #8a2be2;
+    }
+
+    .assignment-table th {
+        padding: 1rem;
+        color: #fff;
+        font-size: 0.82rem;
+        font-weight: 800;
+        letter-spacing: 0;
+        text-transform: uppercase;
+        white-space: nowrap;
+    }
+
+    .assignment-table td {
+        padding: 1rem;
+        border-bottom: 1px solid #2c2c2c;
+        vertical-align: middle;
+    }
+
+    .assignment-table tbody tr:hover {
+        background-color: #202020;
+    }
+
+    .assignment-user {
+        color: #fff;
+        font-weight: 800;
+    }
+
+    .assignment-meta {
+        margin-top: 0.35rem;
+        color: #9696a1;
+        font-size: 0.82rem;
+    }
+
+    .assignment-current {
+        display: inline-flex;
+        max-width: 220px;
+        align-items: center;
+        padding: 0.35rem 0.55rem;
+        border: 1px solid #3a3644;
+        border-radius: 8px;
+        background-color: #211f27;
+        color: #f0ecff;
+        font-size: 0.9rem;
+        font-weight: 700;
+    }
+
+    .assignment-empty {
+        color: #a8a8b2;
+        font-weight: 600;
+    }
+
+    .assignment-form {
+        align-items: end;
+    }
+
+    .assignment-label {
+        display: block;
+        margin-bottom: 0.35rem;
+        color: #d7ccf3;
+        font-size: 0.78rem;
+        font-weight: 800;
+    }
+
+    .assignment-select {
+        min-height: 40px;
+        border: 1px solid #4b3b63;
+        border-radius: 8px;
+        background-color: #25212d;
+        color: #fff;
+        font-weight: 600;
+    }
+
+    .assignment-select:focus {
+        border-color: #b052ff;
+        background-color: #2b2337;
+        color: #fff;
+        box-shadow: 0 0 0 0.2rem rgba(138, 43, 226, 0.25);
+    }
+
+    .assignment-save {
+        min-height: 40px;
+        border: 1px solid #20c997;
+        border-radius: 8px;
+        background-color: #198754;
+        color: #fff;
+        font-weight: 800;
+        transition: background-color 160ms ease, box-shadow 160ms ease, transform 160ms ease;
+    }
+
+    .assignment-save:hover,
+    .assignment-save:focus {
+        background-color: #20a86a;
+        color: #fff;
+        box-shadow: 0 0 16px rgba(32, 201, 151, 0.35);
+        transform: translateY(-1px);
+    }
+
+    @@media (max-width: 767.98px) {
+        .assignment-table th,
+        .assignment-table td {
+            min-width: 180px;
+        }
+
+        .assignment-form {
+            min-width: 520px;
+        }
+    }
+</style>
+
+<section class="trainer-page">
+    <div class="trainer-header">
+        <h1>Przypisania trenera</h1>
+        <p>Wybierz klienta i przypisz mu aktualny plan treningowy oraz dietę. Zwykły użytkownik zobaczy tylko elementy przypisane przez trenera.</p>
+    </div>
+
+    @if (!string.IsNullOrWhiteSpace(Model.StatusMessage))
+    {
+        <div class="trainer-alert trainer-alert-success p-3">@Model.StatusMessage</div>
+    }
+
+    <div asp-validation-summary="All" class="trainer-validation"></div>
+
+    @if (!Model.Users.Any())
+    {
+        <div class="trainer-alert p-3">
+            Brak zwykłych użytkowników do przypisania. Jeśli w systemie nie ma jeszcze trenera, najbliższa rejestracja otrzyma rolę Trener; kolejne konta otrzymają rolę Klient.
+        </div>
+    }
+    else
+    {
+        <div class="assignment-shell table-responsive">
+            <table class="assignment-table">
+                <thead>
+                    <tr>
+                        <th>Użytkownik</th>
+                        <th>Aktualny plan</th>
+                        <th>Aktualna dieta</th>
+                        <th>Przypisz</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var user in Model.Users)
+                    {
+                        <tr>
+                            <td>
+                                <div class="assignment-user">@user.Email</div>
+                                @if (!string.IsNullOrWhiteSpace(user.AssignedBy) && user.AssignedAtUtc.HasValue)
+                                {
+                                    <div class="assignment-meta">
+                                        Ostatnio zmienił: @user.AssignedBy, @user.AssignedAtUtc.Value.ToLocalTime().ToString("g")
+                                    </div>
+                                }
+                            </td>
+                            <td>
+                                @if (string.IsNullOrWhiteSpace(user.PlanName))
+                                {
+                                    <span class="assignment-empty">Brak</span>
+                                }
+                                else
+                                {
+                                    <span class="assignment-current">@user.PlanName</span>
+                                }
+                            </td>
+                            <td>
+                                @if (string.IsNullOrWhiteSpace(user.DietName))
+                                {
+                                    <span class="assignment-empty">Brak</span>
+                                }
+                                else
+                                {
+                                    <span class="assignment-current">@user.DietName</span>
+                                }
+                            </td>
+                            <td>
+                                <form method="post" class="row g-2 assignment-form">
+                                    <input type="hidden" name="Input.UserId" value="@user.UserId" />
+
+                                    <div class="col-md-5">
+                                        <label class="assignment-label" for="plan-@user.UserId">Plan</label>
+                                        <select id="plan-@user.UserId" class="form-select form-select-sm assignment-select" name="Input.PlanTreningowyId">
+                                            <option value="">Bez planu</option>
+                                            @foreach (var plan in Model.TrainingPlans)
+                                            {
+                                                <option value="@plan.Value" selected="@(user.PlanTreningowyId?.ToString() == plan.Value)">
+                                                    @plan.Text
+                                                </option>
+                                            }
+                                        </select>
+                                    </div>
+
+                                    <div class="col-md-5">
+                                        <label class="assignment-label" for="diet-@user.UserId">Dieta</label>
+                                        <select id="diet-@user.UserId" class="form-select form-select-sm assignment-select" name="Input.DietId">
+                                            <option value="">Bez diety</option>
+                                            @foreach (var diet in Model.Diets)
+                                            {
+                                                <option value="@diet.Value" selected="@(user.DietId?.ToString() == diet.Value)">
+                                                    @diet.Text
+                                                </option>
+                                            }
+                                        </select>
+                                    </div>
+
+                                    <div class="col-md-2">
+                                        <button type="submit" class="btn btn-sm assignment-save w-100">Zapisz</button>
+                                    </div>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+</section>

@@ -1,0 +1,137 @@
+@page
+@model WebApplication1.Pages.ClassSchedulePages.CreateModel
+@{
+    ViewData["Title"] = "Zapisz się na zajęcia";
+
+    var dniPoPolsku = new Dictionary<DayOfWeek, string>
+    {
+        { DayOfWeek.Monday, "Poniedziałek" },
+        { DayOfWeek.Tuesday, "Wtorek" },
+        { DayOfWeek.Wednesday, "Środa" },
+        { DayOfWeek.Thursday, "Czwartek" },
+        { DayOfWeek.Friday, "Piątek" },
+        { DayOfWeek.Saturday, "Sobota" },
+        { DayOfWeek.Sunday, "Niedziela" }
+    };
+}
+
+<style>
+    .header-card {
+        background-color: #1a1a1a;
+        border: 1px solid #333;
+        border-radius: 12px;
+        box-shadow: 0 8px 30px rgba(0,0,0,0.5);
+    }
+
+    .theme-card {
+        background-color: #1a1a1a;
+        border: 1px solid #333;
+        border-top: 4px solid #8a2be2;
+        border-radius: 12px;
+        box-shadow: 0 8px 30px rgba(0,0,0,0.5);
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+        .theme-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(138,43,226,0.15);
+            border-color: #555;
+        }
+
+    .btn-neon {
+        background-color: #8a2be2;
+        color: #fff;
+        border: none;
+        transition: 0.3s ease;
+    }
+
+        .btn-neon:hover {
+            background-color: #9d4edd;
+            color: #fff;
+            box-shadow: 0 0 15px rgba(138,43,226,0.5);
+        }
+
+    .btn-outline-neon {
+        border: 2px solid #8a2be2;
+        color: #b052ff;
+        background-color: transparent;
+        transition: 0.3s ease;
+    }
+
+        .btn-outline-neon:hover {
+            background-color: #8a2be2;
+            color: #fff;
+        }
+
+    .btn-disabled {
+        background-color: #252525;
+        color: #666;
+        border: 1px solid #444;
+        cursor: not-allowed;
+    }
+
+    .description-text {
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+</style>
+
+<div class="container mt-4">
+
+    <div class="header-card p-4 mb-5 d-flex justify-content-between align-items-center flex-wrap gap-3">
+        <div>
+            <h2 class="text-light fw-bold mb-1">🏋️ Zapisz się na zajęcia</h2>
+            <p class="text-muted small mb-0">Wybierz interesujący Cię trening z listy poniżej i dołącz do grupy</p>
+        </div>
+        <a class="btn btn-outline-neon fw-bold px-4 py-2" asp-page="./Index">🔙 Wróć do grafiku</a>
+    </div>
+
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 mb-5">
+        @foreach (var zajecie in Model.DostepneZajecia)
+        {
+            <div class="col">
+                <div class="theme-card h-100 d-flex flex-column">
+                    <div class="card-body p-4 flex-grow-1">
+
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <span class="badge" style="background-color: rgba(138,43,226,0.15); color: #b052ff; border: 1px solid #8a2be2;">
+                                @dniPoPolsku[zajecie.Day]
+                            </span>
+                            <span class="fw-bold" style="color: #b052ff; font-size: 0.95rem;">
+                                🕒 @zajecie.StartTime.ToString(@"hh\:mm")
+                            </span>
+                        </div>
+
+                        <h4 class="card-title fw-bold mb-2 text-light">@zajecie.Name</h4>
+                        <p class="small mb-3 text-muted">
+                            👤 Prowadzący: <strong style="color: #ccc;">@zajecie.Trainer</strong>
+                        </p>
+                        <p class="card-text text-muted description-text" style="font-size: 0.9rem;">
+                            @zajecie.Description
+                        </p>
+
+                    </div>
+
+                    <div class="mt-auto border-top p-3 d-flex justify-content-between align-items-center" style="border-color: #333 !important; background-color: #111; border-radius: 0 0 12px 12px;">
+                        <span class="badge" style="background-color: #333; color: #ccc; border: 1px solid #444; font-size: 0.8rem;">
+                            ⏳ @zajecie.Duration min
+                        </span>
+
+                        @if (Model.JuzZapisanyId.Contains(zajecie.Id))
+                        {
+                            <button class="btn btn-disabled fw-bold px-4 py-2" disabled>✔️ Zapisany</button>
+                        }
+                        else
+                        {
+                            <form method="post" asp-page-handler="Zapisz" asp-route-classEventId="@zajecie.Id" class="m-0">
+                                <button type="submit" class="btn btn-neon fw-bold px-4 py-2 shadow-sm">Zapisz się</button>
+                            </form>
+                        }
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

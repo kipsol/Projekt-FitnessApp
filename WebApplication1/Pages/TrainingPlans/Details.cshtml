@@ -1,0 +1,51 @@
+@page
+@model WebApplication1.Pages.TrainingPlans.DetailsModel
+
+@{
+    ViewData["Title"] = "Szczegoly planu treningowego";
+}
+
+<h1>Szczegoly planu treningowego</h1>
+
+<dl class="row">
+    <dt class="col-sm-3">Nazwa</dt>
+    <dd class="col-sm-9">@Model.PlanTreningowy.Nazwa</dd>
+
+    <dt class="col-sm-3">Opis</dt>
+    <dd class="col-sm-9">@Model.PlanTreningowy.Opis</dd>
+
+    <dt class="col-sm-3">Poziom zaawansowania</dt>
+    <dd class="col-sm-9">@Model.PlanTreningowy.PoziomZaawansowania</dd>
+
+    <dt class="col-sm-3">Czas trwania</dt>
+    <dd class="col-sm-9">@Model.PlanTreningowy.CzasTrwaniaTygodnie tyg.</dd>
+</dl>
+
+<h4>Cwiczenia w planie</h4>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Nazwa</th>
+            <th>Partia</th>
+            <th>Serie</th>
+            <th>Powtorzenia</th>
+            <th>Przerwa</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var pozycja in Model.PlanTreningowy.PozycjePlanu.OrderBy(item => item.Cwiczenie.Nazwa))
+        {
+            <tr>
+                <td>@pozycja.Cwiczenie.Nazwa</td>
+                <td>@pozycja.Cwiczenie.PartiaMiesniowa.Nazwa</td>
+                <td>@pozycja.LiczbaSerii</td>
+                <td>@pozycja.LiczbaPowtorzen</td>
+                <td>@pozycja.PrzerwaSekundy s</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a asp-page="./Edit" asp-route-id="@Model.PlanTreningowy.Id" class="btn btn-primary">Edytuj</a>
+<a asp-page="./Details" asp-page-handler="Pdf" asp-route-id="@Model.PlanTreningowy.Id" class="btn btn-outline-primary">Pobierz PDF</a>
+<a asp-page="./Index" class="btn btn-link">Powrot do listy</a>

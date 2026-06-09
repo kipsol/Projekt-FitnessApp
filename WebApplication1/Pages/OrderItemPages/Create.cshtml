@@ -1,0 +1,50 @@
+@page
+@model WebApplication1.Pages.OrderItemPages.IndexModel
+
+@{
+    ViewData["Title"] = "Zawartość Zamówień";
+}
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h2 class="text-dark">🛒 Pozycje w Zamówieniach (Koszyki)</h2>
+            <p class="text-muted small">Spis produktów przypisanych do konkretnych numerów zamówień</p>
+        </div>
+        <a asp-page="Create" class="btn btn-success shadow-sm">➕ Dodaj produkt do zamówienia</a>
+    </div>
+
+    <div class="card shadow-sm border-0">
+        <div class="card-body p-0">
+            <table class="table table-hover align-middle mb-0">
+                <thead class="table-light">
+                    <tr>
+                        <th class="ps-3">ID Zamówienia</th>
+                        <th>Nazwa produktu</th>
+                        <th class="text-center">Ilość sztuk</th>
+                        <th class="text-end">Cena jedn. (w momencie zakupu)</th>
+                        <th class="text-end">Suma częściowa</th>
+                        <th class="text-end pe-3">Zarządzanie</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.OrderItem)
+                    {
+                        var sumaCzesciowa = item.PriceAtPurchase * item.Quantity;
+                        <tr>
+                            <td class="ps-3"><span class="badge bg-dark">Zamówienie #@item.OrderId</span></td>
+                            <td class="fw-bold text-dark">@item.Product?.Name</td>
+                            <td class="text-center fw-bold text-secondary">@item.Quantity szt.</td>
+                            <td class="text-end">@item.PriceAtPurchase.ToString("F2") PLN</td>
+                            <td class="text-end fw-bold text-success">@sumaCzesciowa.ToString("F2") PLN</td>
+                            <td class="text-end pe-3">
+                                <a asp-page="./Edit" asp-route-id="@item.Id" class="btn btn-xs text-secondary btn-link">Modyfikuj</a> |
+                                <a asp-page="./Delete" asp-route-id="@item.Id" class="btn btn-xs text-danger btn-link text-decoration-none">Wycofaj</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

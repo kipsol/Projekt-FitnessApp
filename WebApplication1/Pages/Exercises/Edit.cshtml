@@ -1,0 +1,82 @@
+@page
+@model WebApplication1.Pages.Exercises.EditModel
+
+@{
+    ViewData["Title"] = "Edytuj cwiczenie";
+}
+
+<h1>Edytuj cwiczenie</h1>
+
+<form method="post" enctype="multipart/form-data" class="col-md-6">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input type="hidden" asp-for="Cwiczenie.Id" />
+
+    <div class="form-group mb-3">
+        <label asp-for="Cwiczenie.Nazwa"></label>
+        <input asp-for="Cwiczenie.Nazwa" class="form-control" />
+        <span asp-validation-for="Cwiczenie.Nazwa" class="text-danger"></span>
+    </div>
+
+    <div class="form-group mb-3">
+        <label asp-for="Cwiczenie.OpisWykonania"></label>
+        <textarea asp-for="Cwiczenie.OpisWykonania" class="form-control" rows="4"></textarea>
+        <span asp-validation-for="Cwiczenie.OpisWykonania" class="text-danger"></span>
+    </div>
+
+    <div class="form-group mb-3">
+        <label asp-for="Cwiczenie.PartiaMiesniowaId">Partia miesniowa</label>
+        <select asp-for="Cwiczenie.PartiaMiesniowaId" asp-items="Model.PartieMiesniowe" class="form-select"></select>
+        <span asp-validation-for="Cwiczenie.PartiaMiesniowaId" class="text-danger"></span>
+    </div>
+
+    <div class="form-group mb-3">
+        <label asp-for="Cwiczenie.MaszynaId">Maszyna</label>
+        <select asp-for="Cwiczenie.MaszynaId" asp-items="Model.Maszyny" class="form-select">
+            <option value="">Bez maszyny</option>
+        </select>
+        <span asp-validation-for="Cwiczenie.MaszynaId" class="text-danger"></span>
+    </div>
+
+    <div class="form-group mb-3">
+        <label asp-for="Cwiczenie.LiczbaSerii"></label>
+        <input asp-for="Cwiczenie.LiczbaSerii" class="form-control" />
+        <span asp-validation-for="Cwiczenie.LiczbaSerii" class="text-danger"></span>
+    </div>
+
+    <div class="form-group mb-3">
+        <label asp-for="Cwiczenie.LiczbaPowtorzen"></label>
+        <input asp-for="Cwiczenie.LiczbaPowtorzen" class="form-control" />
+        <span asp-validation-for="Cwiczenie.LiczbaPowtorzen" class="text-danger"></span>
+    </div>
+
+    <div class="form-group mb-3">
+        <label asp-for="Cwiczenie.PrzerwaSekundy"></label>
+        <input asp-for="Cwiczenie.PrzerwaSekundy" class="form-control" />
+        <span asp-validation-for="Cwiczenie.PrzerwaSekundy" class="text-danger"></span>
+    </div>
+
+    @if (!string.IsNullOrWhiteSpace(Model.Cwiczenie.PlikSciezka))
+    {
+        <div class="form-group mb-3">
+            <label>Aktualny plik</label>
+            <div>
+                <a href="@Model.Cwiczenie.PlikSciezka" target="_blank" rel="noopener">Otworz aktualny plik</a>
+            </div>
+        </div>
+    }
+
+    <div class="form-group mb-3">
+        <label asp-for="PlikCwiczenia">Nowy plik cwiczenia</label>
+        <input asp-for="PlikCwiczenia" class="form-control" type="file" accept=".jpg,.jpeg,.png,.pdf" />
+        <span asp-validation-for="PlikCwiczenia" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Zapisz</button>
+    <a asp-page="./Index" class="btn btn-link">Powrot</a>
+</form>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
