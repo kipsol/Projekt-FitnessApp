@@ -1,0 +1,38 @@
+@page
+@model WebApplication1.Pages.OrderPages.CreateModel
+@{
+    ViewData["Title"] = "Złóż Zamówienie";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6 shadow p-4 bg-white rounded">
+            <h2 class="mb-4 text-success text-center">🛒 Szybki Zakup</h2>
+            <p class="text-muted text-center small">Wybierz produkt i ilość. Kwota oraz data przeliczą się w systemie automatycznie!</p>
+            <hr />
+
+            <form method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+                <div class="form-group mb-4">
+                    <label class="form-label fw-bold">Wybierz produkt z katalogu</label>
+                    <select asp-for="WybranyProduktId" class="form-select form-select-lg" asp-items="ViewBag.ProductId" required>
+                        <option value="">-- Wybierz towar --</option>
+                    </select>
+                    <span asp-validation-for="WybranyProduktId" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-4">
+                    <label class="form-label fw-bold">Ilość sztuk</label>
+                    <input asp-for="Ilosc" class="form-control" type="number" min="1" required />
+                    <span asp-validation-for="Ilosc" class="text-danger"></span>
+                </div>
+
+                <div class="d-grid gap-2">
+                    <input type="submit" value="Kupuję i składam zamówienie" class="btn btn-success btn-lg shadow-sm" />
+                    <a class="btn btn-outline-secondary" asp-page="./Index">Anuluj i wróć</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

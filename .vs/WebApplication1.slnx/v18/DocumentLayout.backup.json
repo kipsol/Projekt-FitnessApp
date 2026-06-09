@@ -1,0 +1,742 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\kipso\\source\\repos\\WebApplication1\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{1139E486-A36B-6B58-4965-3753D45010A4}|WebApplication1\\WebApplication1.csproj|c:\\users\\kipso\\source\\repos\\webapplication1\\webapplication1\\data\\identityseeddata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1139E486-A36B-6B58-4965-3753D45010A4}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\data\\identityseeddata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1139E486-A36B-6B58-4965-3753D45010A4}|WebApplication1\\WebApplication1.csproj|c:\\users\\kipso\\source\\repos\\webapplication1\\webapplication1\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1139E486-A36B-6B58-4965-3753D45010A4}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1139E486-A36B-6B58-4965-3753D45010A4}|WebApplication1\\WebApplication1.csproj|c:\\users\\kipso\\source\\repos\\webapplication1\\webapplication1\\models\\classschedule.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1139E486-A36B-6B58-4965-3753D45010A4}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\models\\classschedule.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1139E486-A36B-6B58-4965-3753D45010A4}|WebApplication1\\WebApplication1.csproj|c:\\users\\kipso\\source\\repos\\webapplication1\\webapplication1\\models\\dietplanday.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1139E486-A36B-6B58-4965-3753D45010A4}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\models\\dietplanday.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1139E486-A36B-6B58-4965-3753D45010A4}|WebApplication1\\WebApplication1.csproj|c:\\users\\kipso\\source\\repos\\webapplication1\\webapplication1\\models\\meal.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1139E486-A36B-6B58-4965-3753D45010A4}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\models\\meal.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1139E486-A36B-6B58-4965-3753D45010A4}|WebApplication1\\WebApplication1.csproj|c:\\users\\kipso\\source\\repos\\webapplication1\\webapplication1\\models\\order.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1139E486-A36B-6B58-4965-3753D45010A4}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\models\\order.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1139E486-A36B-6B58-4965-3753D45010A4}|WebApplication1\\WebApplication1.csproj|c:\\users\\kipso\\source\\repos\\webapplication1\\webapplication1\\dtos\\maszynadto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1139E486-A36B-6B58-4965-3753D45010A4}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\dtos\\maszynadto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1139E486-A36B-6B58-4965-3753D45010A4}|WebApplication1\\WebApplication1.csproj|c:\\users\\kipso\\source\\repos\\webapplication1\\webapplication1\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1139E486-A36B-6B58-4965-3753D45010A4}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1139E486-A36B-6B58-4965-3753D45010A4}|WebApplication1\\WebApplication1.csproj|c:\\users\\kipso\\source\\repos\\webapplication1\\webapplication1\\areas\\identity\\pages\\_validationscriptspartial.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{1139E486-A36B-6B58-4965-3753D45010A4}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\areas\\identity\\pages\\_validationscriptspartial.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1139E486-A36B-6B58-4965-3753D45010A4}|WebApplication1\\WebApplication1.csproj|c:\\users\\kipso\\source\\repos\\webapplication1\\webapplication1\\areas\\identity\\pages\\_viewimports.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{1139E486-A36B-6B58-4965-3753D45010A4}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\areas\\identity\\pages\\_viewimports.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1139E486-A36B-6B58-4965-3753D45010A4}|WebApplication1\\WebApplication1.csproj|c:\\users\\kipso\\source\\repos\\webapplication1\\webapplication1\\areas\\identity\\pages\\_viewstart.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{1139E486-A36B-6B58-4965-3753D45010A4}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\areas\\identity\\pages\\_viewstart.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1139E486-A36B-6B58-4965-3753D45010A4}|WebApplication1\\WebApplication1.csproj|c:\\users\\kipso\\source\\repos\\webapplication1\\webapplication1\\pages\\classeventpages\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{1139E486-A36B-6B58-4965-3753D45010A4}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\pages\\classeventpages\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1139E486-A36B-6B58-4965-3753D45010A4}|WebApplication1\\WebApplication1.csproj|c:\\users\\kipso\\source\\repos\\webapplication1\\webapplication1\\dtos\\classeventdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1139E486-A36B-6B58-4965-3753D45010A4}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\dtos\\classeventdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1139E486-A36B-6B58-4965-3753D45010A4}|WebApplication1\\WebApplication1.csproj|c:\\users\\kipso\\source\\repos\\webapplication1\\webapplication1\\dtos\\plantreningowydto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1139E486-A36B-6B58-4965-3753D45010A4}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\dtos\\plantreningowydto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1139E486-A36B-6B58-4965-3753D45010A4}|WebApplication1\\WebApplication1.csproj|c:\\users\\kipso\\source\\repos\\webapplication1\\webapplication1\\pages\\classeventpages\\create.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1139E486-A36B-6B58-4965-3753D45010A4}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\pages\\classeventpages\\create.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1139E486-A36B-6B58-4965-3753D45010A4}|WebApplication1\\WebApplication1.csproj|c:\\users\\kipso\\source\\repos\\webapplication1\\webapplication1\\pages\\classeventpages\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{1139E486-A36B-6B58-4965-3753D45010A4}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\pages\\classeventpages\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1139E486-A36B-6B58-4965-3753D45010A4}|WebApplication1\\WebApplication1.csproj|c:\\users\\kipso\\source\\repos\\webapplication1\\webapplication1\\repositories\\iclasseventrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1139E486-A36B-6B58-4965-3753D45010A4}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\repositories\\iclasseventrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1139E486-A36B-6B58-4965-3753D45010A4}|WebApplication1\\WebApplication1.csproj|c:\\users\\kipso\\source\\repos\\webapplication1\\webapplication1\\repositories\\classeventrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1139E486-A36B-6B58-4965-3753D45010A4}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\repositories\\classeventrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1139E486-A36B-6B58-4965-3753D45010A4}|WebApplication1\\WebApplication1.csproj|c:\\users\\kipso\\source\\repos\\webapplication1\\webapplication1\\migrations\\applicationdbcontextmodelsnapshot.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1139E486-A36B-6B58-4965-3753D45010A4}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\migrations\\applicationdbcontextmodelsnapshot.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1139E486-A36B-6B58-4965-3753D45010A4}|WebApplication1\\WebApplication1.csproj|c:\\users\\kipso\\source\\repos\\webapplication1\\webapplication1\\pages\\classeventpages\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{1139E486-A36B-6B58-4965-3753D45010A4}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\pages\\classeventpages\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1139E486-A36B-6B58-4965-3753D45010A4}|WebApplication1\\WebApplication1.csproj|c:\\users\\kipso\\source\\repos\\webapplication1\\webapplication1\\pages\\classeventpages\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{1139E486-A36B-6B58-4965-3753D45010A4}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\pages\\classeventpages\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1139E486-A36B-6B58-4965-3753D45010A4}|WebApplication1\\WebApplication1.csproj|c:\\users\\kipso\\source\\repos\\webapplication1\\webapplication1\\pages\\classeventpages\\delete.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{1139E486-A36B-6B58-4965-3753D45010A4}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\pages\\classeventpages\\delete.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1139E486-A36B-6B58-4965-3753D45010A4}|WebApplication1\\WebApplication1.csproj|c:\\users\\kipso\\source\\repos\\webapplication1\\webapplication1\\models\\classevent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1139E486-A36B-6B58-4965-3753D45010A4}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\models\\classevent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1139E486-A36B-6B58-4965-3753D45010A4}|WebApplication1\\WebApplication1.csproj|c:\\users\\kipso\\source\\repos\\webapplication1\\webapplication1\\dtos\\cwiczeniedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1139E486-A36B-6B58-4965-3753D45010A4}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\dtos\\cwiczeniedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1139E486-A36B-6B58-4965-3753D45010A4}|WebApplication1\\WebApplication1.csproj|c:\\users\\kipso\\source\\repos\\webapplication1\\webapplication1\\pages\\classeventpages\\edit.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1139E486-A36B-6B58-4965-3753D45010A4}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\pages\\classeventpages\\edit.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1139E486-A36B-6B58-4965-3753D45010A4}|WebApplication1\\WebApplication1.csproj|c:\\users\\kipso\\source\\repos\\webapplication1\\webapplication1\\pages\\mealpages\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{1139E486-A36B-6B58-4965-3753D45010A4}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\pages\\mealpages\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1139E486-A36B-6B58-4965-3753D45010A4}|WebApplication1\\WebApplication1.csproj|c:\\users\\kipso\\source\\repos\\webapplication1\\webapplication1\\pages\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{1139E486-A36B-6B58-4965-3753D45010A4}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\pages\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1139E486-A36B-6B58-4965-3753D45010A4}|WebApplication1\\WebApplication1.csproj|c:\\users\\kipso\\source\\repos\\webapplication1\\webapplication1\\migrations\\20260608200705_moveday.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1139E486-A36B-6B58-4965-3753D45010A4}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\migrations\\20260608200705_moveday.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1139E486-A36B-6B58-4965-3753D45010A4}|WebApplication1\\WebApplication1.csproj|c:\\users\\kipso\\source\\repos\\webapplication1\\webapplication1\\models\\product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1139E486-A36B-6B58-4965-3753D45010A4}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\models\\product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1139E486-A36B-6B58-4965-3753D45010A4}|WebApplication1\\WebApplication1.csproj|c:\\users\\kipso\\source\\repos\\webapplication1\\webapplication1\\pages\\dietplanpages\\index.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1139E486-A36B-6B58-4965-3753D45010A4}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\pages\\dietplanpages\\index.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1139E486-A36B-6B58-4965-3753D45010A4}|WebApplication1\\WebApplication1.csproj|c:\\users\\kipso\\source\\repos\\webapplication1\\webapplication1\\dtos\\partiamiesniowadto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1139E486-A36B-6B58-4965-3753D45010A4}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\dtos\\partiamiesniowadto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1139E486-A36B-6B58-4965-3753D45010A4}|WebApplication1\\WebApplication1.csproj|c:\\users\\kipso\\source\\repos\\webapplication1\\webapplication1\\dtos\\sekcjadto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1139E486-A36B-6B58-4965-3753D45010A4}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\dtos\\sekcjadto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1139E486-A36B-6B58-4965-3753D45010A4}|WebApplication1\\WebApplication1.csproj|c:\\users\\kipso\\source\\repos\\webapplication1\\webapplication1\\pages\\orderpages\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{1139E486-A36B-6B58-4965-3753D45010A4}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\pages\\orderpages\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1139E486-A36B-6B58-4965-3753D45010A4}|WebApplication1\\WebApplication1.csproj|c:\\users\\kipso\\source\\repos\\webapplication1\\webapplication1\\pages\\orderitempages\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{1139E486-A36B-6B58-4965-3753D45010A4}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\pages\\orderitempages\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1139E486-A36B-6B58-4965-3753D45010A4}|WebApplication1\\WebApplication1.csproj|c:\\users\\kipso\\source\\repos\\webapplication1\\webapplication1\\pages\\productpages\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{1139E486-A36B-6B58-4965-3753D45010A4}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\pages\\productpages\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1139E486-A36B-6B58-4965-3753D45010A4}|WebApplication1\\WebApplication1.csproj|c:\\users\\kipso\\source\\repos\\webapplication1\\webapplication1\\pages\\classschedulepages\\create.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1139E486-A36B-6B58-4965-3753D45010A4}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\pages\\classschedulepages\\create.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1139E486-A36B-6B58-4965-3753D45010A4}|WebApplication1\\WebApplication1.csproj|c:\\users\\kipso\\source\\repos\\webapplication1\\webapplication1\\pages\\classschedulepages\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{1139E486-A36B-6B58-4965-3753D45010A4}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\pages\\classschedulepages\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1139E486-A36B-6B58-4965-3753D45010A4}|WebApplication1\\WebApplication1.csproj|c:\\users\\kipso\\source\\repos\\webapplication1\\webapplication1\\pages\\classschedulepages\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{1139E486-A36B-6B58-4965-3753D45010A4}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\pages\\classschedulepages\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1139E486-A36B-6B58-4965-3753D45010A4}|WebApplication1\\WebApplication1.csproj|c:\\users\\kipso\\source\\repos\\webapplication1\\webapplication1\\pages\\classschedulepages\\delete.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{1139E486-A36B-6B58-4965-3753D45010A4}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\pages\\classschedulepages\\delete.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1139E486-A36B-6B58-4965-3753D45010A4}|WebApplication1\\WebApplication1.csproj|c:\\users\\kipso\\source\\repos\\webapplication1\\webapplication1\\pages\\classschedulepages\\index.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1139E486-A36B-6B58-4965-3753D45010A4}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\pages\\classschedulepages\\index.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1139E486-A36B-6B58-4965-3753D45010A4}|WebApplication1\\WebApplication1.csproj|c:\\users\\kipso\\source\\repos\\webapplication1\\webapplication1\\migrations\\20260608193609_addclassesandschedule.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1139E486-A36B-6B58-4965-3753D45010A4}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\migrations\\20260608193609_addclassesandschedule.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1139E486-A36B-6B58-4965-3753D45010A4}|WebApplication1\\WebApplication1.csproj|c:\\users\\kipso\\source\\repos\\webapplication1\\webapplication1\\models\\partiamiesniowa.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1139E486-A36B-6B58-4965-3753D45010A4}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\models\\partiamiesniowa.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1139E486-A36B-6B58-4965-3753D45010A4}|WebApplication1\\WebApplication1.csproj|c:\\users\\kipso\\source\\repos\\webapplication1\\webapplication1\\areas\\identity\\pages\\account\\register.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1139E486-A36B-6B58-4965-3753D45010A4}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\areas\\identity\\pages\\account\\register.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1139E486-A36B-6B58-4965-3753D45010A4}|WebApplication1\\WebApplication1.csproj|c:\\users\\kipso\\source\\repos\\webapplication1\\webapplication1\\areas\\identity\\pages\\account\\register.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{1139E486-A36B-6B58-4965-3753D45010A4}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\areas\\identity\\pages\\account\\register.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1139E486-A36B-6B58-4965-3753D45010A4}|WebApplication1\\WebApplication1.csproj|c:\\users\\kipso\\source\\repos\\webapplication1\\webapplication1\\areas\\identity\\pages\\account\\_viewimports.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{1139E486-A36B-6B58-4965-3753D45010A4}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\areas\\identity\\pages\\account\\_viewimports.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 10,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "ClassSchedule.cs",
+              "DocumentMoniker": "C:\\Users\\kipso\\source\\repos\\WebApplication1\\WebApplication1\\Models\\ClassSchedule.cs",
+              "RelativeDocumentMoniker": "WebApplication1\\Models\\ClassSchedule.cs",
+              "ToolTip": "C:\\Users\\kipso\\source\\repos\\WebApplication1\\WebApplication1\\Models\\ClassSchedule.cs",
+              "RelativeToolTip": "WebApplication1\\Models\\ClassSchedule.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-08T19:31:02.571Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "DietPlanDay.cs",
+              "DocumentMoniker": "C:\\Users\\kipso\\source\\repos\\WebApplication1\\WebApplication1\\Models\\DietPlanDay.cs",
+              "RelativeDocumentMoniker": "WebApplication1\\Models\\DietPlanDay.cs",
+              "ToolTip": "C:\\Users\\kipso\\source\\repos\\WebApplication1\\WebApplication1\\Models\\DietPlanDay.cs",
+              "RelativeToolTip": "WebApplication1\\Models\\DietPlanDay.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-08T19:17:58.67Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Meal.cs",
+              "DocumentMoniker": "C:\\Users\\kipso\\source\\repos\\WebApplication1\\WebApplication1\\Models\\Meal.cs",
+              "RelativeDocumentMoniker": "WebApplication1\\Models\\Meal.cs",
+              "ToolTip": "C:\\Users\\kipso\\source\\repos\\WebApplication1\\WebApplication1\\Models\\Meal.cs",
+              "RelativeToolTip": "WebApplication1\\Models\\Meal.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-08T19:18:05.37Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Order.cs",
+              "DocumentMoniker": "C:\\Users\\kipso\\source\\repos\\WebApplication1\\WebApplication1\\Models\\Order.cs",
+              "RelativeDocumentMoniker": "WebApplication1\\Models\\Order.cs",
+              "ToolTip": "C:\\Users\\kipso\\source\\repos\\WebApplication1\\WebApplication1\\Models\\Order.cs",
+              "RelativeToolTip": "WebApplication1\\Models\\Order.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-08T20:46:53.414Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "MaszynaDto.cs",
+              "DocumentMoniker": "C:\\Users\\kipso\\source\\repos\\WebApplication1\\WebApplication1\\DTOs\\MaszynaDto.cs",
+              "RelativeDocumentMoniker": "WebApplication1\\DTOs\\MaszynaDto.cs",
+              "ToolTip": "C:\\Users\\kipso\\source\\repos\\WebApplication1\\WebApplication1\\DTOs\\MaszynaDto.cs",
+              "RelativeToolTip": "WebApplication1\\DTOs\\MaszynaDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-09T11:58:01.299Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "ApplicationDbContext.cs",
+              "DocumentMoniker": "C:\\Users\\kipso\\source\\repos\\WebApplication1\\WebApplication1\\Data\\ApplicationDbContext.cs",
+              "RelativeDocumentMoniker": "WebApplication1\\Data\\ApplicationDbContext.cs",
+              "ToolTip": "C:\\Users\\kipso\\source\\repos\\WebApplication1\\WebApplication1\\Data\\ApplicationDbContext.cs",
+              "RelativeToolTip": "WebApplication1\\Data\\ApplicationDbContext.cs",
+              "ViewState": "AgIAAPoAAAAAAAAAAAAwwFkBAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-08T19:31:53.593Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "_ValidationScriptsPartial.cshtml",
+              "DocumentMoniker": "C:\\Users\\kipso\\source\\repos\\WebApplication1\\WebApplication1\\Areas\\Identity\\Pages\\_ValidationScriptsPartial.cshtml",
+              "RelativeDocumentMoniker": "WebApplication1\\Areas\\Identity\\Pages\\_ValidationScriptsPartial.cshtml",
+              "ToolTip": "C:\\Users\\kipso\\source\\repos\\WebApplication1\\WebApplication1\\Areas\\Identity\\Pages\\_ValidationScriptsPartial.cshtml",
+              "RelativeToolTip": "WebApplication1\\Areas\\Identity\\Pages\\_ValidationScriptsPartial.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-06-08T19:12:33.549Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "_ViewImports.cshtml",
+              "DocumentMoniker": "C:\\Users\\kipso\\source\\repos\\WebApplication1\\WebApplication1\\Areas\\Identity\\Pages\\_ViewImports.cshtml",
+              "RelativeDocumentMoniker": "WebApplication1\\Areas\\Identity\\Pages\\_ViewImports.cshtml",
+              "ToolTip": "C:\\Users\\kipso\\source\\repos\\WebApplication1\\WebApplication1\\Areas\\Identity\\Pages\\_ViewImports.cshtml",
+              "RelativeToolTip": "WebApplication1\\Areas\\Identity\\Pages\\_ViewImports.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-06-08T19:12:35.416Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "_ViewStart.cshtml",
+              "DocumentMoniker": "C:\\Users\\kipso\\source\\repos\\WebApplication1\\WebApplication1\\Areas\\Identity\\Pages\\_ViewStart.cshtml",
+              "RelativeDocumentMoniker": "WebApplication1\\Areas\\Identity\\Pages\\_ViewStart.cshtml",
+              "ToolTip": "C:\\Users\\kipso\\source\\repos\\WebApplication1\\WebApplication1\\Areas\\Identity\\Pages\\_ViewStart.cshtml",
+              "RelativeToolTip": "WebApplication1\\Areas\\Identity\\Pages\\_ViewStart.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-06-08T19:12:37.739Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\kipso\\source\\repos\\WebApplication1\\WebApplication1\\Program.cs",
+              "RelativeDocumentMoniker": "WebApplication1\\Program.cs",
+              "ToolTip": "C:\\Users\\kipso\\source\\repos\\WebApplication1\\WebApplication1\\Program.cs",
+              "RelativeToolTip": "WebApplication1\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABwAAAA5AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-08T19:09:44.101Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "IdentitySeedData.cs",
+              "DocumentMoniker": "C:\\Users\\kipso\\source\\repos\\WebApplication1\\WebApplication1\\Data\\IdentitySeedData.cs",
+              "RelativeDocumentMoniker": "WebApplication1\\Data\\IdentitySeedData.cs",
+              "ToolTip": "C:\\Users\\kipso\\source\\repos\\WebApplication1\\WebApplication1\\Data\\IdentitySeedData.cs",
+              "RelativeToolTip": "WebApplication1\\Data\\IdentitySeedData.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACcAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-09T19:12:44.757Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\kipso\\source\\repos\\WebApplication1\\WebApplication1\\Pages\\ClassEventPages\\Index.cshtml",
+              "RelativeDocumentMoniker": "WebApplication1\\Pages\\ClassEventPages\\Index.cshtml",
+              "ToolTip": "C:\\Users\\kipso\\source\\repos\\WebApplication1\\WebApplication1\\Pages\\ClassEventPages\\Index.cshtml",
+              "RelativeToolTip": "WebApplication1\\Pages\\ClassEventPages\\Index.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAvAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-06-09T12:47:49.891Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "ClassEventDTO.cs",
+              "DocumentMoniker": "C:\\Users\\kipso\\source\\repos\\WebApplication1\\WebApplication1\\DTOs\\ClassEventDTO.cs",
+              "RelativeDocumentMoniker": "WebApplication1\\DTOs\\ClassEventDTO.cs",
+              "ToolTip": "C:\\Users\\kipso\\source\\repos\\WebApplication1\\WebApplication1\\DTOs\\ClassEventDTO.cs",
+              "RelativeToolTip": "WebApplication1\\DTOs\\ClassEventDTO.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-09T12:44:34.621Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "PlanTreningowyDto.cs",
+              "DocumentMoniker": "C:\\Users\\kipso\\source\\repos\\WebApplication1\\WebApplication1\\DTOs\\PlanTreningowyDto.cs",
+              "RelativeDocumentMoniker": "WebApplication1\\DTOs\\PlanTreningowyDto.cs",
+              "ToolTip": "C:\\Users\\kipso\\source\\repos\\WebApplication1\\WebApplication1\\DTOs\\PlanTreningowyDto.cs",
+              "RelativeToolTip": "WebApplication1\\DTOs\\PlanTreningowyDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-09T11:58:03.586Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "Create.cshtml.cs",
+              "DocumentMoniker": "C:\\Users\\kipso\\source\\repos\\WebApplication1\\WebApplication1\\Pages\\ClassEventPages\\Create.cshtml.cs",
+              "RelativeDocumentMoniker": "WebApplication1\\Pages\\ClassEventPages\\Create.cshtml.cs",
+              "ToolTip": "C:\\Users\\kipso\\source\\repos\\WebApplication1\\WebApplication1\\Pages\\ClassEventPages\\Create.cshtml.cs",
+              "RelativeToolTip": "WebApplication1\\Pages\\ClassEventPages\\Create.cshtml.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAC8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-08T20:03:53.374Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "Create.cshtml",
+              "DocumentMoniker": "C:\\Users\\kipso\\source\\repos\\WebApplication1\\WebApplication1\\Pages\\ClassEventPages\\Create.cshtml",
+              "RelativeDocumentMoniker": "WebApplication1\\Pages\\ClassEventPages\\Create.cshtml",
+              "ToolTip": "C:\\Users\\kipso\\source\\repos\\WebApplication1\\WebApplication1\\Pages\\ClassEventPages\\Create.cshtml",
+              "RelativeToolTip": "WebApplication1\\Pages\\ClassEventPages\\Create.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-06-08T20:03:43.12Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "IClassEventRepository.cs",
+              "DocumentMoniker": "C:\\Users\\kipso\\source\\repos\\WebApplication1\\WebApplication1\\Repositories\\IClassEventRepository.cs",
+              "RelativeDocumentMoniker": "WebApplication1\\Repositories\\IClassEventRepository.cs",
+              "ToolTip": "C:\\Users\\kipso\\source\\repos\\WebApplication1\\WebApplication1\\Repositories\\IClassEventRepository.cs",
+              "RelativeToolTip": "WebApplication1\\Repositories\\IClassEventRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-09T18:41:24.133Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "ClassEventRepository.cs",
+              "DocumentMoniker": "C:\\Users\\kipso\\source\\repos\\WebApplication1\\WebApplication1\\Repositories\\ClassEventRepository.cs",
+              "RelativeDocumentMoniker": "WebApplication1\\Repositories\\ClassEventRepository.cs",
+              "ToolTip": "C:\\Users\\kipso\\source\\repos\\WebApplication1\\WebApplication1\\Repositories\\ClassEventRepository.cs",
+              "RelativeToolTip": "WebApplication1\\Repositories\\ClassEventRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-09T18:41:33.528Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "ApplicationDbContextModelSnapshot.cs",
+              "DocumentMoniker": "C:\\Users\\kipso\\source\\repos\\WebApplication1\\WebApplication1\\Migrations\\ApplicationDbContextModelSnapshot.cs",
+              "RelativeDocumentMoniker": "WebApplication1\\Migrations\\ApplicationDbContextModelSnapshot.cs",
+              "ToolTip": "C:\\Users\\kipso\\source\\repos\\WebApplication1\\WebApplication1\\Migrations\\ApplicationDbContextModelSnapshot.cs",
+              "RelativeToolTip": "WebApplication1\\Migrations\\ApplicationDbContextModelSnapshot.cs",
+              "ViewState": "AgIAAIIDAAAAAAAAAAAgwKgDAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-09T19:15:32.024Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "Edit.cshtml",
+              "DocumentMoniker": "C:\\Users\\kipso\\source\\repos\\WebApplication1\\WebApplication1\\Pages\\ClassEventPages\\Edit.cshtml",
+              "RelativeDocumentMoniker": "WebApplication1\\Pages\\ClassEventPages\\Edit.cshtml",
+              "ToolTip": "C:\\Users\\kipso\\source\\repos\\WebApplication1\\WebApplication1\\Pages\\ClassEventPages\\Edit.cshtml",
+              "RelativeToolTip": "WebApplication1\\Pages\\ClassEventPages\\Edit.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-06-08T20:13:05.75Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "Details.cshtml",
+              "DocumentMoniker": "C:\\Users\\kipso\\source\\repos\\WebApplication1\\WebApplication1\\Pages\\ClassEventPages\\Details.cshtml",
+              "RelativeDocumentMoniker": "WebApplication1\\Pages\\ClassEventPages\\Details.cshtml",
+              "ToolTip": "C:\\Users\\kipso\\source\\repos\\WebApplication1\\WebApplication1\\Pages\\ClassEventPages\\Details.cshtml",
+              "RelativeToolTip": "WebApplication1\\Pages\\ClassEventPages\\Details.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACYAAAAGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-06-08T20:14:08.815Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "Delete.cshtml",
+              "DocumentMoniker": "C:\\Users\\kipso\\source\\repos\\WebApplication1\\WebApplication1\\Pages\\ClassEventPages\\Delete.cshtml",
+              "RelativeDocumentMoniker": "WebApplication1\\Pages\\ClassEventPages\\Delete.cshtml",
+              "ToolTip": "C:\\Users\\kipso\\source\\repos\\WebApplication1\\WebApplication1\\Pages\\ClassEventPages\\Delete.cshtml",
+              "RelativeToolTip": "WebApplication1\\Pages\\ClassEventPages\\Delete.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-06-08T20:14:20.629Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "ClassEvent.cs",
+              "DocumentMoniker": "C:\\Users\\kipso\\source\\repos\\WebApplication1\\WebApplication1\\Models\\ClassEvent.cs",
+              "RelativeDocumentMoniker": "WebApplication1\\Models\\ClassEvent.cs",
+              "ToolTip": "C:\\Users\\kipso\\source\\repos\\WebApplication1\\WebApplication1\\Models\\ClassEvent.cs",
+              "RelativeToolTip": "WebApplication1\\Models\\ClassEvent.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-08T19:30:11.953Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "CwiczenieDto.cs",
+              "DocumentMoniker": "C:\\Users\\kipso\\source\\repos\\WebApplication1\\WebApplication1\\DTOs\\CwiczenieDto.cs",
+              "RelativeDocumentMoniker": "WebApplication1\\DTOs\\CwiczenieDto.cs",
+              "ToolTip": "C:\\Users\\kipso\\source\\repos\\WebApplication1\\WebApplication1\\DTOs\\CwiczenieDto.cs",
+              "RelativeToolTip": "WebApplication1\\DTOs\\CwiczenieDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-09T11:57:56.168Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "Edit.cshtml.cs",
+              "DocumentMoniker": "C:\\Users\\kipso\\source\\repos\\WebApplication1\\WebApplication1\\Pages\\ClassEventPages\\Edit.cshtml.cs",
+              "RelativeDocumentMoniker": "WebApplication1\\Pages\\ClassEventPages\\Edit.cshtml.cs",
+              "ToolTip": "C:\\Users\\kipso\\source\\repos\\WebApplication1\\WebApplication1\\Pages\\ClassEventPages\\Edit.cshtml.cs",
+              "RelativeToolTip": "WebApplication1\\Pages\\ClassEventPages\\Edit.cshtml.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-09T12:54:30.599Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\kipso\\source\\repos\\WebApplication1\\WebApplication1\\Pages\\MealPages\\Index.cshtml",
+              "RelativeDocumentMoniker": "WebApplication1\\Pages\\MealPages\\Index.cshtml",
+              "ToolTip": "C:\\Users\\kipso\\source\\repos\\WebApplication1\\WebApplication1\\Pages\\MealPages\\Index.cshtml",
+              "RelativeToolTip": "WebApplication1\\Pages\\MealPages\\Index.cshtml",
+              "ViewState": "AgIAAE4AAAAAAAAAAAAAAFgAAAArAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-06-09T12:27:41.523Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "_Layout.cshtml",
+              "DocumentMoniker": "C:\\Users\\kipso\\source\\repos\\WebApplication1\\WebApplication1\\Pages\\Shared\\_Layout.cshtml",
+              "RelativeDocumentMoniker": "WebApplication1\\Pages\\Shared\\_Layout.cshtml",
+              "ToolTip": "C:\\Users\\kipso\\source\\repos\\WebApplication1\\WebApplication1\\Pages\\Shared\\_Layout.cshtml",
+              "RelativeToolTip": "WebApplication1\\Pages\\Shared\\_Layout.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAEoAAAAHAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-06-08T19:44:42.668Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 27,
+              "Title": "20260608200705_MoveDay.cs",
+              "DocumentMoniker": "C:\\Users\\kipso\\source\\repos\\WebApplication1\\WebApplication1\\Migrations\\20260608200705_MoveDay.cs",
+              "RelativeDocumentMoniker": "WebApplication1\\Migrations\\20260608200705_MoveDay.cs",
+              "ToolTip": "C:\\Users\\kipso\\source\\repos\\WebApplication1\\WebApplication1\\Migrations\\20260608200705_MoveDay.cs",
+              "RelativeToolTip": "WebApplication1\\Migrations\\20260608200705_MoveDay.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-08T20:07:06.087Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 28,
+              "Title": "Product.cs",
+              "DocumentMoniker": "C:\\Users\\kipso\\source\\repos\\WebApplication1\\WebApplication1\\Models\\Product.cs",
+              "RelativeDocumentMoniker": "WebApplication1\\Models\\Product.cs",
+              "ToolTip": "C:\\Users\\kipso\\source\\repos\\WebApplication1\\WebApplication1\\Models\\Product.cs",
+              "RelativeToolTip": "WebApplication1\\Models\\Product.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB8AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-08T20:46:36.352Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 29,
+              "Title": "Index.cshtml.cs",
+              "DocumentMoniker": "C:\\Users\\kipso\\source\\repos\\WebApplication1\\WebApplication1\\Pages\\DietPlanPages\\Index.cshtml.cs",
+              "RelativeDocumentMoniker": "WebApplication1\\Pages\\DietPlanPages\\Index.cshtml.cs",
+              "ToolTip": "C:\\Users\\kipso\\source\\repos\\WebApplication1\\WebApplication1\\Pages\\DietPlanPages\\Index.cshtml.cs",
+              "RelativeToolTip": "WebApplication1\\Pages\\DietPlanPages\\Index.cshtml.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-09T00:30:30.141Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 30,
+              "Title": "PartiaMiesniowaDto.cs",
+              "DocumentMoniker": "C:\\Users\\kipso\\source\\repos\\WebApplication1\\WebApplication1\\DTOs\\PartiaMiesniowaDto.cs",
+              "RelativeDocumentMoniker": "WebApplication1\\DTOs\\PartiaMiesniowaDto.cs",
+              "ToolTip": "C:\\Users\\kipso\\source\\repos\\WebApplication1\\WebApplication1\\DTOs\\PartiaMiesniowaDto.cs",
+              "RelativeToolTip": "WebApplication1\\DTOs\\PartiaMiesniowaDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-09T11:58:02.217Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 31,
+              "Title": "SekcjaDto.cs",
+              "DocumentMoniker": "C:\\Users\\kipso\\source\\repos\\WebApplication1\\WebApplication1\\DTOs\\SekcjaDto.cs",
+              "RelativeDocumentMoniker": "WebApplication1\\DTOs\\SekcjaDto.cs",
+              "ToolTip": "C:\\Users\\kipso\\source\\repos\\WebApplication1\\WebApplication1\\DTOs\\SekcjaDto.cs",
+              "RelativeToolTip": "WebApplication1\\DTOs\\SekcjaDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-09T11:58:04.29Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 32,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\kipso\\source\\repos\\WebApplication1\\WebApplication1\\Pages\\OrderPages\\Index.cshtml",
+              "RelativeDocumentMoniker": "WebApplication1\\Pages\\OrderPages\\Index.cshtml",
+              "ToolTip": "C:\\Users\\kipso\\source\\repos\\WebApplication1\\WebApplication1\\Pages\\OrderPages\\Index.cshtml",
+              "RelativeToolTip": "WebApplication1\\Pages\\OrderPages\\Index.cshtml",
+              "ViewState": "AgIAADwAAAAAAAAAAAAAAGYAAABFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-06-09T12:16:13.974Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 33,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\kipso\\source\\repos\\WebApplication1\\WebApplication1\\Pages\\OrderItemPages\\Index.cshtml",
+              "RelativeDocumentMoniker": "WebApplication1\\Pages\\OrderItemPages\\Index.cshtml",
+              "ToolTip": "C:\\Users\\kipso\\source\\repos\\WebApplication1\\WebApplication1\\Pages\\OrderItemPages\\Index.cshtml",
+              "RelativeToolTip": "WebApplication1\\Pages\\OrderItemPages\\Index.cshtml",
+              "ViewState": "AgIAAFEAAAAAAAAAAAAAAGMAAABMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-06-09T12:20:49.705Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 34,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\kipso\\source\\repos\\WebApplication1\\WebApplication1\\Pages\\ProductPages\\Index.cshtml",
+              "RelativeDocumentMoniker": "WebApplication1\\Pages\\ProductPages\\Index.cshtml",
+              "ToolTip": "C:\\Users\\kipso\\source\\repos\\WebApplication1\\WebApplication1\\Pages\\ProductPages\\Index.cshtml",
+              "RelativeToolTip": "WebApplication1\\Pages\\ProductPages\\Index.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB4AAAA4AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-06-09T12:24:26.581Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 35,
+              "Title": "Create.cshtml.cs",
+              "DocumentMoniker": "C:\\Users\\kipso\\source\\repos\\WebApplication1\\WebApplication1\\Pages\\ClassSchedulePages\\Create.cshtml.cs",
+              "RelativeDocumentMoniker": "WebApplication1\\Pages\\ClassSchedulePages\\Create.cshtml.cs",
+              "ToolTip": "C:\\Users\\kipso\\source\\repos\\WebApplication1\\WebApplication1\\Pages\\ClassSchedulePages\\Create.cshtml.cs",
+              "RelativeToolTip": "WebApplication1\\Pages\\ClassSchedulePages\\Create.cshtml.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-08T20:02:24.213Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 36,
+              "Title": "Edit.cshtml",
+              "DocumentMoniker": "C:\\Users\\kipso\\source\\repos\\WebApplication1\\WebApplication1\\Pages\\ClassSchedulePages\\Edit.cshtml",
+              "RelativeDocumentMoniker": "WebApplication1\\Pages\\ClassSchedulePages\\Edit.cshtml",
+              "ToolTip": "C:\\Users\\kipso\\source\\repos\\WebApplication1\\WebApplication1\\Pages\\ClassSchedulePages\\Edit.cshtml",
+              "RelativeToolTip": "WebApplication1\\Pages\\ClassSchedulePages\\Edit.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABkAAABfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-06-08T19:57:33.253Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 37,
+              "Title": "Details.cshtml",
+              "DocumentMoniker": "C:\\Users\\kipso\\source\\repos\\WebApplication1\\WebApplication1\\Pages\\ClassSchedulePages\\Details.cshtml",
+              "RelativeDocumentMoniker": "WebApplication1\\Pages\\ClassSchedulePages\\Details.cshtml",
+              "ToolTip": "C:\\Users\\kipso\\source\\repos\\WebApplication1\\WebApplication1\\Pages\\ClassSchedulePages\\Details.cshtml",
+              "RelativeToolTip": "WebApplication1\\Pages\\ClassSchedulePages\\Details.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACEAAAAGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-06-08T19:57:29.315Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 38,
+              "Title": "Delete.cshtml",
+              "DocumentMoniker": "C:\\Users\\kipso\\source\\repos\\WebApplication1\\WebApplication1\\Pages\\ClassSchedulePages\\Delete.cshtml",
+              "RelativeDocumentMoniker": "WebApplication1\\Pages\\ClassSchedulePages\\Delete.cshtml",
+              "ToolTip": "C:\\Users\\kipso\\source\\repos\\WebApplication1\\WebApplication1\\Pages\\ClassSchedulePages\\Delete.cshtml",
+              "RelativeToolTip": "WebApplication1\\Pages\\ClassSchedulePages\\Delete.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-06-08T19:57:27.963Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 39,
+              "Title": "Index.cshtml.cs",
+              "DocumentMoniker": "C:\\Users\\kipso\\source\\repos\\WebApplication1\\WebApplication1\\Pages\\ClassSchedulePages\\Index.cshtml.cs",
+              "RelativeDocumentMoniker": "WebApplication1\\Pages\\ClassSchedulePages\\Index.cshtml.cs",
+              "ToolTip": "C:\\Users\\kipso\\source\\repos\\WebApplication1\\WebApplication1\\Pages\\ClassSchedulePages\\Index.cshtml.cs",
+              "RelativeToolTip": "WebApplication1\\Pages\\ClassSchedulePages\\Index.cshtml.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACAAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-08T19:42:25.37Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 40,
+              "Title": "20260608193609_AddClassesAndSchedule.cs",
+              "DocumentMoniker": "C:\\Users\\kipso\\source\\repos\\WebApplication1\\WebApplication1\\Migrations\\20260608193609_AddClassesAndSchedule.cs",
+              "RelativeDocumentMoniker": "WebApplication1\\Migrations\\20260608193609_AddClassesAndSchedule.cs",
+              "ToolTip": "C:\\Users\\kipso\\source\\repos\\WebApplication1\\WebApplication1\\Migrations\\20260608193609_AddClassesAndSchedule.cs",
+              "RelativeToolTip": "WebApplication1\\Migrations\\20260608193609_AddClassesAndSchedule.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACUAAABSAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-08T19:36:09.164Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 41,
+              "Title": "PartiaMiesniowa.cs",
+              "DocumentMoniker": "C:\\Users\\kipso\\source\\repos\\WebApplication1\\WebApplication1\\Models\\PartiaMiesniowa.cs",
+              "RelativeDocumentMoniker": "WebApplication1\\Models\\PartiaMiesniowa.cs",
+              "ToolTip": "C:\\Users\\kipso\\source\\repos\\WebApplication1\\WebApplication1\\Models\\PartiaMiesniowa.cs",
+              "RelativeToolTip": "WebApplication1\\Models\\PartiaMiesniowa.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-08T19:18:09.113Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 42,
+              "Title": "Register.cshtml.cs",
+              "DocumentMoniker": "C:\\Users\\kipso\\source\\repos\\WebApplication1\\WebApplication1\\Areas\\Identity\\Pages\\Account\\Register.cshtml.cs",
+              "RelativeDocumentMoniker": "WebApplication1\\Areas\\Identity\\Pages\\Account\\Register.cshtml.cs",
+              "ToolTip": "C:\\Users\\kipso\\source\\repos\\WebApplication1\\WebApplication1\\Areas\\Identity\\Pages\\Account\\Register.cshtml.cs",
+              "RelativeToolTip": "WebApplication1\\Areas\\Identity\\Pages\\Account\\Register.cshtml.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-08T19:12:41.977Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 43,
+              "Title": "Register.cshtml",
+              "DocumentMoniker": "C:\\Users\\kipso\\source\\repos\\WebApplication1\\WebApplication1\\Areas\\Identity\\Pages\\Account\\Register.cshtml",
+              "RelativeDocumentMoniker": "WebApplication1\\Areas\\Identity\\Pages\\Account\\Register.cshtml",
+              "ToolTip": "C:\\Users\\kipso\\source\\repos\\WebApplication1\\WebApplication1\\Areas\\Identity\\Pages\\Account\\Register.cshtml",
+              "RelativeToolTip": "WebApplication1\\Areas\\Identity\\Pages\\Account\\Register.cshtml",
+              "ViewState": "AgIAABgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-06-08T19:12:32.519Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 44,
+              "Title": "_ViewImports.cshtml",
+              "DocumentMoniker": "C:\\Users\\kipso\\source\\repos\\WebApplication1\\WebApplication1\\Areas\\Identity\\Pages\\Account\\_ViewImports.cshtml",
+              "RelativeDocumentMoniker": "WebApplication1\\Areas\\Identity\\Pages\\Account\\_ViewImports.cshtml",
+              "ToolTip": "C:\\Users\\kipso\\source\\repos\\WebApplication1\\WebApplication1\\Areas\\Identity\\Pages\\Account\\_ViewImports.cshtml",
+              "RelativeToolTip": "WebApplication1\\Areas\\Identity\\Pages\\Account\\_ViewImports.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-06-08T19:12:26.405Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

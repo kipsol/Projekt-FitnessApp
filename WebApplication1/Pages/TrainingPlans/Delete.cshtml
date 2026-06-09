@@ -1,0 +1,26 @@
+@page
+@model WebApplication1.Pages.TrainingPlans.DeleteModel
+
+@{
+    ViewData["Title"] = "Usun plan treningowy";
+}
+
+<h1>Usun plan treningowy</h1>
+<h3>Czy na pewno chcesz usunac ten plan?</h3>
+
+<dl class="row">
+    <dt class="col-sm-3">Nazwa</dt>
+    <dd class="col-sm-9">@Model.PlanTreningowy.Nazwa</dd>
+
+    <dt class="col-sm-3">Poziom</dt>
+    <dd class="col-sm-9">@Model.PlanTreningowy.PoziomZaawansowania</dd>
+
+    <dt class="col-sm-3">Cwiczenia</dt>
+    <dd class="col-sm-9">@Model.PlanTreningowy.PozycjePlanu.Count</dd>
+</dl>
+
+<form method="post">
+    <input type="hidden" asp-for="PlanTreningowy.Id" />
+    <button type="submit" class="btn btn-danger">Usun</button>
+    <a asp-page="./Index" class="btn btn-link">Powrot</a>
+</form>

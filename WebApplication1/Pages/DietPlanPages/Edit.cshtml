@@ -1,0 +1,50 @@
+@page
+@model WebApplication1.Pages.DietPlanDayPages.EditModel
+
+@{
+    ViewData["Title"] = "Edytuj posiłek";
+}
+
+<h1>Edytuj posiłek</h1>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Input.Id" />
+            <div class="form-group">
+                <label asp-for="Input.DietId" class="control-label">Dieta</label>
+                <input asp-for="Input.DietId" class="form-control" />
+                <span asp-validation-for="Input.DietId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.MealId" class="control-label">Posiłek</label>
+                <input asp-for="Input.MealId" class="form-control" />
+                <span asp-validation-for="Input.MealId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <span class="text-danger">*</span>
+                <label asp-for="Input.Day" class="control-label"></label>
+                <input asp-for="Input.Day" class="form-control" aria-required="true" />
+                <span asp-validation-for="Input.Day" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <span class="text-danger">*</span>
+                <label asp-for="Input.MealType" class="control-label"></label>
+                <input asp-for="Input.MealType" class="form-control" aria-required="true" />
+                <span asp-validation-for="Input.MealType" class="text-danger"></span>
+            </div>
+            <div class="form-group mt-3">
+                <input type="submit" value="Zapisz" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="mt-3">
+    <a asp-page="./Index">Powrót do listy</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

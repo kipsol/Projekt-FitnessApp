@@ -1,0 +1,39 @@
+@page
+@model WebApplication1.Pages.ClassEventPages.DetailsModel
+
+@{
+    ViewData["Title"] = "Szczegóły";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8 p-5 rounded" style="background-color: #1a1a1a; border: 1px solid #333; border-top: 4px solid #b052ff; box-shadow: 0 8px 30px rgba(0,0,0,0.5);">
+            <h2 class="mb-4 text-light fw-bold">ℹ️ Szczegóły zajęć</h2>
+            <hr style="border-color: #333;" />
+
+            <div class="p-4 rounded mb-4" style="background-color: #222; border: 1px solid #444;">
+                <dl class="row mb-0 text-light">
+                    <dt class="col-sm-4 text-muted">Nazwa</dt>
+                    <dd class="col-sm-8 fw-bold" style="color: #b052ff;">@Html.DisplayFor(model => model.ClassEvent.Name)</dd>
+
+                    <dt class="col-sm-4 text-muted mt-2">Prowadzący</dt>
+                    <dd class="col-sm-8 mt-2">@Html.DisplayFor(model => model.ClassEvent.Trainer)</dd>
+
+                    <dt class="col-sm-4 text-muted mt-2">Godzina</dt>
+                    <dd class="col-sm-8 mt-2">@Html.DisplayFor(model => model.ClassEvent.StartTime)</dd>
+
+                    <dt class="col-sm-4 text-muted mt-2">Czas trwania</dt>
+                    <dd class="col-sm-8 mt-2">@Html.DisplayFor(model => model.ClassEvent.Duration) min</dd>
+
+                    <dt class="col-sm-4 text-muted mt-2">Opis</dt>
+                    <dd class="col-sm-8 mt-2 text-secondary">@Html.DisplayFor(model => model.ClassEvent.Description)</dd>
+                </dl>
+            </div>
+
+            <div class="d-flex gap-2">
+                <a asp-page="./Edit" asp-route-id="@Model.ClassEvent.Id" class="btn px-4 fw-bold" style="background-color: #8a2be2; color: #fff;">Edytuj</a>
+                <a asp-page="./Index" class="btn px-4 fw-bold" style="border: 1px solid #555; color: #ccc;">Wróć do listy</a>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,44 @@
+﻿@page
+@model WebApplication1.Pages.PanelModel
+@{
+    ViewData["Title"] = "Panel treningowy";
+}
+
+<section class="home-header">
+    <div>
+        <h1>Panel zarzadzania treningami</h1>
+        <p>Tworz i rozbudowuj katalog fitness: dodawaj nowe cwiczenia, definiuj wyposazenie sal oraz przygotowuj fundamenty pod spersonalizowane plany treningowe.</p>
+    </div>
+</section>
+
+<section class="action-grid" aria-label="Zarzadzanie treningiem">
+    <a class="action-tile action-tile-plan" asp-page="/TrainingPlans/Index">
+        <span class="action-icon">#</span>
+        <span class="action-title">Plany treningowe</span>
+        <span class="action-text">Projektuj, modyfikuj i organizuj gotowe programy treningowe.</span>
+    </a>
+
+    <a class="action-tile action-tile-exercise" asp-page="/Exercises/Index">
+        <span class="action-icon">#</span>
+        <span class="action-title">Cwiczenia</span>
+        <span class="action-text">Buduj wlasna, profesjonalna baze cwiczen, precyzyjnie okreslajac parametry takie jak liczba serii, powtorzen oraz czas regeneracji.</span>
+    </a>
+
+    <a class="action-tile action-tile-muscle" asp-page="/MuscleGroups/Index">
+        <span class="action-icon">#</span>
+        <span class="action-title">Partie miesniowe</span>
+        <span class="action-text">Kategoryzuj cwiczenia wedlug grup miesniowych, aby ulatwic i przyspieszyc proces ukladania optymalnych planow.</span>
+    </a>
+
+    <a class="action-tile action-tile-machine" asp-page="/GymMachines/Index">
+        <span class="action-icon">#</span>
+        <span class="action-title">Maszyny</span>
+        <span class="action-text">Zarzadzaj baza wyposazenia: dodawaj nowy sprzet, aktualizuj jego status i przypisuj do konkretnych lokalizacji na sali.</span>
+    </a>
+
+    <a class="action-tile action-tile-section" asp-page="/Sections/Index">
+        <span class="action-icon">#</span>
+        <span class="action-title">Sekcje</span>
+        <span class="action-text">Konfiguruj topografie klubu - definiuj strefy treningowe, np. cardio lub wolne ciezary.</span>
+    </a>
+</section>

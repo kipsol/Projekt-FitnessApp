@@ -1,0 +1,174 @@
+@page
+@model WebApplication1.Pages.ClassEventPages.IndexModel
+
+@{
+    ViewData["Title"] = "Baza Zajęć";
+}
+
+<style>
+    .dark-table-container {
+        background-color: #1a1a1a;
+        border-radius: 12px;
+        border: 1px solid #333;
+        overflow: hidden;
+        box-shadow: 0 8px 25px rgba(0,0,0,0.5);
+    }
+
+    .dark-table {
+        width: 100%;
+        margin-bottom: 0;
+        color: #cfcfcf;
+    }
+
+        .dark-table thead {
+            background-color: #222;
+            border-bottom: 3px solid #8a2be2;
+        }
+
+        .dark-table th {
+            padding: 18px;
+            color: #fff;
+            font-weight: 600;
+            border: none;
+        }
+
+        .dark-table td {
+            padding: 18px;
+            vertical-align: middle;
+            border-bottom: 1px solid #2a2a2a;
+        }
+
+        .dark-table tr:hover {
+            background-color: #252525;
+        }
+
+    .action-btn {
+        color: #aaa;
+        text-decoration: none;
+        padding: 6px 12px;
+        border: 1px solid #444;
+        border-radius: 6px;
+        margin-right: 5px;
+        font-size: 0.85rem;
+        transition: all 0.3s ease;
+    }
+
+        .action-btn:hover {
+            color: #b052ff;
+            border-color: #8a2be2;
+            background-color: rgba(138,43,226,0.1);
+        }
+
+    .action-delete:hover {
+        color: #fff;
+        border-color: #ff4d4d;
+        background-color: rgba(255, 77, 77, 0.8);
+    }
+
+    .btn-neon {
+        background-color: #8a2be2;
+        color: #fff;
+        padding: 10px 20px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: bold;
+        transition: 0.3s;
+        border: none;
+    }
+
+        .btn-neon:hover {
+            background-color: #9d4edd;
+            color: #fff;
+            box-shadow: 0 0 15px rgba(138,43,226,0.4);
+        }
+
+    .btn-outline-dark-theme {
+        border: 1px solid #555;
+        color: #ccc;
+        padding: 10px 20px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: bold;
+        transition: 0.3s;
+    }
+
+        .btn-outline-dark-theme:hover {
+            background-color: #333;
+            color: #fff;
+            border-color: #777;
+        }
+</style>
+
+<div class="container mt-4 mb-5">
+
+    <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-3">
+        <div>
+            <h2 class="text-light fw-bold mb-1">⚙️ Baza Zajęć Fitness</h2>
+            <p class="text-muted small mb-0">Zarządzaj słownikiem dostępnych treningów i trenerów</p>
+        </div>
+        <div class="d-flex gap-2 flex-wrap">
+            <a asp-page="/ClassSchedulePages/Index" class="btn-outline-dark-theme shadow-sm">🔙 Wróć do grafiku</a>
+            @if (Model.CanManageClasses)
+            {
+                <a asp-page="./Create" class="btn-neon shadow-sm">➕ Dodaj nowe zajęcia</a>
+            }
+            else
+            {
+                <a asp-page="/ClassSchedulePages/Create" class="btn-neon shadow-sm">Zapisz się</a>
+            }
+        </div>
+    </div>
+
+    <div class="dark-table-container">
+        <table class="dark-table">
+            <thead>
+                <tr>
+                    <th class="ps-4">Nazwa zajęć</th>
+                    <th>Prowadzący</th>
+                    <th>Godzina</th>
+                    <th>Czas trwania</th>
+                    <th>Opis</th>
+                    <th class="text-end pe-4">Zarządzanie</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.ClassEvent)
+                {
+                    <tr>
+                        <td class="fw-bold ps-4" style="color: #b052ff; font-size: 1.05rem;">@item.Name</td>
+
+                        <td class="text-light">👤 @item.Trainer</td>
+
+                        <td class="fw-bold text-light">🕒 @item.StartTime.ToString(@"hh\:mm")</td>
+
+                        <td><span class="badge" style="background-color: #333; color: #ccc; border: 1px solid #444;">⏳ @item.Duration min</span></td>
+
+                        <td class="text-muted small" style="max-width: 250px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                            @item.Description
+                        </td>
+
+                        <td class="text-end pe-4">
+                            @if (Model.CanManageClasses)
+                            {
+                                <a asp-page="./Edit" asp-route-id="@item.Id" class="action-btn">Edytuj</a>
+                            }
+                            <a asp-page="./Details" asp-route-id="@item.Id" class="action-btn">Szczegóły</a>
+                            @if (Model.CanManageClasses)
+                            {
+                                <a asp-page="./Delete" asp-route-id="@item.Id" class="action-btn action-delete">Usuń</a>
+                            }
+                        </td>
+                    </tr>
+                }
+                @if (!Model.ClassEvent.Any())
+                {
+                    <tr>
+                        <td colspan="6" class="text-center text-muted py-5" style="font-style: italic;">
+                            Brak zdefiniowanych zajęć w bazie.
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,25 @@
+@page
+@model WebApplication1.Pages.MuscleGroups.DeleteModel
+
+@{
+    ViewData["Title"] = "Usun partie miesniowa";
+}
+
+<h1>Usun partie miesniowa</h1>
+<h3>Czy na pewno chcesz usunac te partie miesniowa?</h3>
+
+<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+<dl class="row">
+    <dt class="col-sm-3">Nazwa</dt>
+    <dd class="col-sm-9">@Model.PartiaMiesniowa.Nazwa</dd>
+
+    <dt class="col-sm-3">Liczba cwiczen</dt>
+    <dd class="col-sm-9">@Model.PartiaMiesniowa.Cwiczenia.Count</dd>
+</dl>
+
+<form method="post">
+    <input type="hidden" asp-for="PartiaMiesniowa.Id" />
+    <button type="submit" class="btn btn-danger" disabled="@Model.HasCwiczenia">Usun</button>
+    <a asp-page="./Index" class="btn btn-link">Powrot</a>
+</form>

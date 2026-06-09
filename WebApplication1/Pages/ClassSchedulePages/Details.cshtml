@@ -1,0 +1,37 @@
+@page
+@model WebApplication1.Pages.ClassSchedulePages.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>ClassSchedule</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            Class event ID
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ClassSchedule.ClassEventId)
+        </dd>
+        <dt class="col-sm-2">
+            Day
+        </dt>
+        <dd class="col-sm-10">
+            @(Model.ClassSchedule.ClassEvent?.Day.ToString() ?? "-")
+        </dd>
+        <dt class="col-sm-2">
+            Class
+        </dt>
+        <dd class="col-sm-10">
+            @(Model.ClassSchedule.ClassEvent?.Name ?? "-")
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.ClassSchedule.Id">Edit</a> |
+    <a asp-page="./Index">Back to List</a>
+</div>

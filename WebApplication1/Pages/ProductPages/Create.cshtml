@@ -1,0 +1,56 @@
+@page
+@model WebApplication1.Pages.ProductPages.CreateModel
+
+@{
+    ViewData["Title"] = "Dodaj produkt";
+}
+
+<h1>Dodaj produkt</h1>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <span class="text-danger">*</span>
+                <label asp-for="Input.Name" class="control-label"></label>
+                <input asp-for="Input.Name" class="form-control" aria-required="true" />
+                <span asp-validation-for="Input.Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.Description" class="control-label"></label>
+                <input asp-for="Input.Description" class="form-control" />
+                <span asp-validation-for="Input.Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <span class="text-danger">*</span>
+                <label asp-for="Input.Price" class="control-label"></label>
+                <input asp-for="Input.Price" class="form-control" aria-required="true" />
+                <span asp-validation-for="Input.Price" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <span class="text-danger">*</span>
+                <label asp-for="Input.Stock" class="control-label"></label>
+                <input asp-for="Input.Stock" class="form-control" aria-required="true" />
+                <span asp-validation-for="Input.Stock" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <span class="text-danger">*</span>
+                <label asp-for="Input.Category" class="control-label"></label>
+                <input asp-for="Input.Category" class="form-control" aria-required="true" />
+                <span asp-validation-for="Input.Category" class="text-danger"></span>
+            </div>
+            <div class="form-group mt-3">
+                <input type="submit" value="Utwórz" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="mt-3">
+    <a asp-page="./Index">Powrót do listy</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

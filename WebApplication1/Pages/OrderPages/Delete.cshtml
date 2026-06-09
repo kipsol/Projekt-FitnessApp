@@ -1,0 +1,25 @@
+@page
+@model WebApplication1.Pages.OrderPages.DeleteModel
+
+@{
+    ViewData["Title"] = "Usuń zamówienie";
+}
+
+<h1>Usuń zamówienie</h1>
+<h3>Czy na pewno chcesz usunąć to zamówienie?</h3>
+<div>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">@Html.DisplayNameFor(model => model.Order.OrderDate)</dt>
+        <dd class="col-sm-10">@Html.DisplayFor(model => model.Order.OrderDate)</dd>
+        <dt class="col-sm-2">@Html.DisplayNameFor(model => model.Order.TotalPrice)</dt>
+        <dd class="col-sm-10">@Html.DisplayFor(model => model.Order.TotalPrice)</dd>
+        <dt class="col-sm-2">@Html.DisplayNameFor(model => model.Order.Status)</dt>
+        <dd class="col-sm-10">@Html.DisplayFor(model => model.Order.Status)</dd>
+    </dl>
+    <form method="post">
+        <input type="hidden" asp-for="Order.Id" />
+        <input type="submit" value="Usuń" class="btn btn-danger" /> |
+        <a asp-page="./Index">Powrót do listy</a>
+    </form>
+</div>
