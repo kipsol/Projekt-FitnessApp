@@ -42,7 +42,7 @@ W pliku `appsettings.json` (lub `appsettings.Development.json`) sprawdź wartoś
 ```
 *Dostosuj wartość (np. `Server=localhost\\SQLEXPRESS`), w zależności od posiadanego serwera SQL.*
 ### 4. Przygotowanie bazy danych (Migracje)
-Uruchumienie kontenera w dokerze
+Uruchumienie kontenera w dokerze(upewnij się, że masz uruchomioną aplikacje docker desktop)
 ```powershell
 docker-compose up -d
 ```
